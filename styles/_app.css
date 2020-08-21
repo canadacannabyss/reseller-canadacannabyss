@@ -13,8 +13,8 @@ body {
 }
 
 html {
-  overflow-y: overlay;
-  overflow-x: hidden;
+  /* overflow-y: overlay; */
+  /* overflow-x: hidden; */
 }
 
 .noSelect {

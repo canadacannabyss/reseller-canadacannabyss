@@ -1,26 +1,27 @@
 import Head from 'next/head';
+import { NextPage } from 'next';
 import React, { FC, SFC } from 'react';
 
-interface Props<P = {}> extends SFC<P> {
-  repos: Object;
-  getInitialProps?: (ctx: any) => Promise<P>;
-}
-
-const Dashboard: FC<Props> = (props) => {
+const Home = (props) => {
   const { repos } = props;
-  console.log('respos:', repos);
 
   return (
     <div>
       <Head>
         <title>Homepage</title>
       </Head>
-      <h1>Dashboard</h1>
+      <h1>Homepage</h1>
+      <h3>Repos:</h3>
+      <ul>
+        {repos.map((repo) => (
+          <li>{repo.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-Dashboard.getInitialProps = async () => {
+Home.getInitialProps = async () => {
   const repos = await fetch('https://api.github.com/users/Davi-Silva/repos');
 
   const data = await repos.json();
@@ -29,4 +30,4 @@ Dashboard.getInitialProps = async () => {
   };
 };
 
-export default Dashboard;
+export default Home;

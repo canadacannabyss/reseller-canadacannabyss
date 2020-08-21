@@ -29,13 +29,13 @@ const Brand = styled.div`
     color: rgb(24, 132, 15);
     line-height: 15px;
     span {
-      color: rgb(176, 17, 41);
+      color: #b01129;
       font-weight: 900;
     }
   }
   .sep {
     content: '';
-    background-color: rgb(176, 17, 41);
+    background-color: #b01129;
     width: 2px;
     height: 18px;
     display: block;
@@ -44,7 +44,12 @@ const Brand = styled.div`
   }
   h1 {
     font-size: 20px;
-    color: rgb(176, 17, 41);
+    color: #b01129;
+  }
+  @media (max-width: 578px) {
+    p {
+      display: none;
+    }
   }
 `;
 
@@ -58,8 +63,13 @@ const UserDiv = styled.div`
 const User = styled.div`
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.2);
+  background-image: ${(props) => `url('${props.img}')`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   border-radius: 50px;
 `;
 
-export { Navbar, NavbarWrapper, Brand, UserDiv, User };
+export {
+  Navbar, NavbarWrapper, Brand, UserDiv, User,
+};

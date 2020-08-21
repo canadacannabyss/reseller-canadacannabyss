@@ -1,14 +1,13 @@
-import React, { FC, ReactChild } from 'react';
+/* eslint-disable react/no-danger */
+import React from 'react';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { Content } from '../styles/Layout';
 import Navbar from './UI/Navbar/NavigationBar';
 import Footer from './UI/Footer/Footer';
 
-interface Props {
-  children: ReactChild;
-}
-
-const Layout: FC<Props> = (props: any) => {
+const Layout = (props) => {
+  const { children } = props;
   const layoutStyle = {
     height: '100%',
     width: '100%',
@@ -39,10 +38,14 @@ const Layout: FC<Props> = (props: any) => {
       </Head>
 
       <Navbar />
-      <Content>{props.children}</Content>
+      <Content>{children}</Content>
       <Footer />
     </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
