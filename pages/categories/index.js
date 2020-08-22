@@ -4,11 +4,9 @@ import React from 'react';
 import {
   FaListUl, FaSearch, FaPlus,
 } from 'react-icons/fa';
-import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import CategoryList from '../../components/UI/List/Categories/CategoryList';
 
 import {
-  PageContainer,
   Background,
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
@@ -119,37 +117,35 @@ const Categories = () => (
     <Head>
       <title>Categories | Reseller - Canada Cannabyss</title>
     </Head>
-    <PageContainer>
-      <Sidebar />
-      <Background>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaListUl />
-                  <h1>Categories</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/categories/add' as='/categories/add'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <CategoryList categories={categories} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Background>
-    </PageContainer>
+
+    <Background>
+      <Container>
+        <ContentContainer>
+          <Content>
+            <TitleSearchBarAddButtonDiv>
+              <TitleDiv>
+                <FaListUl />
+                <h1>Categories</h1>
+              </TitleDiv>
+              <SearchBarAddButtonDiv>
+                <SearchBar>
+                  <input />
+                  <button type='button'>
+                    <FaSearch />
+                  </button>
+                </SearchBar>
+                <Link href='/categories/add' as='/categories/add'>
+                  <AddProductLink>
+                    <FaPlus />
+                  </AddProductLink>
+                </Link>
+              </SearchBarAddButtonDiv>
+            </TitleSearchBarAddButtonDiv>
+            <CategoryList categories={categories} />
+          </Content>
+        </ContentContainer>
+      </Container>
+    </Background>
   </>
 );
 

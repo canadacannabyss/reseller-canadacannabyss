@@ -105,7 +105,7 @@ const SearchBar = styled.div`
 const AddProductLink = styled.a`
   background: #18840f;
   color: #fff;
-  padding: 11px 10px;
+  padding: 10px 10px 8px 10px;
   font-size: 16px;
   margin-left: 10px;
   align-self: center;

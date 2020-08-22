@@ -19,14 +19,14 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Fragment>
+      <>
         <Head>
           <link rel='icon' type='image/png' href={Logo} />
         </Head>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Fragment>
+      </>
     );
   }
 }

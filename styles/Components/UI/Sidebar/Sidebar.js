@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { SidebarBackgroundFadeIn, SidebarBackgroundFadeOut } from '../../../Animations/Animations';
+
+const Background = styled.div`
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0 , 0, 0.2);
+  @media (max-width: 1199px) {
+    ${(props) => (props.toggleSidebar ? 'display: block' : 'display: none;')}
+  }
+`;
 
 const SidebarContainer = styled.div`
   height: 100%;
@@ -88,20 +100,22 @@ const ToggleSidebarButton = styled.button`
   }
   &:hover {
     svg {
-      transform: rotate(45deg) scale(1.2);
+      ${(props) => (props.toggleSidebar && 'transform: rotate(45deg) scale(1.2);')}
     }
   }
   &:active {
     svg {
-      transform: rotate(45deg) scale(0.9);
+      ${(props) => (props.toggleSidebar && 'transform: rotate(45deg) scale(0.9);')}
     }
   }
   svg {
     font-size: 19px;
-    transform: rotate(45deg);
+    ${(props) => (props.toggleSidebar ? 'transform: rotate(45deg);' : 'transform: rotate(0deg);')}
     color: #18840f;
     transition: all 0.2s ease-in-out;
   }
 `;
 
-export { SidebarContainer, SidebarLink, ToggleSidebarButton };
+export {
+  SidebarContainer, SidebarLink, ToggleSidebarButton, Background,
+};

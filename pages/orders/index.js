@@ -4,11 +4,9 @@ import React from 'react';
 import {
   FaSortAmountDownAlt, FaSearch, FaPlus,
 } from 'react-icons/fa';
-import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import OrderList from '../../components/UI/List/Orders/OrderList';
 
 import {
-  PageContainer,
   Background,
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
@@ -119,37 +117,34 @@ const Promotions = () => (
     <Head>
       <title>Promotions | Reseller - Canada Cannabyss</title>
     </Head>
-    <PageContainer>
-      <Sidebar />
-      <Background>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaSortAmountDownAlt />
-                  <h1>Orders</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/orders/add' as='/orders/add'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <OrderList orders={orders} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Background>
-    </PageContainer>
+    <Background>
+      <Container>
+        <ContentContainer>
+          <Content>
+            <TitleSearchBarAddButtonDiv>
+              <TitleDiv>
+                <FaSortAmountDownAlt />
+                <h1>Orders</h1>
+              </TitleDiv>
+              <SearchBarAddButtonDiv>
+                <SearchBar>
+                  <input />
+                  <button type='button'>
+                    <FaSearch />
+                  </button>
+                </SearchBar>
+                <Link href='/orders/add' as='/orders/add'>
+                  <AddProductLink>
+                    <FaPlus />
+                  </AddProductLink>
+                </Link>
+              </SearchBarAddButtonDiv>
+            </TitleSearchBarAddButtonDiv>
+            <OrderList orders={orders} />
+          </Content>
+        </ContentContainer>
+      </Container>
+    </Background>
   </>
 );
 

@@ -4,11 +4,9 @@ import React from 'react';
 import {
   FaTags, FaSearch, FaPlus,
 } from 'react-icons/fa';
-import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import PromotionList from '../../components/UI/List/Promotions/PromotionList';
 
 import {
-  PageContainer,
   Background,
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
@@ -119,37 +117,34 @@ const Promotions = () => (
     <Head>
       <title>Promotions | Reseller - Canada Cannabyss</title>
     </Head>
-    <PageContainer>
-      <Sidebar />
-      <Background>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaTags />
-                  <h1>Promotions</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/promotions/add' as='/promotions/add'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <PromotionList promotions={promotions} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Background>
-    </PageContainer>
+    <Background>
+      <Container>
+        <ContentContainer>
+          <Content>
+            <TitleSearchBarAddButtonDiv>
+              <TitleDiv>
+                <FaTags />
+                <h1>Promotions</h1>
+              </TitleDiv>
+              <SearchBarAddButtonDiv>
+                <SearchBar>
+                  <input />
+                  <button type='button'>
+                    <FaSearch />
+                  </button>
+                </SearchBar>
+                <Link href='/promotions/add' as='/promotions/add'>
+                  <AddProductLink>
+                    <FaPlus />
+                  </AddProductLink>
+                </Link>
+              </SearchBarAddButtonDiv>
+            </TitleSearchBarAddButtonDiv>
+            <PromotionList promotions={promotions} />
+          </Content>
+        </ContentContainer>
+      </Container>
+    </Background>
   </>
 );
 

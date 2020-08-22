@@ -4,11 +4,9 @@ import React from 'react';
 import {
   FaBoxes, FaSearch, FaPlus,
 } from 'react-icons/fa';
-import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import BundleList from '../../components/UI/List/Bundles/BundleList';
 
 import {
-  PageContainer,
   Background,
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
@@ -350,37 +348,34 @@ const Bundles = () => (
     <Head>
       <title>Bundles | Reseller - Canada Cannabyss</title>
     </Head>
-    <PageContainer>
-      <Sidebar />
-      <Background>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaBoxes />
-                  <h1>Bundles</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/bundles/add' as='/bundles/add'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <BundleList bundles={bundles} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Background>
-    </PageContainer>
+    <Background>
+      <Container>
+        <ContentContainer>
+          <Content>
+            <TitleSearchBarAddButtonDiv>
+              <TitleDiv>
+                <FaBoxes />
+                <h1>Bundles</h1>
+              </TitleDiv>
+              <SearchBarAddButtonDiv>
+                <SearchBar>
+                  <input />
+                  <button type='button'>
+                    <FaSearch />
+                  </button>
+                </SearchBar>
+                <Link href='/bundles/add' as='/bundles/add'>
+                  <AddProductLink>
+                    <FaPlus />
+                  </AddProductLink>
+                </Link>
+              </SearchBarAddButtonDiv>
+            </TitleSearchBarAddButtonDiv>
+            <BundleList bundles={bundles} />
+          </Content>
+        </ContentContainer>
+      </Container>
+    </Background>
   </>
 );
 

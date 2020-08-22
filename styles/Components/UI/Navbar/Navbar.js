@@ -61,6 +61,7 @@ const UserDiv = styled.div`
 `;
 
 const User = styled.div`
+  cursor: pointer;
   width: 40px;
   height: 40px;
   background-image: ${(props) => `url('${props.img}')`};

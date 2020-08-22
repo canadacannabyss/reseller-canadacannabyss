@@ -3,8 +3,10 @@ import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { Content } from '../styles/Layout';
+import { PageContainer } from '../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import Navbar from './UI/Navbar/NavigationBar';
 import Footer from './UI/Footer/Footer';
+import Sidebar from './UI/Sidebar/Sidebar';
 
 const Layout = (props) => {
   const { children } = props;
@@ -38,7 +40,10 @@ const Layout = (props) => {
       </Head>
 
       <Navbar />
-      <Content>{children}</Content>
+      <PageContainer>
+        <Sidebar />
+        {children}
+      </PageContainer>
       <Footer />
     </div>
   );
