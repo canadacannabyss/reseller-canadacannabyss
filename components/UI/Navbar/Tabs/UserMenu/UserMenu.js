@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Container, LinkTo } from '../../../../../styles/Components/UI/Navbar/Tabs/UserMenu/UserMenu';
+import { Container, LinkTo, SignOut } from '../../../../../styles/Components/UI/Navbar/Tabs/UserMenu/UserMenu';
 
 const UserMenu = () => (
   <Container>
@@ -10,11 +10,9 @@ const UserMenu = () => (
         Account
       </LinkTo>
     </Link>
-    <Link href='' as=''>
-      <LinkTo>
-        Sign out
-      </LinkTo>
-    </Link>
+    <SignOut>
+      Sign out
+    </SignOut>
   </Container>
 );
 

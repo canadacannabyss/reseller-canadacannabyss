@@ -5,6 +5,11 @@ const PageContainer = styled.div`
   flex-direction: row;
 `;
 
+const BackgroundDashboard = styled.div`
+  background: #f1f1f1;
+  width: 100%;
+`;
+
 const Background = styled.div`
   background: #f1f1f1;
   width: 100%;
@@ -14,6 +19,12 @@ const Background = styled.div`
   }
 `;
 
+const BackgroundAdd = styled.div`
+  background: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+`;
+
 const BackgroundLogin = styled.div`
   background: #f1f1f1;
   width: 100%;
@@ -21,4 +32,6 @@ const BackgroundLogin = styled.div`
   position: relative;
 `;
 
-export { PageContainer, Background, BackgroundLogin };
+export {
+  PageContainer, Background, BackgroundLogin, BackgroundAdd, BackgroundDashboard,
+};

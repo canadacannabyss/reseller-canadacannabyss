@@ -3,8 +3,41 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-areas: 'a a a b';
+  grid-gap: 20px;
+  .main {
+    grid-area: a;
+  }
+  .side {
+    grid-area: b;
+  }
   @media (max-width: 1460px) {
     width: 100%;
+  }
+  @media (max-width: 991px) {
+    grid-template-areas: 
+    'a a b';
+  }
+  @media (max-width: 768px) {
+    display: block;
+    .main {
+      margin-bottom: 20px;
+    }
+  }
+`;
+
+const MainGrid = styled.div`
+  display: grid;
+  grid-gap: 20px;
+`;
+
+const HalfGrid = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 
@@ -13,10 +46,20 @@ const Container = styled.div`
   width: 100%;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
-  @media(max-width: 991px) {
-    margin: 20px 0;
-    border-radius: 0px;
-  }
+`;
+
+const SideContainer = styled.div`
+  background: #fff;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+`;
+
+const StickyDiv = styled.div`
+  position: sticky;
+  top: 20px;
+  width: 100%;
+  height: fit-content;
 `;
 
 const ContentContainer = styled.div`
@@ -25,7 +68,6 @@ const ContentContainer = styled.div`
   flex-wrap: nowrap;
   overflow-x: auto;
   padding: 10px 14px;
-  
 `;
 
 const Content = styled.div`
@@ -43,21 +85,31 @@ const TitleSearchBarAddButtonDiv = styled.div`
   }
 `;
 
-const TitleDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  svg {
+const PlusIconSign = styled.div`
+  .mainIcon {
     margin-right: 10px;
     font-size: 22px;
     color: #18840f;
   }
+  .plus {
+    font-size: 12px;
+    color: #18840f;
+    transform: translate(-5px, -14px);
+  }
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 42px;
   h1 {
     font-size: 20px;
     color: #18840f;
   }
-  @media (max-width: 576px) {
-    margin-bottom: 1rem;
+  h2 {
+    font-size: 18px;
+    color: #18840f;
   }
 `;
 
@@ -177,9 +229,72 @@ const SpansDiv = styled.div`
   }
 `;
 
+const Label = styled.label`
+  color: #18840f;
+  font-size: 13px;
+  font-weight: 900;
+`;
+
+const InputGroupTitle = styled.h3`
+  font-size: 17px;
+  color: #18840f;
+  font-weight: 900;
+  margin-bottom: 1rem;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  padding-left: 12px;
+  box-sizing: border-box;
+  letter-spacing: 0.04em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(184, 196, 194);
+  border-image: initial;
+  border-radius: 4px;
+  background: #fff;
+  transition: all 0.2s ease-in-out 0s;
+  &:focus {
+    border-color: #18840f;
+    outline: none;
+  }
+`;
+
+const TextArea = styled.textarea`
+  height: 200px;
+  width: 100%;
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  padding-left: 12px;
+  box-sizing: border-box;
+  letter-spacing: 0.04em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(184, 196, 194);
+  border-image: initial;
+  border-radius: 4px;
+  background: #fff;
+  resize: none;
+  transition: all 0.2s ease-in-out 0s;
+  &:focus {
+    border-color: #18840f;
+    outline: none;
+  }
+`;
+
 export {
   Wrapper,
+  StickyDiv,
+  MainGrid,
+  HalfGrid,
   Container,
+  SideContainer,
+  PlusIconSign,
   SearchBarAddButtonDiv,
   TitleSearchBarAddButtonDiv,
   SearchBar,
@@ -188,4 +303,8 @@ export {
   ContentContainer,
   Content,
   SpansDiv,
+  Label,
+  InputGroupTitle,
+  Input,
+  TextArea,
 };

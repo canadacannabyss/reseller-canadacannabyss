@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../../../assets/img/canada-cannabyss-logo.svg';
+// import OutsideAlerter from '../../../utils/OutsideAlerter';
 
 import UserMenu from './Tabs/UserMenu/UserMenu';
 
@@ -43,7 +44,11 @@ const NavigationBar = () => {
           </UserDiv>
         </NavbarWrapper>
       </Navbar>
-      {toggleUserMenu && <UserMenu />}
+      {toggleUserMenu && (
+      // <OutsideAlerter>
+      <UserMenu handleClose={onClickUserButton} />
+      // </OutsideAlerter>
+      )}
     </>
   );
 };

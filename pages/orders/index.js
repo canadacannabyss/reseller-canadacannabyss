@@ -10,6 +10,7 @@ import {
   Background,
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
+  Wrapper,
   Container,
   ContentContainer,
   SearchBarAddButtonDiv,
@@ -118,32 +119,34 @@ const Promotions = () => (
       <title>Promotions | Reseller - Canada Cannabyss</title>
     </Head>
     <Background>
-      <Container>
-        <ContentContainer>
-          <Content>
-            <TitleSearchBarAddButtonDiv>
-              <TitleDiv>
-                <FaSortAmountDownAlt />
-                <h1>Orders</h1>
-              </TitleDiv>
-              <SearchBarAddButtonDiv>
-                <SearchBar>
-                  <input />
-                  <button type='button'>
-                    <FaSearch />
-                  </button>
-                </SearchBar>
-                <Link href='/orders/add' as='/orders/add'>
-                  <AddProductLink>
-                    <FaPlus />
-                  </AddProductLink>
-                </Link>
-              </SearchBarAddButtonDiv>
-            </TitleSearchBarAddButtonDiv>
-            <OrderList orders={orders} />
-          </Content>
-        </ContentContainer>
-      </Container>
+      <Wrapper>
+        <Container>
+          <ContentContainer>
+            <Content>
+              <TitleSearchBarAddButtonDiv>
+                <TitleDiv>
+                  <FaSortAmountDownAlt />
+                  <h1>Orders</h1>
+                </TitleDiv>
+                <SearchBarAddButtonDiv>
+                  <SearchBar>
+                    <input />
+                    <button type='button'>
+                      <FaSearch />
+                    </button>
+                  </SearchBar>
+                  <Link href='/orders/add' as='/orders/add'>
+                    <AddProductLink>
+                      <FaPlus />
+                    </AddProductLink>
+                  </Link>
+                </SearchBarAddButtonDiv>
+              </TitleSearchBarAddButtonDiv>
+              <OrderList orders={orders} />
+            </Content>
+          </ContentContainer>
+        </Container>
+      </Wrapper>
     </Background>
   </>
 );

@@ -47,43 +47,78 @@ const Sidebar = () => {
           </ToggleSidebarButton>
           <SidebarContainer toggleSidebar={toggleSidebar}>
             <Link href='/dashboard' as='/dashboard'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaHome />
                 <p>Dashboard</p>
               </SidebarLink>
             </Link>
             <Link href='/products' as='/products'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaBox />
                 <p>Products</p>
               </SidebarLink>
             </Link>
             <Link href='/bundles' as='/bundles'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaBoxes />
                 <p>Bundles</p>
               </SidebarLink>
             </Link>
             <Link href='/promotions' as='/promotions'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaTags />
                 <p>Promotions</p>
               </SidebarLink>
             </Link>
             <Link href='/coupons' as='/coupons'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaPercent />
                 <p>Coupons</p>
               </SidebarLink>
             </Link>
             <Link href='/categories' as='/categories'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaListUl />
                 <p>Categories</p>
               </SidebarLink>
             </Link>
             <Link href='/orders' as='/orders'>
-              <SidebarLink toggleSidebar={toggleSidebar}>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
                 <FaSortAmountDownAlt />
                 <p>Orders</p>
               </SidebarLink>

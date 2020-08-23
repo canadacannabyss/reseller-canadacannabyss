@@ -20,8 +20,10 @@ const UserFlex = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 1rem; 
   @media (max-width: 460px) {
     flex-direction: column;
+    margin-bottom: 0;
   }
 `;
 

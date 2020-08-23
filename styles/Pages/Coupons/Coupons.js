@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+  @media (max-width: 1460px) {
+    width: 100%;
+  }
+`;
+
 const Container = styled.div`
   background: #fff;
   width: 100%;
@@ -117,6 +125,7 @@ const AddProductLink = styled.a`
 `;
 
 export {
+  Wrapper,
   Container,
   SearchBarAddButtonDiv,
   TitleSearchBarAddButtonDiv,

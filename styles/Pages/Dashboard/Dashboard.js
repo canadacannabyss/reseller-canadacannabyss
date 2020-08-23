@@ -86,4 +86,6 @@ const ContainerTitle = styled.h2`
   }
 `;
 
-export { Wrapper, Container, ContainerTitle };
+export {
+  Wrapper, Container, ContainerTitle,
+};

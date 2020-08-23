@@ -27,7 +27,32 @@ const LinkTo = styled.a`
   }
 `;
 
+const SignOut = styled.button`
+  font-size: 15px;
+  padding: 9px 10px;
+  display: block;
+  background: #fff;
+  padding-left: 15px;
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  width: 100%;
+  text-align: left;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background: #18840f33;
+    border-left: 4px solid #18840f66;
+    color: #18840f;
+  }
+`;
+
 export {
   Container,
   LinkTo,
+  SignOut,
 };
