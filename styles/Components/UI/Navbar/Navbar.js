@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Navbar = styled.nav`
   height: 64px;
   width: 100%;
+  background: #fff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
 `;
 
@@ -71,6 +72,4 @@ const User = styled.div`
   border-radius: 50px;
 `;
 
-export {
-  Navbar, NavbarWrapper, Brand, UserDiv, User,
-};
+export { Navbar, NavbarWrapper, Brand, UserDiv, User };
