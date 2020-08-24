@@ -101,6 +101,9 @@ const Submit = styled.button`
   border-radius: 4px;
   background: rgba(24, 132, 15, 0.2);
   transition: all 0.15s ease-in-out 0s;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export {

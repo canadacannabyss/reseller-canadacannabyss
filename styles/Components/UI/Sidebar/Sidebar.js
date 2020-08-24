@@ -1,13 +1,14 @@
-import styled, { css } from 'styled-components';
-import { SidebarBackgroundFadeIn, SidebarBackgroundFadeOut } from '../../../Animations/Animations';
+import styled from 'styled-components';
 
 const Background = styled.div`
   display: none;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
+  top: 0;
   background: rgba(0, 0 , 0, 0.2);
   @media (max-width: 1199px) {
+    z-index: 9;
     ${(props) => (props.toggleSidebar ? 'display: block' : 'display: none;')}
   }
 `;
@@ -23,15 +24,14 @@ const SidebarContainer = styled.div`
     background: #18840f33;
   }
   @media(max-width: 1199px) {
-    position: absolute;
-    top: 64px;
+    position: fixed;
+    top: 0;
     height: 100%;
+    z-index: 9;
     ${(props) => (props.toggleSidebar ? 'transform: translate(0px);' : 'transform: translate(-250px);')}
   }
-  @media(max-width: 1199px) {
-    /* z-index: 9;
-    position: ;
-  top: 0; */
+  @media(max-width: 300px) {
+    ${(props) => (props.toggleSidebar ? 'width: 200px;' : 'width: 0px;')}
   }
 `;
 
@@ -94,6 +94,9 @@ const ToggleSidebarButton = styled.button`
   transition: all 0.2s ease-in-out;
   @media(max-width: 1199px) {
     ${(props) => (props.toggleSidebar ? 'left: 250px' : 'left: 0px;')}
+  }
+  @media(max-width: 300px) {
+    ${(props) => (props.toggleSidebar ? 'left: 200px' : 'left: 0px;')}
   }
   &:focus {
     outline: none;

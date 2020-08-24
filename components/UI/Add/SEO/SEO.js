@@ -38,13 +38,37 @@ const SEO = (props) => {
             <PreviewDescription>{description}</PreviewDescription>
           </SEOPreview>
           <Label htmlFor='title'>Title</Label>
-          <Input id='title' type='text' autoComplete='off' />
+          <Input
+            id='title'
+            type='text'
+            autoComplete='off'
+            value={title}
+            onChange={onChangeSeoTitle}
+          />
           <br />
           <Label htmlFor='slug'>Slug</Label>
-          <Input id='slug' type='text' autoComplete='off' />
+          <Input
+            id='slug'
+            type='text'
+            autoComplete='off'
+            value={slug}
+            onChange={onChangeSeoSlug}
+            disabled
+            className='disabled'
+          />
           <br />
-          <Label htmlFor='seoDescription'>Title</Label>
-          <TextArea id='seoDescription' type='text' autoComplete='off' />
+          <Label
+            htmlFor='seoDescription'
+          >
+            Description
+          </Label>
+          <TextArea
+            id='seoDescription'
+            type='text'
+            autoComplete='off'
+            value={description}
+            onChange={onChangeSeoDescription}
+          />
         </Content>
       </ContentContainer>
     </Container>

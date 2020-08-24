@@ -262,16 +262,16 @@ const Variants = (props) => {
           <ContentContainer>
             <Content>
               <VariantsFieldsDiv>
-                <InputsDivGrid>
+                <InputsDivGrid id='labelsGrid'>
                   <div />
                   <div>
                     <Label>Variant</Label>
                   </div>
                   <div>
-                    <Label>Price</Label>
+                    <Label className='price'>Price</Label>
                   </div>
                   <div>
-                    <Label>Compare To</Label>
+                    <Label className='compareTo'>Compare To</Label>
                   </div>
                   <div>
                     <Label>SKU</Label>
@@ -292,6 +292,7 @@ const Variants = (props) => {
                           <input
                             type='checkbox'
                             name='active'
+                            autoComplete='off'
                             onChange={(e) => {
                               handleCombinedInputChange(index, e);
                               getActiveVariantValue(index, e);
@@ -302,6 +303,7 @@ const Variants = (props) => {
                           <input
                             type='checkbox'
                             name='active'
+                            autoComplete='off'
                             onChange={(e) => {
                               handleCombinedInputChange(index, e);
                               getActiveVariantValue(index, e);
@@ -318,10 +320,12 @@ const Variants = (props) => {
                     </div>
                     <div>
                       <OptionValuesInput
+                        className='price'
                         name='price'
                         type='number'
                         step='0.1'
                         min='0'
+                        autoComplete='off'
                         onChange={(e) => {
                           handleCombinedInputChange(index, e);
                         }}
@@ -330,10 +334,12 @@ const Variants = (props) => {
                     </div>
                     <div>
                       <OptionValuesInput
+                        className='compareTo'
                         name='compareTo'
                         type='number'
                         step='0.1'
                         min='0'
+                        autoComplete='off'
                         onChange={(e) => {
                           handleCombinedInputChange(index, e);
                         }}
@@ -341,7 +347,9 @@ const Variants = (props) => {
                     </div>
                     <div>
                       <OptionValuesInput
+                        className='sku'
                         name='sku'
+                        autoComplete='off'
                         onChange={(e) => {
                           handleCombinedInputChange(index, e);
                         }}
@@ -350,7 +358,9 @@ const Variants = (props) => {
                     </div>
                     <div>
                       <OptionValuesInput
+                        className='barcode'
                         name='barcode'
+                        autoComplete='off'
                         onChange={(e) => {
                           handleCombinedInputChange(index, e);
                         }}
@@ -359,10 +369,12 @@ const Variants = (props) => {
                     </div>
                     <div>
                       <OptionValuesInput
+                        className='quantity'
                         name='quantity'
                         type='number'
                         step='1'
                         min='0'
+                        autoComplete='off'
                         onChange={(e) => {
                           handleCombinedInputChange(index, e);
                         }}

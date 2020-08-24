@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { BackgroundLogin } from '../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Container,
@@ -31,32 +32,32 @@ const Login = () => {
   };
 
   return (
-    <BackgroundLogin>
-      <Container>
-        <Form onSubmit={onSubmitLogin}>
-          <BrandDiv>
-            <img src={Logo} alt='Canada Cannabyss' />
-            {/* <p>
-              Canada
-              <br />
-              <span>Cannabyss</span>
-            </p> */}
-            <div className='sep' />
-            <h1>Login</h1>
-          </BrandDiv>
-          <Label htmlFor='email'>Email</Label>
-          <Input type='email' id='email' value={email} onChange={onChangeEmail} />
-          <Label htmlFor='password'>Password</Label>
-          <Input
-            type='password'
-            id='password'
-            value={password}
-            onChange={onChangePassword}
-          />
-          <Submit type='submit'>Login</Submit>
-        </Form>
-      </Container>
-    </BackgroundLogin>
+    <>
+      <Head>
+        <title>Login | Reseller - Canada Cannabyss</title>
+      </Head>
+      <BackgroundLogin>
+        <Container>
+          <Form onSubmit={onSubmitLogin}>
+            <BrandDiv>
+              <img src={Logo} alt='Canada Cannabyss' />
+              <div className='sep' />
+              <h1>Login</h1>
+            </BrandDiv>
+            <Label htmlFor='email'>Email</Label>
+            <Input type='email' id='email' value={email} onChange={onChangeEmail} />
+            <Label htmlFor='password'>Password</Label>
+            <Input
+              type='password'
+              id='password'
+              value={password}
+              onChange={onChangePassword}
+            />
+            <Submit type='submit'>Login</Submit>
+          </Form>
+        </Container>
+      </BackgroundLogin>
+    </>
   );
 };
 

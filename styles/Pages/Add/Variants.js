@@ -11,8 +11,18 @@ export const Wrapper = styled.div`
 export const VariantsDiv = styled.div`
   background: #fff;
   width: 100%;
+  overflow-x: scroll;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media(max-width: 340px) {
+    border-radius: 0px;
+  }
+  @media (max-width: 300px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -36,6 +46,22 @@ export const InputsDivGrid = styled.div`
   grid-gap: 5px;
   grid-template-columns: 0.2fr 1fr 0.5fr 0.5fr 1fr 1fr 0.3fr;
   margin-bottom: 6px;
+  @media (max-width: 768px) {
+    padding-right: 20px;
+    div {
+      .price,
+      .compareTo {
+        width: 100px;
+      }
+      .sku,
+      .barcode {
+        width: 200px;
+      }
+      .quantity {
+        width: 80px;
+      }
+    }
+  }
 `;
 
 export const CheckboxDiv = styled.div`
@@ -125,6 +151,9 @@ export const OptionValuesInput = styled.input`
   &::placeholder {
     color: 1px solid rgb(184, 196, 194);
   }
+  @media (max-width: 768px) {
+    width: 490px;
+  }
 `;
 
 export const ButtonsDiv = styled.div`
@@ -186,6 +215,11 @@ export const VariantsFieldsDiv = styled.div`
   /* grid-template-columns: 1fr 1fr;
   grid-gap: 8px; */
   width: 100%;
+  @media (max-width: 768px) {
+    #labelsGrid {
+      grid-template-columns: 30px 125px 100px 100px 200px 200px 70px;
+    }
+  }
 `;
 
 export const VariantsH2 = styled.h2`

@@ -23,6 +23,9 @@ const BackgroundAdd = styled.div`
   background: #f1f1f1;
   width: 100%;
   padding: 20px;
+  @media(max-width: 340px) {
+    padding: 20px 0;
+  }
 `;
 
 const BackgroundLogin = styled.div`

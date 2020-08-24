@@ -13,7 +13,9 @@ import {
 import PhysicalProduct from '../../Buttons/Checkbox/PhysicalProduct';
 
 const Shipping = (props) => {
-  const { physicalProduct, handleCheckPhysicalProduct } = props;
+  const {
+    handleWeightAmount, handleWeightUnit, physicalProduct, handleCheckPhysicalProduct,
+  } = props;
 
   return (
     <Container className='shipping'>
@@ -29,8 +31,15 @@ const Shipping = (props) => {
           <WeightDescription>
             Used to calculate shipping rates at checkout and label prices during fulfillment.
           </WeightDescription>
-          <WeightInput id='weight' type='number' min='0' step='0.1' autoComplete='off' />
-          <WeightUnitSelect>
+          <WeightInput
+            id='weight'
+            type='number'
+            min='0'
+            step='0.1'
+            autoComplete='off'
+            onChange={handleWeightAmount}
+          />
+          <WeightUnitSelect onChange={handleWeightUnit}>
             <option value='kg'>kg</option>
             <option value='lbs'>lbs</option>
           </WeightUnitSelect>

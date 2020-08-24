@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Logo from '../../../assets/img/canada-cannabyss-logo.svg';
 // import OutsideAlerter from '../../../utils/OutsideAlerter';
 
@@ -13,6 +14,7 @@ import {
 } from '../../../styles/Components/UI/Navbar/Navbar';
 
 const NavigationBar = () => {
+  const router = useRouter();
   const [toggleUserMenu, setToggleUserMenu] = useState(false);
 
   const onClickUserButton = () => {
@@ -34,6 +36,7 @@ const NavigationBar = () => {
             <div className='sep' />
             <h1>Reseller</h1>
           </Brand>
+          {router.asPath !== '/login' && (
           <UserDiv>
             <User
               onClick={() => {
@@ -42,6 +45,7 @@ const NavigationBar = () => {
               img='https://canada-cannabyss.s3.ca-central-1.amazonaws.com/default/users/default-user.jpg'
             />
           </UserDiv>
+          )}
         </NavbarWrapper>
       </Navbar>
       {toggleUserMenu && (

@@ -12,7 +12,13 @@ import {
 import AllowCustomersPurchaseOutOfStockCheckbox from '../../Buttons/Checkbox/AllowCustomersPurchaseOutOfStockCheckbox';
 
 const Inventory = (props) => {
-  const { allowPurchaseOutOfStock, handleCheckAllowPurchaseOutOfStock } = props;
+  const {
+    handleSku,
+    handleBarcode,
+    handleQuantity,
+    allowPurchaseOutOfStock,
+    handleCheckAllowPurchaseOutOfStock,
+  } = props;
 
   return (
     <Container className='inventory'>
@@ -23,11 +29,21 @@ const Inventory = (props) => {
             <div>
               <Label htmlFor='sku'>SKU (stock keeping unit)</Label>
               <br />
-              <Input id='sku' type='text' autoComplete='off' />
+              <Input
+                id='sku'
+                type='text'
+                autoComplete='off'
+                onChange={handleSku}
+              />
             </div>
             <div>
               <Label htmlFor='barcode'>Barcode (ISBN, UPC, GTIN, etc.)</Label>
-              <Input id='barcode' type='text' autoComplete='off' />
+              <Input
+                id='barcode'
+                type='text'
+                autoComplete='off'
+                onChange={handleBarcode}
+              />
             </div>
           </HalfGrid>
           <br />
@@ -35,7 +51,13 @@ const Inventory = (props) => {
             <div>
               <Label htmlFor='quantity'>Quantity</Label>
               <br />
-              <Input id='quantity' type='number' min='1' step='1' />
+              <Input
+                id='quantity'
+                type='number'
+                min='1'
+                step='1'
+                onChange={handleQuantity}
+              />
             </div>
           </HalfGrid>
           <br />
@@ -50,6 +72,9 @@ const Inventory = (props) => {
 };
 
 Inventory.propTypes = {
+  handleSku: PropTypes.func.isRequired,
+  handleBarcode: PropTypes.func.isRequired,
+  handleQuantity: PropTypes.func.isRequired,
   handleCheckAllowPurchaseOutOfStock: PropTypes.func.isRequired,
   allowPurchaseOutOfStock: PropTypes.bool.isRequired,
 };

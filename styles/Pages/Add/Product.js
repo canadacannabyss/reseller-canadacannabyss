@@ -16,8 +16,7 @@ const Wrapper = styled.div`
     width: 100%;
   }
   @media (max-width: 991px) {
-    grid-template-areas: 
-    'a a b';
+    grid-template-areas: 'a a b';
   }
   @media (max-width: 768px) {
     display: block;
@@ -30,6 +29,9 @@ const Wrapper = styled.div`
 const MainGrid = styled.div`
   display: grid;
   grid-gap: 20px;
+  @media (max-width: 300px) {
+    display: block;
+  }
 `;
 
 const HalfGrid = styled.div`
@@ -46,6 +48,12 @@ const Container = styled.div`
   width: 100%;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+  @media (max-width: 340px) {
+    border-radius: 0px;
+  }
+  @media (max-width: 300px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const SideContainer = styled.div`
@@ -53,6 +61,9 @@ const SideContainer = styled.div`
   width: 100%;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+  @media (max-width: 340px) {
+    border-radius: 0px;
+  }
 `;
 
 const StickyDiv = styled.div`
@@ -157,7 +168,7 @@ const SearchBar = styled.div`
       }
     }
     svg {
-      transition: all .1s ease-in-out;
+      transition: all 0.1s ease-in-out;
     }
   }
 `;
@@ -205,7 +216,7 @@ const SpansDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-self: center;
-  } 
+  }
   .buttonsSpan {
     display: flex;
     flex-direction: row;
@@ -302,6 +313,44 @@ const TextArea = styled.textarea`
   }
 `;
 
+const OrganizationTextArea = styled.textarea`
+  height: 100px;
+  width: 100%;
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  padding: 12px;
+  box-sizing: border-box;
+  letter-spacing: 0.04em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(184, 196, 194);
+  border-image: initial;
+  border-radius: 4px;
+  background: #fff;
+  resize: none;
+  transition: all 0.2s ease-in-out 0s;
+  &:focus {
+    border-color: #18840f;
+    outline: none;
+  }
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #18840f;
+    border: 1px solid #18840f;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #18840f;
+  }
+`;
+
 const WeightLabel = styled.label`
   font-size: 14px;
   font-weight: 900;
@@ -355,6 +404,72 @@ const WeightUnitSelect = styled.select`
   }
 `;
 
+const SubmitButton = styled.button`
+  font-size: 16px;
+  display: block;
+  margin: 15px auto 0px auto;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  -webkit-letter-spacing: 0.04em;
+  -moz-letter-spacing: 0.04em;
+  -ms-letter-spacing: 0.04em;
+  letter-spacing: 0.04em;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+  color: rgb(24, 132, 15);
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(24, 132, 15, 0.4);
+  border-image: initial;
+  border-radius: 4px;
+  background: rgba(24, 132, 15, 0.2);
+  -webkit-transition: all 0.15s ease-in-out 0s;
+  transition: all 0.15s ease-in-out 0s;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  display: block;
+  position: fixed;
+  top: 0;
+  z-index: 99999999999;
+`;
+
+const LoadingSpinner = styled.div`
+  display: table;
+  margin: 15px auto;
+  /* animation-name: ${spin}; */
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  svg {
+    font-size: 20px;
+    color: #18840f;
+  }
+`;
+
+const Warning = styled.div`
+  border: 1px solid #d42626;
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: #d42626;
+  font-size: 12px;
+  margin: 7px auto;
+  display: table;
+  cursor: default;
+  background: #d426260f;
+  text-transform: uppercase;
+`;
+
 export {
   Wrapper,
   StickyDiv,
@@ -375,8 +490,13 @@ export {
   InputGroupTitle,
   Input,
   TextArea,
+  OrganizationTextArea,
   WeightLabel,
   WeightInput,
   WeightUnitSelect,
   WeightDescription,
+  SubmitButton,
+  Loading,
+  LoadingSpinner,
+  Warning,
 };
