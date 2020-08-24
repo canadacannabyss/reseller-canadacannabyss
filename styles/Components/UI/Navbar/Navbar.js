@@ -72,4 +72,6 @@ const User = styled.div`
   border-radius: 50px;
 `;
 
-export { Navbar, NavbarWrapper, Brand, UserDiv, User };
+export {
+  Navbar, NavbarWrapper, Brand, UserDiv, User,
+};

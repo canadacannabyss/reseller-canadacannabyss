@@ -270,7 +270,7 @@ const TextArea = styled.textarea`
   font-size: 16px;
   display: block;
   margin-top: 5px;
-  padding-left: 12px;
+  padding: 12px;
   box-sizing: border-box;
   letter-spacing: 0.04em;
   border-width: 1px;
@@ -280,6 +280,74 @@ const TextArea = styled.textarea`
   border-radius: 4px;
   background: #fff;
   resize: none;
+  transition: all 0.2s ease-in-out 0s;
+  &:focus {
+    border-color: #18840f;
+    outline: none;
+  }
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #18840f;
+    border: 1px solid #18840f;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #18840f;
+  }
+`;
+
+const WeightLabel = styled.label`
+  font-size: 14px;
+  font-weight: 900;
+  color: #18840f;
+`;
+
+const WeightDescription = styled.p`
+  font-size: 15px;
+  color: #777777;
+  margin-bottom: 0.5rem;
+`;
+
+const WeightInput = styled.input`
+  height: 40px;
+  width: 100px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  padding-left: 12px;
+  box-sizing: border-box;
+  letter-spacing: 0.04em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(184, 196, 194);
+  border-image: initial;
+  border-radius: 4px;
+  background: rgb(255, 255, 255);
+  transition: all 0.2s ease-in-out 0s;
+  &:focus {
+    border-color: #18840f;
+    outline: none;
+  }
+`;
+
+const WeightUnitSelect = styled.select`
+  height: 40px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  padding-left: 12px;
+  box-sizing: border-box;
+  letter-spacing: 0.04em;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  border-radius: 4px;
+  background: rgb(255, 255, 255);
   transition: all 0.2s ease-in-out 0s;
   &:focus {
     border-color: #18840f;
@@ -307,4 +375,8 @@ export {
   InputGroupTitle,
   Input,
   TextArea,
+  WeightLabel,
+  WeightInput,
+  WeightUnitSelect,
+  WeightDescription,
 };
