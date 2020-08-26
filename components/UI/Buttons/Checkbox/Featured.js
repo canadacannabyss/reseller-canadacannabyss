@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   CheckboxDiv,
-  CheckboxDivChecked,
+  CheckboxDivChecked
 } from '../../../../styles/Components/UI/Buttons/Checkbox/AllowCustomersPurchaseOutOfStockCheckbox';
 
 const FeaturedCheckbox = (props) => {

@@ -2,9 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import {
-  FaBox, FaSearch, FaPlus
+  FaSearch, FaPlus, FaObjectUngroup
 } from 'react-icons/fa';
-import ProductList from '../../components/UI/List/Products/ProductList';
+import BannerList from '../../components/UI/List/Banners/BannersList';
+
 import {
   Background
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
@@ -18,11 +19,11 @@ import {
   AddProductLink,
   TitleDiv,
   Content
-} from '../../styles/Pages/Products/Products';
+} from '../../styles/Pages/Banners/Banners';
 
-const products = [
+const banners = [
   {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -33,18 +34,7 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: true,
-    slug: 'first-product'
-  },
-  {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -55,18 +45,7 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: true,
-    slug: 'first-product'
-  },
-  {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -77,7 +56,7 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -88,7 +67,7 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -99,18 +78,7 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: true,
-    slug: 'first-product'
-  },
-  {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
@@ -121,22 +89,34 @@ const products = [
     slug: 'first-product'
   },
   {
-    productName: 'First Product',
+    promotionName: 'First Promotion',
     prices: {
       price: 32.65,
       compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
-    featured: true,
+    featured: false,
+    slug: 'first-product'
+  },
+  {
+    promotionName: 'First Promotion',
+    prices: {
+      price: 32.65,
+      compareTo: 40.00
+    },
+    createdOn: 'December 30, 2019',
+    updatedOn: 'December 31, 2019',
+    featured: false,
     slug: 'first-product'
   }
+
 ];
 
-const Products = () => (
+const Banners = () => (
   <>
     <Head>
-      <title>Products | Reseller - Canada Cannabyss</title>
+      <title>Banners | Reseller - Canada Cannabyss</title>
     </Head>
     <Background>
       <Wrapper>
@@ -145,8 +125,8 @@ const Products = () => (
             <Content>
               <TitleSearchBarAddButtonDiv>
                 <TitleDiv>
-                  <FaBox />
-                  <h1>Products</h1>
+                  <FaObjectUngroup />
+                  <h1>Banners</h1>
                 </TitleDiv>
                 <SearchBarAddButtonDiv>
                   <SearchBar>
@@ -155,14 +135,14 @@ const Products = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/add/product' as='/add/product'>
+                  <Link href='/add/banner' as='/add/banner'>
                     <AddProductLink>
                       <FaPlus />
                     </AddProductLink>
                   </Link>
                 </SearchBarAddButtonDiv>
               </TitleSearchBarAddButtonDiv>
-              <ProductList products={products} />
+              <BannerList banners={banners} />
             </Content>
           </ContentContainer>
         </Container>
@@ -171,7 +151,7 @@ const Products = () => (
   </>
 );
 
-Products.getInitialProps = async () => {
+Banners.getInitialProps = async () => {
   const repos = await fetch('https://api.github.com/users/Davi-Silva/repos');
 
   const data = await repos.json();
@@ -180,4 +160,4 @@ Products.getInitialProps = async () => {
   };
 };
 
-export default Products;
+export default Banners;

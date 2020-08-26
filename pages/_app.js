@@ -22,6 +22,7 @@ class MyApp extends App {
       <>
         <Head>
           <link rel='icon' type='image/png' href={Logo} />
+          <meta charset='utf-8' />
         </Head>
         <Layout>
           <Component {...pageProps} />

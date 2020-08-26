@@ -16,6 +16,11 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
     "quotes": [2, "single", { "avoidEscape": true }],
-    "jsx-quotes": [2, "prefer-single"]
+    "jsx-quotes": [2, "prefer-single"],
+    "operator-linebreak": [2, "after"],
+    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": ["error"],
+    "array-callback-return": "error"
   }
 }

@@ -4,11 +4,13 @@ import { ImageUploader } from 'portrait-load';
 import {
   Container,
   ContentContainer,
-  Content,
+  Content
 } from '../../../../styles/Pages/Add/Product';
 
 const Media = (props) => {
-  const { childRef, handleSetImagesArray, imagesArray } = props;
+  const {
+    childRef, multipleFiles, handleSetImagesArray, imagesArray
+  } = props;
 
   return (
     <Container>
@@ -29,9 +31,9 @@ const Media = (props) => {
             defaultMessage='Allowed files dimensions'
             fileDimensions={{
               width: '640px',
-              height: '640px',
+              height: '640px'
             }}
-            multipleFiles
+            multipleFiles={multipleFiles}
             apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/products/publish/media`}
           />
         </Content>
@@ -42,8 +44,9 @@ const Media = (props) => {
 
 Media.propTypes = {
   childRef: PropTypes.shape().isRequired,
+  multipleFiles: PropTypes.bool.isRequired,
   handleSetImagesArray: PropTypes.func.isRequired,
-  imagesArray: PropTypes.shape().isRequired,
+  imagesArray: PropTypes.shape().isRequired
 };
 
 export default Media;

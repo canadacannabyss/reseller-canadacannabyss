@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import {
-  FaBoxes, FaSearch, FaPlus,
+  FaBoxes, FaSearch, FaPlus
 } from 'react-icons/fa';
 import BundleList from '../../components/UI/List/Bundles/BundleList';
 
 import {
-  Background,
+  Background
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Wrapper,
@@ -18,7 +18,7 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content,
+  Content
 } from '../../styles/Pages/Bundles/Bundles';
 
 const bundles = [
@@ -26,321 +26,321 @@ const bundles = [
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     bundleName: 'First Bundle',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
-  },
+    slug: 'first-product'
+  }
 
 ];
 
@@ -366,7 +366,7 @@ const Bundles = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/bundles/add' as='/bundles/add'>
+                  <Link href='/add/bundle' as='/add/bundle'>
                     <AddProductLink>
                       <FaPlus />
                     </AddProductLink>
@@ -387,7 +387,7 @@ Bundles.getInitialProps = async () => {
 
   const data = await repos.json();
   return {
-    repos: data,
+    repos: data
   };
 };
 

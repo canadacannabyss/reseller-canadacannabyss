@@ -1,143 +1,383 @@
 import Head from 'next/head';
-import React from 'react';
-import { FaBox, FaPlus } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
+import { FaTags, FaPlus, FaSpinner } from 'react-icons/fa';
+import Router from 'next/router';
+import _ from 'lodash';
+
+import { slugifyString } from '../../utils/stringMethods';
+import { roundFloatNumber } from '../../utils/numberConverter';
 
 import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import ItemNameDescription from '../../components/UI/Add/ItemNameDescription/ItemNameDescription';
+import Media from '../../components/UI/Add/Media/Media';
+import SEO from '../../components/UI/Add/SEO/SEO';
+import ProductsList from '../../components/UI/List/Add/ProductsList/ProductsList';
+import Organization from '../../components/UI/Add/Organization/Organization';
 import {
   Wrapper,
   StickyDiv,
   MainGrid,
-  Container,
-  SideContainer,
-  ContentContainer,
-  TitleSearchBarAddButtonDiv,
-  TitleDiv,
-  Content,
-  HalfGrid,
-  PlusIconSign,
-  Label,
-  InputGroupTitle,
-  Input,
-  TextArea,
+  SubmitButton,
+  LoadingSpinner,
+  Loading,
+  Warning
 } from '../../styles/Pages/Add/Product';
 
-const AddProduct = () => (
-  <>
-    <Head>
-      <title>Add Product | Reseller - Canada Cannabyss</title>
-    </Head>
-    <BackgroundAdd>
-      <Wrapper>
-        <MainGrid className='main'>
-          <Container>
-            <ContentContainer>
-              <Content>
-                <TitleSearchBarAddButtonDiv>
-                  <TitleDiv>
-                    <PlusIconSign>
-                      <FaBox className='mainIcon' />
-                      <FaPlus className='plus' />
-                    </PlusIconSign>
-                    <h1>Add Products</h1>
-                  </TitleDiv>
-                </TitleSearchBarAddButtonDiv>
-                <Label htmlFor='productName'>Product Name</Label>
-                <Input id='productName' type='text' autoComplete='off' />
-                <br />
-                <Label>Description</Label>
-                <TextArea />
-              </Content>
-            </ContentContainer>
-          </Container>
-          <Container className='pricing'>
-            <ContentContainer>
-              <Content>
-                <InputGroupTitle>Pricing</InputGroupTitle>
-                <HalfGrid>
-                  <div>
-                    <Label htmlFor='price'>Price</Label>
-                    <br />
-                    <Input
-                      id='price'
-                      type='number'
-                      min='0'
-                      step='0.1'
-                      autoComplete='off'
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor='compareTo'>Compare To</Label>
-                    <Input
-                      id='compareTo'
-                      type='number'
-                      min='0'
-                      step='0.1'
-                      autoComplete='off'
-                    />
-                  </div>
-                </HalfGrid>
-              </Content>
-            </ContentContainer>
-          </Container>
-          <Container className='inventory'>
-            <ContentContainer>
-              <Content>
-                <InputGroupTitle>Inventory</InputGroupTitle>
-                <HalfGrid>
-                  <div>
-                    <Label htmlFor='sku'>SKU (stock keeping unit)</Label>
-                    <br />
-                    <Input id='sku' type='text' autoComplete='off' />
-                  </div>
-                  <div>
-                    <Label htmlFor='barcode'>
-                      Barcode (ISBN, UPC, GTIN, etc.)
-                    </Label>
-                    <Input id='barcode' type='text' autoComplete='off' />
-                  </div>
-                </HalfGrid>
-                <br />
-                <HalfGrid>
-                  <div>
-                    <Label htmlFor='quantity'>Quantity</Label>
-                    <br />
-                    <Input id='quantity' type='number' min='1' step='1' />
-                  </div>
-                </HalfGrid>
-              </Content>
-            </ContentContainer>
-          </Container>
-        </MainGrid>
-        <StickyDiv>
-          <SideContainer className='side'>
-            <ContentContainer>
-              <Content>
-                <TitleSearchBarAddButtonDiv>
-                  <TitleDiv>
-                    <h2>Organization</h2>
-                  </TitleDiv>
-                </TitleSearchBarAddButtonDiv>
-                <Label htmlFor='category'>Category</Label>
-                <Input id='category' type='text' autoComplete='off' />
-                <br />
-                <Label htmlFor='tags'>Tags</Label>
-                <Input id='tags' type='text' autoComplete='off' />
-              </Content>
-            </ContentContainer>
-          </SideContainer>
-        </StickyDiv>
-      </Wrapper>
-    </BackgroundAdd>
-  </>
-);
+const AddPromotion = () => {
+  const childRef = useRef();
 
-AddProduct.getInitialProps = async () => {
-  const repos = await fetch('https://api.github.com/users/Davi-Silva/repos');
+  const [warning, setWarning] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isSlugValid, setIsSlugValid] = useState(true);
+  const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const data = await repos.json();
-  return {
-    repos: data,
+  const [promotionName, setPromotionName] = useState('');
+  const [description, setDescription] = useState('');
+
+  const [productOnBundle, setProductOnBundle] = useState([]);
+  const [productList, setProductList] = useState([]);
+
+  const [slug, setSlug] = useState('');
+
+  const [imagesArray, setImagesArray] = useState([]);
+  const [imagesArrayLength, setImagesArrayLength] = useState(0);
+
+  const [seoTitle, setSeoTitle] = useState('');
+  const [seoSlug, setSeoSlug] = useState('');
+  const [seoDescription, setSeoDescription] = useState('');
+
+  const [categories, setCategories] = useState('');
+  const [categoriesArray, setCategoriesArray] = useState([]);
+  const [tags, setTags] = useState('');
+  const [tagsArray, setTagsArray] = useState([]);
+
+  const handleSetImagesArray = (images) => {
+    setImagesArray(images);
   };
+
+  const onChangeSeoTitle = (e) => {
+    setSeoTitle(e.target.value);
+  };
+
+  const onChangeSeoSlug = (e) => {
+    setSeoSlug(slugifyString(e.target.value));
+  };
+
+  const onChangeSeoDescription = (e) => {
+    setSeoDescription(e.target.value);
+  };
+
+  const changeSlugFromProductName = () => {
+    setSlug(slugifyString(promotionName));
+  };
+
+  const handleSubmit = async () => {
+    if (allFieldsFilled) {
+      setImagesArrayLength(imagesArray.length);
+      setLoading(true);
+      await childRef.current.handleStartUploadingFiles();
+    }
+  };
+
+  const disabledSubmitButton = () => {
+    if (
+
+      isSlugValid &&
+      slug.length > 0 &&
+      promotionName.length > 0 &&
+      description.length > 0 &&
+      seoTitle.length > 0 &&
+      seoSlug.length > 0 &&
+      seoDescription.length > 0 &&
+      categories.length > 0 &&
+      tags.length > 0 &&
+      !_.isEmpty(imagesArray) &&
+      !_.isEmpty(tagsArray) &&
+      !_.isEmpty(categoriesArray)
+    ) {
+      setAllFieldsFilled(true);
+    } else {
+      setAllFieldsFilled(false);
+    }
+  };
+
+  useEffect(() => {
+    disabledSubmitButton();
+  }, [
+    isSlugValid,
+    slug,
+    promotionName,
+    description,
+    seoTitle,
+    seoSlug,
+    seoDescription,
+    categories,
+    categoriesArray,
+    tags,
+    tagsArray,
+    imagesArray
+  ]);
+
+  const setGlobalVariable = async () => {
+    const bodyRequest = {
+      type: 'promotions',
+      title: promotionName
+    };
+    const response = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/set/global-variable`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyRequest)
+      }
+    );
+    return response;
+  };
+
+  const verifySlug = async () => {
+    const response = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/validation/slug/${slug}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    const data = await response.json();
+    return data;
+  };
+
+  const publishProduct = async (product) => {
+    const response = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/publish`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      }
+    );
+    const data = await response.json();
+    return data;
+  };
+
+  const fetchAllProducts = async () => {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/promotions`, {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    setProductList(data);
+  };
+
+  useEffect(() => {
+    fetchAllProducts(1, 12);
+  }, []);
+
+  useEffect(() => {
+    setSeoSlug(slug);
+  }, [slug]);
+
+  useEffect(() => {
+    changeSlugFromProductName(promotionName);
+  }, [promotionName]);
+
+  useEffect(() => {
+    if (slug.length > 0) {
+      const checkSlugValid = async () => {
+        await verifySlug(slug);
+      };
+      checkSlugValid();
+      setGlobalVariable();
+    }
+  }, [promotionName]);
+
+  const onSubmit = async () => {
+    disabledSubmitButton();
+    const imagesArrayObj = [];
+    imagesArray.map((image) => {
+      imagesArrayObj.push(image.data._id);
+    });
+    if (allFieldsFilled) {
+      const productInfo = {
+        isSlugValid,
+        media: imagesArrayObj,
+        promotionName,
+        description,
+        seo: {
+          title: seoTitle,
+          slug: seoSlug,
+          description: seoDescription
+        },
+        organization: {
+          categories: categoriesArray,
+          tags: tagsArray
+        }
+      };
+      const isSlugValidRes = await verifySlug(slug);
+      if (isSlugValidRes.valid) {
+        const res = await publishProduct(productInfo);
+        Router.push(`/product/${res.slug}`);
+      } else {
+        console.log('Slug is invalid');
+        setIsSlugValid(false);
+      }
+    } else {
+      setWarning(true);
+    }
+  };
+
+  useEffect(() => {
+    if (imagesArray.length > 0) {
+      if (imagesArray[0].data !== null && imagesArray[0].data !== undefined) {
+        if (imagesArray.length === imagesArrayLength) {
+          onSubmit();
+        }
+      }
+    }
+  }, [imagesArray]);
+
+  const categoriesToArray = () => {
+    const tempCategories = categories.split(',');
+    tempCategories.map((category, i) => {
+      tempCategories[i] = tempCategories[i].trim();
+    });
+    setCategoriesArray(tempCategories);
+  };
+
+  useEffect(() => {
+    categoriesToArray();
+  }, [categories]);
+
+  const tagsToArray = () => {
+    const tempTags = tags.split(',');
+    tempTags.map((tag, i) => {
+      tempTags[i] = tempTags[i].trim();
+    });
+    setTagsArray(tempTags);
+  };
+
+  useEffect(() => {
+    tagsToArray();
+  }, [tags]);
+
+  const onChangeCategories = (e) => {
+    setCategories(e.target.value);
+  };
+
+  const onChangeTags = (e) => {
+    setTags(e.target.value.toLowerCase());
+  };
+
+  const onChangeProductName = (e) => {
+    setPromotionName(e.target.value);
+  };
+
+  const onChangeDescription = (e) => {
+    setDescription(e.target.getContent());
+  };
+
+  const removeElementFromArray = (arr, element) => {
+    const index = arr.indexOf(element);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  };
+
+  const handleGetElement = (el) => {
+    const element = el;
+    if (!productOnBundle.includes(element.id)) {
+      setProductOnBundle((pOnBundle) => pOnBundle.concat(element.id));
+      element.style.backgroundColor = '#18840f';
+      element.style.border = '1px solid #18840f';
+      element.querySelector('.name').style.color = '#fff';
+    } else {
+      setProductOnBundle(removeElementFromArray(productOnBundle, element.id));
+      element.style.backgroundColor = '#efefef';
+      element.style.border = '1px solid #efefef';
+      element.querySelector('.name').style.color = '#18840f';
+    }
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Add Promotion | Reseller - Canada Cannabyss</title>
+      </Head>
+      <BackgroundAdd>
+        <Wrapper>
+          <MainGrid className='main'>
+            <ItemNameDescription
+              MainIcon={<FaTags className='mainIcon' />}
+              PlusIcon={<FaPlus className='plus' />}
+              title='Add Promotion'
+              itemName='Promotion Name'
+              onChangeItemName={onChangeProductName}
+              description={description}
+              onChangeDescription={onChangeDescription}
+            />
+            <Media
+              multipleFiles={false}
+              childRef={childRef}
+              handleSetImagesArray={handleSetImagesArray}
+              imagesArray={imagesArray}
+            />
+            <ProductsList
+              title='Products on promotion'
+              products={productList}
+              handleGetElement={handleGetElement}
+            />
+            <SEO
+              onChangeSeoTitle={onChangeSeoTitle}
+              onChangeSeoSlug={onChangeSeoSlug}
+              onChangeSeoDescription={onChangeSeoDescription}
+              title={seoTitle}
+              slug={seoSlug}
+              description={seoDescription}
+            />
+          </MainGrid>
+          <StickyDiv>
+            <Organization
+              onChangeCategories={onChangeCategories}
+              onChangeTags={onChangeTags}
+              categories={categories}
+              tags={tags}
+            />
+          </StickyDiv>
+        </Wrapper>
+        {warning && <Warning>Fill all fields before submit</Warning>}
+        <SubmitButton type='button' onClick={handleSubmit}>
+          Add Promotion
+        </SubmitButton>
+      </BackgroundAdd>
+      {loading && (
+        <Loading>
+          <LoadingSpinner>
+            <FaSpinner />
+          </LoadingSpinner>
+        </Loading>
+      )}
+    </>
+  );
 };
 
-export default AddProduct;
+export default AddPromotion;

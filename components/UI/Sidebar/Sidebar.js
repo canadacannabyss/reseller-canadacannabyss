@@ -11,12 +11,13 @@ import {
   FaListUl,
   FaPlus,
   FaBars,
+  FaObjectUngroup
 } from 'react-icons/fa';
 import {
   SidebarContainer,
   SidebarLink,
   ToggleSidebarButton,
-  Background,
+  Background
 } from '../../../styles/Components/UI/Sidebar/Sidebar';
 
 const Sidebar = () => {
@@ -88,6 +89,17 @@ const Sidebar = () => {
               >
                 <FaTags />
                 <p>Promotions</p>
+              </SidebarLink>
+            </Link>
+            <Link href='/banners' as='/banners'>
+              <SidebarLink
+                toggleSidebar={toggleSidebar}
+                onClick={() => {
+                  onClickToggleSidebar();
+                }}
+              >
+                <FaObjectUngroup />
+                <p>Banners</p>
               </SidebarLink>
             </Link>
             <Link href='/coupons' as='/coupons'>

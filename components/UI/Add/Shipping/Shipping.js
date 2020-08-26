@@ -8,13 +8,13 @@ import {
   WeightLabel,
   WeightDescription,
   WeightInput,
-  WeightUnitSelect,
+  WeightUnitSelect
 } from '../../../../styles/Pages/Add/Product';
 import PhysicalProduct from '../../Buttons/Checkbox/PhysicalProduct';
 
 const Shipping = (props) => {
   const {
-    handleWeightAmount, handleWeightUnit, physicalProduct, handleCheckPhysicalProduct,
+    handleWeightAmount, handleWeightUnit, physicalProduct, handleCheckPhysicalProduct
   } = props;
 
   return (
@@ -51,7 +51,7 @@ const Shipping = (props) => {
 
 Shipping.propTypes = {
   handleCheckPhysicalProduct: PropTypes.func.isRequired,
-  physicalProduct: PropTypes.bool.isRequired,
+  physicalProduct: PropTypes.bool.isRequired
 };
 
 export default Shipping;

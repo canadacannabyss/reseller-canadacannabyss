@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import {
-  FaSortAmountDownAlt, FaSearch, FaPlus,
+  FaSortAmountDownAlt, FaSearch, FaPlus
 } from 'react-icons/fa';
 import OrderList from '../../components/UI/List/Orders/OrderList';
 
 import {
-  Background,
+  Background
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Wrapper,
@@ -18,7 +18,7 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content,
+  Content
 } from '../../styles/Pages/Orders/Orders';
 
 const orders = [
@@ -26,90 +26,90 @@ const orders = [
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     orderName: 'First Order',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
-  },
+    slug: 'first-product'
+  }
 
 ];
 
@@ -135,11 +135,6 @@ const Promotions = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/orders/add' as='/orders/add'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
                 </SearchBarAddButtonDiv>
               </TitleSearchBarAddButtonDiv>
               <OrderList orders={orders} />
@@ -156,7 +151,7 @@ Promotions.getInitialProps = async () => {
 
   const data = await repos.json();
   return {
-    repos: data,
+    repos: data
   };
 };
 

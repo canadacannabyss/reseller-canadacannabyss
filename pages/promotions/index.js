@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import {
-  FaTags, FaSearch, FaPlus,
+  FaTags, FaSearch, FaPlus
 } from 'react-icons/fa';
 import PromotionList from '../../components/UI/List/Promotions/PromotionList';
 
 import {
-  Background,
+  Background
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Wrapper,
@@ -18,7 +18,7 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content,
+  Content
 } from '../../styles/Pages/Promotions/Promotions';
 
 const promotions = [
@@ -26,90 +26,90 @@ const promotions = [
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     promotionName: 'First Promotion',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
-  },
+    slug: 'first-product'
+  }
 
 ];
 
@@ -135,7 +135,7 @@ const Promotions = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/promotions/add' as='/promotions/add'>
+                  <Link href='/add/promotion' as='/add/promotion'>
                     <AddProductLink>
                       <FaPlus />
                     </AddProductLink>
@@ -156,7 +156,7 @@ Promotions.getInitialProps = async () => {
 
   const data = await repos.json();
   return {
-    repos: data,
+    repos: data
   };
 };
 

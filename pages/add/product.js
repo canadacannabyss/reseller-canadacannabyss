@@ -1,9 +1,4 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable operator-linebreak */
 import Head from 'next/head';
-import { Editor } from '@tinymce/tinymce-react';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBox, FaPlus, FaSpinner } from 'react-icons/fa';
 import Router from 'next/router';
@@ -13,6 +8,7 @@ import { slugifyString } from '../../utils/stringMethods';
 import { roundFloatNumber } from '../../utils/numberConverter';
 
 import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import ItemNameDescription from '../../components/UI/Add/ItemNameDescription/ItemNameDescription';
 import Pricing from '../../components/UI/Add/Pricing/Pricing';
 import Media from '../../components/UI/Add/Media/Media';
 import ExtraInfo from '../../components/UI/Add/ExtraInfo/ExtraInfo';
@@ -25,18 +21,10 @@ import {
   Wrapper,
   StickyDiv,
   MainGrid,
-  Container,
-  ContentContainer,
-  TitleSearchBarAddButtonDiv,
-  TitleDiv,
-  Content,
-  PlusIconSign,
-  Label,
-  Input,
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning,
+  Warning
 } from '../../styles/Pages/Add/Product';
 
 const AddProduct = () => {
@@ -202,13 +190,13 @@ const AddProduct = () => {
     categoriesArray,
     tags,
     tagsArray,
-    extraInfo,
+    extraInfo
   ]);
 
   const setGlobalVariable = async () => {
     const bodyRequest = {
       type: 'products',
-      title: productName,
+      title: productName
     };
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/admin/products/set/global-variable`,
@@ -218,9 +206,9 @@ const AddProduct = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bodyRequest),
+        body: JSON.stringify(bodyRequest)
       }
     );
     return response;
@@ -235,8 +223,8 @@ const AddProduct = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
     const data = await response.json();
@@ -252,9 +240,9 @@ const AddProduct = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(product)
       }
     );
     const data = await response.json();
@@ -291,12 +279,12 @@ const AddProduct = () => {
         media: imagesArrayObj,
         variants: {
           variantsOptionNames,
-          values: variants,
+          values: variants
         },
         productName,
         prices: {
           price,
-          compareTo,
+          compareTo
         },
         taxableProduct,
         description,
@@ -305,24 +293,24 @@ const AddProduct = () => {
           sku,
           barcode,
           quantity,
-          allowPurchaseOutOfStock,
+          allowPurchaseOutOfStock
         },
         shipping: {
           physicalProduct,
           weight: {
             unit: weightUnit,
-            amount: weightAmount,
-          },
+            amount: weightAmount
+          }
         },
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription,
+          description: seoDescription
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray,
-        },
+          tags: tagsArray
+        }
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
@@ -407,49 +395,15 @@ const AddProduct = () => {
       <BackgroundAdd>
         <Wrapper>
           <MainGrid className='main'>
-            <Container>
-              <ContentContainer>
-                <Content>
-                  <TitleSearchBarAddButtonDiv>
-                    <TitleDiv>
-                      <PlusIconSign>
-                        <FaBox className='mainIcon' />
-                        <FaPlus className='plus' />
-                      </PlusIconSign>
-                      <h1>Add Products</h1>
-                    </TitleDiv>
-                  </TitleSearchBarAddButtonDiv>
-                  <Label htmlFor='productName'>Product Name</Label>
-                  <Input
-                    id='productName'
-                    type='text'
-                    autoComplete='off'
-                    onChange={onChangeProductName}
-                  />
-                  <br />
-                  <Label htmlFor='productDescription'>Description</Label>
-                  <div>
-                    <Editor
-                      apiKey='z1imaefgqfqi5gkj9tp9blogndyf2gp0aj3fgubdtz73p658'
-                      name='description'
-                      initialValue={description}
-                      init={{
-                        height: 320,
-                        menubar: false,
-                        plugins: [
-                          'advlist autolink lists link image charmap print preview anchor',
-                          'searchreplace visualblocks code fullscreen',
-                          'insertdatetime media table paste code help wordcount',
-                        ],
-                        toolbar:
-                          'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-                      }}
-                      onChange={onChangeDescription}
-                    />
-                  </div>
-                </Content>
-              </ContentContainer>
-            </Container>
+            <ItemNameDescription
+              MainIcon={<FaBox className='mainIcon' />}
+              PlusIcon={<FaPlus className='plus' />}
+              title='Add Product'
+              itemName='Product Name'
+              onChangeItemName={onChangeProductName}
+              description={description}
+              onChangeDescription={onChangeDescription}
+            />
             <Media
               childRef={childRef}
               handleSetImagesArray={handleSetImagesArray}

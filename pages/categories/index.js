@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import {
-  FaListUl, FaSearch, FaPlus,
+  FaListUl, FaSearch, FaPlus
 } from 'react-icons/fa';
 import CategoryList from '../../components/UI/List/Categories/CategoryList';
 
 import {
-  Background,
+  Background
 } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Wrapper,
@@ -18,7 +18,7 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content,
+  Content
 } from '../../styles/Pages/Categories/Categories';
 
 const categories = [
@@ -26,90 +26,90 @@ const categories = [
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
+    slug: 'first-product'
   },
   {
     categoryName: 'First Category',
     prices: {
       price: 32.65,
-      compareTo: 40.00,
+      compareTo: 40.00
     },
     createdOn: 'December 30, 2019',
     updatedOn: 'December 31, 2019',
     featured: false,
-    slug: 'first-product',
-  },
+    slug: 'first-product'
+  }
 
 ];
 
@@ -136,7 +136,7 @@ const Categories = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/categories/add' as='/categories/add'>
+                  <Link href='/add/categories' as='/add/categories'>
                     <AddProductLink>
                       <FaPlus />
                     </AddProductLink>
@@ -157,7 +157,7 @@ Categories.getInitialProps = async () => {
 
   const data = await repos.json();
   return {
-    repos: data,
+    repos: data
   };
 };
 
