@@ -29,7 +29,7 @@ const AddBanner = () => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [bannerName, setPromotionName] = useState('');
+  const [bannerName, setBannerName] = useState('');
   const [description, setDescription] = useState('');
 
   const [promotionsOnBanner, setPromotionsOnBanner] = useState([]);
@@ -281,7 +281,7 @@ const AddBanner = () => {
   };
 
   const onChangeProductName = (e) => {
-    setPromotionName(e.target.value);
+    setBannerName(e.target.value);
   };
 
   const onChangeDescription = (e) => {

@@ -15,11 +15,28 @@ const Container = styled.div`
   }
 `;
 
+const BlurredBackground = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  div {
+    background-image: ${(props) => `url('${props.bgImg}')`};
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(4px);
+    height: 100%;
+    width: 100%;
+    transform: scale(1.2);
+  }
+`;
+
 const BrandDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0.5rem;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;;
   img {
     height: 40px;
     width: 40px;
@@ -113,4 +130,5 @@ export {
   Label,
   Input,
   Submit,
+  BlurredBackground
 };

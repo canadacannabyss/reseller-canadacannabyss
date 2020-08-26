@@ -8,8 +8,10 @@ import {
   Label,
   Input,
   Submit,
+  BlurredBackground
 } from '../styles/Pages/Login/Login';
 import Logo from '../assets/img/canada-cannabyss-logo.svg';
+import BackgroundImg from '../assets/img/victoria.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ const Login = () => {
   const onSubmitLogin = (e) => {
     e.preventDefault();
     const loginObj = {
-      email, password,
+      email, password
     };
     console.log(loginObj);
   };
@@ -37,6 +39,9 @@ const Login = () => {
         <title>Login | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundLogin>
+        <BlurredBackground bgImg={BackgroundImg}>
+          <div />
+        </BlurredBackground>
         <Container>
           <Form onSubmit={onSubmitLogin}>
             <BrandDiv>

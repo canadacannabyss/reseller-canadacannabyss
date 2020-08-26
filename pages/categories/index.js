@@ -136,7 +136,7 @@ const Categories = () => (
                       <FaSearch />
                     </button>
                   </SearchBar>
-                  <Link href='/add/categories' as='/add/categories'>
+                  <Link href='/add/category' as='/add/category'>
                     <AddProductLink>
                       <FaPlus />
                     </AddProductLink>
