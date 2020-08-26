@@ -1,9 +1,10 @@
 import App from 'next/app';
 import Head from 'next/head';
-import React, { Fragment } from 'react';
+import React from 'react';
 import Logo from '../assets/img/canada-cannabyss-logo.svg';
 import Layout from '../components/Layout';
 import '../styles/_app.css';
+import { wrapper } from '../store/index';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -32,4 +33,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

@@ -8,9 +8,9 @@ import { slugifyString } from '../../utils/stringMethods';
 
 import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import BannerNameDescription from '../../components/UI/Add/BannerNameDescription/BannerNameDescription';
+import Media from '../../components/UI/Add/Media/Media';
 import SEO from '../../components/UI/Add/SEO/SEO';
-import Organization from '../../components/UI/Add/Organization/Organization';
-import PromotionsList from '../../components/UI/List/Add/PromotionsList/PromotionsList';
+
 import {
   Wrapper,
   StickyDiv,
@@ -32,12 +32,12 @@ const AddCategory = () => {
   const [categoryName, setCategoryName] = useState('');
   const [description, setDescription] = useState('');
 
-  const [promotionsOnBanner, setPromotionsOnBanner] = useState([]);
-  const [promotionsList, setPromotionsList] = useState([]);
-
   const [featured, setFeatured] = useState(false);
 
   const [slug, setSlug] = useState('');
+
+  const [imagesArray, setImagesArray] = useState([]);
+  const [imagesArrayLength, setImagesArrayLength] = useState(0);
 
   const [seoTitle, setSeoTitle] = useState('');
   const [seoSlug, setSeoSlug] = useState('');
@@ -47,6 +47,18 @@ const AddCategory = () => {
   const [categoriesArray, setCategoriesArray] = useState([]);
   const [tags, setTags] = useState('');
   const [tagsArray, setTagsArray] = useState([]);
+
+  const handleSubmit = async () => {
+    if (allFieldsFilled) {
+      setImagesArrayLength(imagesArray.length);
+      setLoading(true);
+      await childRef.current.handleStartUploadingFiles();
+    }
+  };
+
+  const handleSetImagesArray = (images) => {
+    setImagesArray(images);
+  };
 
   const onChangeSeoTitle = (e) => {
     setSeoTitle(e.target.value);
@@ -75,7 +87,7 @@ const AddCategory = () => {
       seoDescription.length > 0 &&
       categories.length > 0 &&
       tags.length > 0 &&
-      !_.isEmpty(promotionsOnBanner) &&
+
       !_.isEmpty(tagsArray) &&
       !_.isEmpty(categoriesArray)
     ) {
@@ -88,7 +100,6 @@ const AddCategory = () => {
   useEffect(() => {
     disabledSubmitButton();
   }, [
-    promotionsOnBanner,
     isSlugValid,
     slug,
     categoryName,
@@ -158,48 +169,6 @@ const AddCategory = () => {
     return data;
   };
 
-  // const fetchAllPromotions = async () => {
-  //   const res = await fetch(
-  //     `${process.env.MAIN_API_ENDPOINT}/admin/promotions/get/all`,
-  //     {
-  //       method: 'GET',
-  //       mode: 'cors',
-  //       cache: 'no-cache',
-  //       credentials: 'same-origin',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //     }
-  //   );
-  //   const data = await res.json();
-  //   setPromotionsList(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchAllPromotions();
-  // }, []);
-
-  const fetchAllPromotions = async () => {
-    const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/get/all`,
-      {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    const data = await res.json();
-    setPromotionsList(data);
-  };
-
-  useEffect(() => {
-    fetchAllPromotions();
-  }, []);
-
   useEffect(() => {
     setSeoSlug(slug);
   }, [slug]);
@@ -221,8 +190,13 @@ const AddCategory = () => {
   const onSubmit = async () => {
     disabledSubmitButton();
     if (allFieldsFilled) {
+      const imagesArrayObj = [];
+      imagesArray.map((image) => {
+        imagesArrayObj.push(image.data._id);
+      });
       const productInfo = {
         isSlugValid,
+        media: imagesArrayObj,
         categoryName,
         description,
         seo: {
@@ -272,6 +246,16 @@ const AddCategory = () => {
     tagsToArray();
   }, [tags]);
 
+  useEffect(() => {
+    if (imagesArray.length > 0) {
+      if (imagesArray[0].data !== null && imagesArray[0].data !== undefined) {
+        if (imagesArray.length === imagesArrayLength) {
+          onSubmit();
+        }
+      }
+    }
+  }, [imagesArray]);
+
   const onChangeCategories = (e) => {
     setCategories(e.target.value);
   };
@@ -286,29 +270,6 @@ const AddCategory = () => {
 
   const onChangeDescription = (e) => {
     setDescription(e.target.getContent());
-  };
-
-  const removeElementFromArray = (arr, element) => {
-    const index = arr.indexOf(element);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
-  };
-
-  const handleGetElement = (el) => {
-    const element = el;
-    if (!promotionsOnBanner.includes(element.id)) {
-      setPromotionsOnBanner((bannerOnBundle) => bannerOnBundle.concat(element.id));
-      element.style.backgroundColor = '#18840f';
-      element.style.border = '1px solid #18840f';
-      element.querySelector('.name').style.color = '#fff';
-    } else {
-      setPromotionsOnBanner(removeElementFromArray(promotionsOnBanner, element.id));
-      element.style.backgroundColor = '#efefef';
-      element.style.border = '1px solid #efefef';
-      element.querySelector('.name').style.color = '#18840f';
-    }
   };
 
   const handleCheckFeatured = () => {
@@ -334,6 +295,12 @@ const AddCategory = () => {
               handleCheckFeatured={handleCheckFeatured}
               featured={featured}
             />
+            <Media
+              multipleFiles={false}
+              childRef={childRef}
+              handleSetImagesArray={handleSetImagesArray}
+              imagesArray={imagesArray}
+            />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
               onChangeSeoSlug={onChangeSeoSlug}
@@ -346,7 +313,7 @@ const AddCategory = () => {
           <StickyDiv />
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={onSubmit}>
+        <SubmitButton type='button' onClick={handleSubmit}>
           Add Category
         </SubmitButton>
       </BackgroundAdd>

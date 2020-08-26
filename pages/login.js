@@ -11,7 +11,7 @@ import {
   BlurredBackground
 } from '../styles/Pages/Login/Login';
 import Logo from '../assets/img/canada-cannabyss-logo.svg';
-import BackgroundImg from '../assets/img/victoria.jpg';
+import BackgroundImg from '../assets/img/bg-login.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');

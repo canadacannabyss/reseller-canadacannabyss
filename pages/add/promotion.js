@@ -212,11 +212,11 @@ const AddPromotion = () => {
 
   const onSubmit = async () => {
     disabledSubmitButton();
-    const imagesArrayObj = [];
-    imagesArray.map((image) => {
-      imagesArrayObj.push(image.data._id);
-    });
     if (allFieldsFilled) {
+      const imagesArrayObj = [];
+      imagesArray.map((image) => {
+        imagesArrayObj.push(image.data._id);
+      });
       const productInfo = {
         isSlugValid,
         media: imagesArrayObj,

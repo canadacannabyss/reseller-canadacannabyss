@@ -10,7 +10,7 @@ import {
   NavbarWrapper,
   Brand,
   UserDiv,
-  User,
+  User
 } from '../../../styles/Components/UI/Navbar/Navbar';
 
 const NavigationBar = () => {
@@ -36,7 +36,7 @@ const NavigationBar = () => {
             <div className='sep' />
             <h1>Reseller</h1>
           </Brand>
-          {router.asPath !== '/login' && (
+          {(router.asPath !== '/login' && !router.asPath.includes('/confirmation/') && !router.asPath.includes('/register/')) && (
           <UserDiv>
             <User
               onClick={() => {
