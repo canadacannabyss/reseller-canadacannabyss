@@ -45,10 +45,8 @@ const Container = styled.div`
   width: 100%;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
-  @media (max-width: 340px) {
+  @media (max-width: 768px) {
     border-radius: 0px;
-  }
-  @media (max-width: 300px) {
     margin-bottom: 20px;
   }
 `;
