@@ -17,10 +17,8 @@ export const VariantsDiv = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  @media(max-width: 340px) {
+  @media(max-width: 768px) {
     border-radius: 0px;
-  }
-  @media (max-width: 300px) {
     margin-bottom: 20px;
   }
 `;
