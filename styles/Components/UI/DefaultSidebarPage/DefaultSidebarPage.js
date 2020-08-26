@@ -23,7 +23,7 @@ const BackgroundAdd = styled.div`
   background: #f1f1f1;
   width: 100%;
   padding: 20px;
-  @media(max-width: 340px) {
+  @media(max-width: 768px) {
     padding: 20px 0;
   }
 `;
@@ -36,5 +36,5 @@ const BackgroundLogin = styled.div`
 `;
 
 export {
-  PageContainer, Background, BackgroundLogin, BackgroundAdd, BackgroundDashboard,
+  PageContainer, Background, BackgroundLogin, BackgroundAdd, BackgroundDashboard
 };

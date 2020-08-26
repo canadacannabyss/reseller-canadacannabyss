@@ -16,9 +16,6 @@ const Wrapper = styled.div`
     width: 100%;
   }
   @media (max-width: 991px) {
-    grid-template-areas: 'a a b';
-  }
-  @media (max-width: 768px) {
     display: block;
     .main {
       margin-bottom: 20px;
@@ -29,7 +26,7 @@ const Wrapper = styled.div`
 const MainGrid = styled.div`
   display: grid;
   grid-gap: 20px;
-  @media (max-width: 300px) {
+  @media (max-width: 768px) {
     display: block;
   }
 `;

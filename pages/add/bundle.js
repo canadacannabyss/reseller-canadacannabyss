@@ -24,7 +24,7 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning
+  Warning,
 } from '../../styles/Pages/Add/Product';
 
 const AddBundle = () => {
@@ -178,7 +178,7 @@ const AddBundle = () => {
     categoriesArray,
     tags,
     tagsArray,
-    extraInfo
+    extraInfo,
   ]);
 
   const fetchAllProducts = async () => {
@@ -188,8 +188,8 @@ const AddBundle = () => {
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     const data = await res.json();
     setProductList(data);
@@ -202,7 +202,7 @@ const AddBundle = () => {
   const setGlobalVariable = async () => {
     const bodyRequest = {
       type: 'bundles',
-      title: bundleName
+      title: bundleName,
     };
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/admin/bundles/set/global-variable`,
@@ -212,9 +212,9 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(bodyRequest)
+        body: JSON.stringify(bodyRequest),
       }
     );
     return response;
@@ -229,8 +229,8 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       }
     );
     const data = await response.json();
@@ -246,9 +246,9 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       }
     );
     const data = await response.json();
@@ -282,12 +282,12 @@ const AddBundle = () => {
         isSlugValid,
         variants: {
           variantsOptionNames: [],
-          values: []
+          values: [],
         },
         bundleName,
         prices: {
           price,
-          compareTo
+          compareTo,
         },
         taxableProduct,
         description,
@@ -296,24 +296,24 @@ const AddBundle = () => {
           sku,
           barcode,
           quantity,
-          allowPurchaseOutOfStock
+          allowPurchaseOutOfStock,
         },
         shipping: {
           physicalProduct,
           weight: {
             unit: weightUnit,
-            amount: weightAmount
-          }
+            amount: weightAmount,
+          },
         },
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription
+          description: seoDescription,
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray
-        }
+          tags: tagsArray,
+        },
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
@@ -420,11 +420,11 @@ const AddBundle = () => {
               description={description}
               onChangeDescription={onChangeDescription}
             />
-            <ProductsList
+            {/* <ProductsList
               title='Products on bundles'
               products={productList}
               handleGetElement={handleGetElement}
-            />
+            /> */}
             <Pricing
               price={price}
               compareTo={compareTo}
@@ -440,8 +440,8 @@ const AddBundle = () => {
               handleQuantity={handleQuantity}
               allowPurchaseOutOfStock={allowPurchaseOutOfStock}
               handleCheckAllowPurchaseOutOfStock={
-            handleCheckAllowPurchaseOutOfStock
-          }
+                handleCheckAllowPurchaseOutOfStock
+              }
             />
             <Shipping
               handleWeightAmount={handleWeightAmount}
@@ -449,10 +449,6 @@ const AddBundle = () => {
               physicalProduct={physicalProduct}
               handleCheckPhysicalProduct={handleCheckPhysicalProduct}
             />
-            {/* <Variants
-              handleGetVariants={handleGetVariants}
-              handleGetVariantsOptionNames={handleGetVariantsOptionNames}
-            /> */}
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
               onChangeSeoSlug={onChangeSeoSlug}
@@ -477,11 +473,11 @@ const AddBundle = () => {
         </SubmitButton>
       </BackgroundAdd>
       {loading && (
-      <Loading>
-        <LoadingSpinner>
-          <FaSpinner />
-        </LoadingSpinner>
-      </Loading>
+        <Loading>
+          <LoadingSpinner>
+            <FaSpinner />
+          </LoadingSpinner>
+        </Loading>
       )}
     </>
   );
