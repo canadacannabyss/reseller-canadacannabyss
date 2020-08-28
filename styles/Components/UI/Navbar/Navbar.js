@@ -17,11 +17,12 @@ const NavbarWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Brand = styled.div`
+const Brand = styled.a`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: 5px;
+  cursor: pointer;
   img {
     height: 45px;
     width: 45px;
@@ -53,7 +54,6 @@ const Brand = styled.div`
     }
   }
 `;
-
 const UserDiv = styled.div`
   margin-right: 5px;
   display: flex;
@@ -72,6 +72,15 @@ const User = styled.div`
   border-radius: 50px;
 `;
 
-export {
-  Navbar, NavbarWrapper, Brand, UserDiv, User,
-};
+const LoginLink = styled.a`
+  color: #18840f;
+  background: #18840f33;
+  border: 1px solid #18840f66;
+  padding: 7px 12px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 0px 2px;
+`;
+
+export { Navbar, NavbarWrapper, Brand, UserDiv, User, LoginLink };

@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaBox, FaPlus, FaSpinner } from 'react-icons/fa';
 import Router from 'next/router';
 import _ from 'lodash';
+import { withResellerAuth } from '../withResellerAuth';
 
 import { slugifyString } from '../../utils/stringMethods';
 import { roundFloatNumber } from '../../utils/numberConverter';
@@ -471,4 +472,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default withResellerAuth(AddProduct);

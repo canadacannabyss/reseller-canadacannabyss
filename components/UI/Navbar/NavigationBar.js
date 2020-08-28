@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
+import Link from 'next/link';
+import { connect } from 'react-redux';
 import { useRouter } from 'next/router';
 import Logo from '../../../assets/img/canada-cannabyss-logo.svg';
 // import OutsideAlerter from '../../../utils/OutsideAlerter';
@@ -10,10 +13,21 @@ import {
   NavbarWrapper,
   Brand,
   UserDiv,
-  User
+  User,
+  LoginLink
 } from '../../../styles/Components/UI/Navbar/Navbar';
 
-const NavigationBar = () => {
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    user
+  };
+};
+
+const NavigationBar = (props) => {
+  const { user } = props;
+
   const router = useRouter();
   const [toggleUserMenu, setToggleUserMenu] = useState(false);
 
@@ -25,36 +39,60 @@ const NavigationBar = () => {
     <>
       <Navbar>
         <NavbarWrapper>
-          <Brand>
-            <img src={Logo} alt='Canada Cannabyss Reseller' />
-            <p>
-              Canada
-              {' '}
-              <br />
-              <span>Cannabyss</span>
-            </p>
-            <div className='sep' />
-            <h1>Reseller</h1>
-          </Brand>
-          {(router.asPath !== '/login' && !router.asPath.includes('/confirmation/') && !router.asPath.includes('/register/')) && (
+          {!_.isEmpty(user.data) && !user.loading && !user.error ? (
+            <Link href='/dashboard' as='/dashboard'>
+              <Brand>
+                <img src={Logo} alt='Canada Cannabyss Reseller' />
+                <p>
+                  Canada
+                  {' '}
+                  <br />
+                  <span>Cannabyss</span>
+                </p>
+                <div className='sep' />
+                <h1>Reseller</h1>
+              </Brand>
+            </Link>
+          ) : (
+            <Link href='/' as='/'>
+              <Brand>
+                <img src={Logo} alt='Canada Cannabyss Reseller' />
+                <p>
+                  Canada
+                  {' '}
+                  <br />
+                  <span>Cannabyss</span>
+                </p>
+                <div className='sep' />
+                <h1>Reseller</h1>
+              </Brand>
+            </Link>
+          )}
+          {(router.asPath !== '/login' && !router.asPath.includes('/confirmation/') && !router.asPath.includes('/register/')) &&
+          !_.isEmpty(user.data) && !user.loading && !user.error && (
           <UserDiv>
             <User
               onClick={() => {
                 onClickUserButton();
               }}
-              img='https://canada-cannabyss.s3.ca-central-1.amazonaws.com/default/users/default-user.jpg'
+              img={user.data.profileImage.url}
             />
           </UserDiv>
+          )}
+          {_.isEmpty(user.data) && (
+            <Link href='/login' as='/login'>
+              <LoginLink>Login</LoginLink>
+            </Link>
           )}
         </NavbarWrapper>
       </Navbar>
       {toggleUserMenu && (
       // <OutsideAlerter>
-      <UserMenu handleClose={onClickUserButton} />
+      <UserMenu onClickUserButton={onClickUserButton} />
       // </OutsideAlerter>
       )}
     </>
   );
 };
 
-export default NavigationBar;
+export default connect(mapStateToProps)(NavigationBar);

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Content } from '../styles/Layout';
 import { PageContainer } from '../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
@@ -8,15 +9,45 @@ import Navbar from './UI/Navbar/NavigationBar';
 import Footer from './UI/Footer/Footer';
 import Sidebar from './UI/Sidebar/Sidebar';
 
+import { fetchLoginUser } from '../store/actions/user/user';
+
+const mapStateToProps = (state) => {
+  const {
+    user,
+    cart,
+    order,
+    loginRequestCount
+  } = state;
+
+  return {
+    user,
+    cart,
+    order,
+    loginRequestCount
+  };
+};
+
+let count = 0;
+
 const Layout = (props) => {
   const { children } = props;
-  const layoutStyle = {
-    height: '100%',
-    width: '100%',
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (count === 0) {
+      dispatch(fetchLoginUser());
+      count += 1;
+    }
+  }, []);
 
   return (
-    <div className='Layout' style={layoutStyle}>
+    <div
+      className='Layout'
+      style={{
+        height: '100%',
+        width: '100%'
+      }}
+    >
       <Head>
         <meta
           name='copyright'
@@ -34,7 +65,7 @@ const Layout = (props) => {
               gtag('js', new Date());
             
               gtag('config', 'UA-145329492-1');
-              `,
+              `
           }}
         />
       </Head>
@@ -50,7 +81,7 @@ const Layout = (props) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
-export default Layout;
+export default connect(mapStateToProps)(Layout);

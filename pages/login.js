@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Router from 'next/router';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { useDispatch, connect } from 'react-redux';
+import { withoutResellerAuth } from '../utils/withoutResellerAuth';
 import { BackgroundLogin } from '../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import {
   Container,
@@ -12,10 +17,34 @@ import {
 } from '../styles/Pages/Login/Login';
 import Logo from '../assets/img/canada-cannabyss-logo.svg';
 import BackgroundImg from '../assets/img/bg-login.jpg';
+import { fetchLoginResellerUser } from '../store/actions/user/user';
 
-const Login = () => {
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    user
+  };
+};
+
+const Login = (props) => {
+  const { user } = props;
+
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [userLoginSubmit, setUserLoginSubmit] = useState(false);
+  const [allFieldsFilled, setAllFieldsFilled] = useState(false);
+
+  const disabledSubmitButton = () => {
+    if (email.length > 0 && password.length > 0) {
+      setAllFieldsFilled(true);
+    } else {
+      setAllFieldsFilled(false);
+    }
+  };
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -27,11 +56,25 @@ const Login = () => {
 
   const onSubmitLogin = (e) => {
     e.preventDefault();
-    const loginObj = {
-      email, password
-    };
-    console.log(loginObj);
+    disabledSubmitButton();
+    if (allFieldsFilled) {
+      const userInfoObj = {
+        email,
+        password
+      };
+      dispatch(fetchLoginResellerUser(userInfoObj));
+    }
   };
+
+  useEffect(() => {
+    disabledSubmitButton();
+  }, [email, password]);
+
+  useEffect(() => {
+    if (!_.isEmpty(user.data) && !user.loading && !user.error) {
+      Router.push('/dashboard');
+    }
+  }, [user]);
 
   return (
     <>
@@ -66,4 +109,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(mapStateToProps)(withoutResellerAuth(Login));

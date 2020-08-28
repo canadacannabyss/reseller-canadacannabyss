@@ -25,46 +25,46 @@ import Logo from '../../assets/img/canada-cannabyss-logo.svg';
 const Confirmation = (props) => {
   const { token } = props;
   const [user, setUser] = useState({});
-  const [warning, setWarning] = useState(true);
+  const [warning, setWarning] = useState(false);
   const [error, setError] = useState(false);
-  const [invalid, setInvalid] = useState(true);
+  const [invalid, setInvalid] = useState(false);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverErrorMessage, setServerErrorMessage] = useState('');
 
-  // useEffect(() => {
-  //   const fetchConfirmAccount = async () => {
-  //     setLoading(true);
-  //     const response = await fetch(
-  //       `${process.env.USER_API_ENDPOINT}/resellers/confirmation/${token}`,
-  //       {
-  //         method: 'GET',
-  //         mode: 'cors',
-  //         cache: 'no-cache',
-  //         credentials: 'same-origin',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     );
-  //     const data = await response.json();
+  useEffect(() => {
+    const fetchConfirmAccount = async () => {
+      setLoading(true);
+      const response = await fetch(
+        `${process.env.USER_API_ENDPOINT}/resellers/confirmation/${token}`,
+        {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
 
-  //     if (data._id) {
-  //       setSuccess(true);
-  //       setUser(data);
-  //     }
-  //     if (data.error) {
-  //       setWarning(true);
-  //       setError(true);
-  //     }
-  //     if (data.notValid) {
-  //       setWarning(true);
-  //       setInvalid(true);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchConfirmAccount();
-  // }, []);
+      if (data._id) {
+        setSuccess(true);
+        setUser(data);
+      }
+      if (data.error) {
+        setWarning(true);
+        setError(true);
+      }
+      if (data.notValid) {
+        setWarning(true);
+        setInvalid(true);
+      }
+      setLoading(false);
+    };
+    fetchConfirmAccount();
+  }, []);
 
   return (
     <>
@@ -93,24 +93,11 @@ const Confirmation = (props) => {
               <p>This link is not valid</p>
             </ConfirmationMessageError>
           )}
-          {/* {success && !_.isEmpty(user) && (
-          <Container>
-            <p>
-              Welcome to Canada Cannabyss{' '}
-              <span>{`${user.names.firstName} ${user.names.lastName}`}</span>.
-            </p>
-            <br />
-            <p>Your Account has been successfully verified.</p>
-          </Container>
-        )} */}
-          {success && (
+          {success && !_.isEmpty(user) && (
             <>
               <p>
                 Welcome to Canada Cannabyss{' '}
-                <span>
-                  {/* {`${user.names.firstName} ${user.names.lastName}`} */}
-                  Reseller Name
-                </span>
+                <span>{`${user.names.firstName} ${user.names.lastName}`}</span>
               </p>
               <br />
               <p>Your Account has been successfully verified.</p>
@@ -124,7 +111,7 @@ const Confirmation = (props) => {
 
 Confirmation.getInitialProps = async (props) => {
   const { isServer, asPath } = props.ctx;
-  const token = asPath.substring(23, asPath.length);
+  const token = asPath.substring(14, asPath.length);
 
   return { isServer, token };
 };

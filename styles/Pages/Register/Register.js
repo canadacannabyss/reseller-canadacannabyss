@@ -1,5 +1,23 @@
 import styled from 'styled-components';
 
+const VerificationMsg = styled.div`
+  padding: 6px 10px;
+  margin: 0 auto;
+  background: #f1f1f1;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  p {
+    text-align: center;
+    width: 100%;
+    color: #5a5a5a;
+    font-size: 16px;
+    span {
+      font-weight: 900;
+    }
+  }
+`;
+
 const Container = styled.div`
   width: 300px;
   position: absolute;
@@ -9,7 +27,7 @@ const Container = styled.div`
   border-radius: 4px;
   background: #fff;
   box-shadow: rgba(0,0,0,0.15) 0px 2px 4px, rgba(0,0,0,0.15) 0px 0px 2px;
-  padding: 20px 20px;
+  padding: 15px 20px 20px 20px;
   @media (max-width: 370px) {
     width: 80%;
   }
@@ -69,6 +87,11 @@ const BrandDiv = styled.div`
 
 const Form = styled.form`
   width: 100%;
+  .disabled {
+    background: #f1f1f1;
+    color: #5a5a5a;
+    border: 1px solid #e0e0e0;
+  }
 `;
 
 const Label = styled.label`
@@ -133,6 +156,24 @@ const HalfGrid = styled.div`
   }
 `;
 
+const Warning = styled.div`
+  border: 1px solid #d426269e;
+  background-color: #d426260f;
+  display: table;
+  margin: 5px auto;
+  border-radius: 5px;
+  padding: 5px 8px;
+  color: #d42626;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-align: center;
+`;
+
+const ErrorMsg = styled.p`
+  color: #b01129;
+  text-align: center;
+`;
+
 export {
   Container,
   BrandDiv,
@@ -141,5 +182,8 @@ export {
   Input,
   Submit,
   BlurredBackground,
-  HalfGrid
+  HalfGrid,
+  VerificationMsg,
+  Warning,
+  ErrorMsg
 };
