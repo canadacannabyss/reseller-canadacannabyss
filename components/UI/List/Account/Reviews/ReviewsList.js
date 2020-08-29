@@ -13,7 +13,7 @@ import {
   PostedOn,
   UserInfoWrapper,
   CommentedOn,
-  Wrapper
+  Wrapper,
 } from '../../../../../styles/Components/UI/List/Account/Reviews/ReviewsList';
 import DateFormatter from '../../../../../utils/dateFormatter';
 
@@ -38,14 +38,13 @@ const ReviewsList = (props) => {
                     <li className='user-info'>
                       <LinkToProfile>
                         <AuthorName>
-                          {review.user.names.firstName}
-                          {' '}
+                          {review.user.names.firstName}{' '}
                           {review.user.names.lastName}
                         </AuthorName>
                       </LinkToProfile>
 
                       <PostedOn>
-                        {formatter.formatDateFullDate(review.publishedOn)}
+                        {formatter.formatDateFullDate(review.createdOn)}
                       </PostedOn>
                     </li>
                   </ul>
@@ -53,8 +52,7 @@ const ReviewsList = (props) => {
                 <Content>{review.content}</Content>
                 <CommentedOn>
                   <p>
-                    <strong>Reviewed on:</strong>
-                    {' '}
+                    <strong>Reviewed on:</strong>{' '}
                     <span>{review.product.productName}</span>
                   </p>
                 </CommentedOn>
@@ -78,14 +76,13 @@ const ReviewsList = (props) => {
                     <li className='user-info'>
                       <LinkToProfile>
                         <AuthorName>
-                          {review.user.names.firstName}
-                          {' '}
+                          {review.user.names.firstName}{' '}
                           {review.user.names.lastName}
                         </AuthorName>
                       </LinkToProfile>
 
                       <PostedOn>
-                        {formatter.formatDateFullDate(review.publishedOn)}
+                        {formatter.formatDateFullDate(review.createdOn)}
                       </PostedOn>
                     </li>
                   </ul>
@@ -93,8 +90,7 @@ const ReviewsList = (props) => {
                 <Content>{review.content}</Content>
                 <CommentedOn>
                   <p>
-                    <strong>Reviewed on:</strong>
-                    {' '}
+                    <strong>Reviewed on:</strong>{' '}
                     <span>{review.bundle.bundleName}</span>
                   </p>
                 </CommentedOn>
