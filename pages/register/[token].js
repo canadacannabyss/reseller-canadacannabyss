@@ -78,7 +78,7 @@ const Register = (props) => {
     setLoadingVerification(true);
     const fetchVerifyResellerRegistrationToken = async () => {
       const response = await fetch(
-        `${process.env.USER_API_ENDPOINT}/resellers/verify/registration/${token}`,
+        `${process.env.USER_API_ENDPOINT}/resellers/auth/verify/registration/${token}`,
         {
           method: 'GET',
           mode: 'cors',
@@ -105,7 +105,7 @@ const Register = (props) => {
 
   const fetchRegisterUser = async (userInfoObj) => {
     const response = await fetch(
-      `${process.env.USER_API_ENDPOINT}/resellers/register`,
+      `${process.env.USER_API_ENDPOINT}/resellers/auth/register`,
       {
         method: 'POST',
         mode: 'cors',
@@ -126,7 +126,7 @@ const Register = (props) => {
 
   const verifyUser = async () => {
     const response = await fetch(
-      `${process.env.USER_API_ENDPOINT}/resellers/verify/username/${username}`,
+      `${process.env.USER_API_ENDPOINT}/resellers/auth/verify/username/${username}`,
       {
         method: 'GET',
         mode: 'cors',
