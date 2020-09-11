@@ -9,10 +9,7 @@ export const withResellerAuth = (C) => class AuthComponent extends Component {
     const userInfo = state.user;
     if (_.isEmpty(userInfo.data)) {
       redirect(props.ctx, '/');
-    } else if (!userInfo.data.isReseller) {
-      redirect(props.ctx, '/');
     }
-    console.log('userInfo:', userInfo);
     return { isServer, asPath, userInfo };
   }
 

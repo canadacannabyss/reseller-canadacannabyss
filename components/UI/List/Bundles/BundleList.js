@@ -2,17 +2,25 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
+import DateFormatter from '../../../../utils/dateFormatter';
 import {
   List,
   ListLiContent,
   EditLink,
   DeleteButton,
-  SpansDiv,
+  SpansDiv
 } from '../../../../styles/Components/UI/List/Bundles/BundleList';
 
 const BundleList = (props) => {
-  const { bundles } = props;
+  const { bundles, handleGetElement } = props;
+
+  const dateFormatter = new DateFormatter();
+
+  const handleSelectProduct = (e) => {
+    const getter = handleGetElement;
+    getter(e.currentTarget);
+  };
+
   return (
     <List>
       <SpansDiv>
@@ -47,9 +55,9 @@ const BundleList = (props) => {
         </div>
       </SpansDiv>
       {bundles.map((bundle) => (
-        <ListLiContent>
+        <ListLiContent id={bundle._id}>
           <div className='bundleName'>
-            <a href={`${process.env.STORE_MAIN_DOMAIN}/bundle/${bundle.slug}`}>
+            <a href={`${process.env.SECURED_MAIN_DOMAIN}/bundle/${bundle.slug}`}>
               {bundle.bundleName}
             </a>
           </div>
@@ -65,12 +73,16 @@ const BundleList = (props) => {
           </div>
           <div className='createdOn'>
             <p>
-              {bundle.createdOn}
+              {dateFormatter.formatDateFullDate(bundle.createdOn)}
             </p>
           </div>
           <div className='updatedOn'>
             <p>
-              {bundle.updatedOn}
+              {bundle.updatedOn ? (
+                <>
+                  {dateFormatter.formatDateFullDate(bundle.updatedOn)}
+                </>
+              ) : ('Not updated')}
             </p>
           </div>
           <div className='featured'>
@@ -78,14 +90,17 @@ const BundleList = (props) => {
           </div>
           <div className='buttons'>
             <Link
-              href='/bundles/edit/[slug]'
-              as={`/bundles/edit/${bundle.slug}`}
+              href='/edit/bundle/[slug]'
+              as={`/edit/bundle/${bundle.slug}`}
             >
               <EditLink>
                 <FaEdit />
               </EditLink>
             </Link>
-            <DeleteButton>
+            <DeleteButton onClick={(e) => {
+              handleSelectProduct(e);
+            }}
+            >
               <FaTrashAlt />
             </DeleteButton>
           </div>
@@ -96,7 +111,7 @@ const BundleList = (props) => {
 };
 
 BundleList.propTypes = {
-  bundles: PropTypes.shape().isRequired,
+  bundles: PropTypes.shape().isRequired
 };
 
 export default BundleList;

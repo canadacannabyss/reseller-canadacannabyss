@@ -2,32 +2,30 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
+import DateFormatter from '../../../../utils/dateFormatter';
 import {
   List,
   ListLiContent,
   EditLink,
   DeleteButton,
-  SpansDiv,
+  SpansDiv
 } from '../../../../styles/Components/UI/List/Coupons/CouponList';
 
 const CouponList = (props) => {
-  const { coupons } = props;
+  const { coupons, handleGetElement } = props;
+
+  const dateFormatter = new DateFormatter();
+
+  const handleSelectProduct = (e) => {
+    const getter = handleGetElement;
+    getter(e.currentTarget);
+  };
+
   return (
     <List>
       <SpansDiv>
         <div className='couponName'>
           <span>Coupon Name</span>
-        </div>
-        <div className='price'>
-          <span>
-            Price
-          </span>
-        </div>
-        <div className='compareTo'>
-          <span>
-            Compare To
-          </span>
         </div>
         <div className='createdOn'>
           <span>
@@ -47,30 +45,24 @@ const CouponList = (props) => {
         </div>
       </SpansDiv>
       {coupons.map((coupon) => (
-        <ListLiContent>
+        <ListLiContent id={coupon._id}>
           <div className='couponName'>
-            <a href={`${process.env.STORE_MAIN_DOMAIN}/coupon/${coupon.slug}`}>
+            <a href={`${process.env.SECURED_MAIN_DOMAIN}/coupon/${coupon.slug}`}>
               {coupon.couponName}
             </a>
           </div>
-          <div className='price'>
-            <p>
-              {coupon.prices.price}
-            </p>
-          </div>
-          <div className='compareTo'>
-            <p>
-              {coupon.prices.compareTo}
-            </p>
-          </div>
           <div className='createdOn'>
             <p>
-              {coupon.createdOn}
+              {dateFormatter.formatDateFullDate(coupon.createdOn)}
             </p>
           </div>
           <div className='updatedOn'>
             <p>
-              {coupon.updatedOn}
+              {coupon.updatedOn ? (
+                <>
+                  {dateFormatter.formatDateFullDate(coupon.updatedOn)}
+                </>
+              ) : ('Not updated')}
             </p>
           </div>
           <div className='featured'>
@@ -78,14 +70,17 @@ const CouponList = (props) => {
           </div>
           <div className='buttons'>
             <Link
-              href='/coupons/edit/[slug]'
-              as={`/coupons/edit/${coupon.slug}`}
+              href='/edit/coupon/[slug]'
+              as={`/edit/coupon/${coupon.slug}`}
             >
               <EditLink>
                 <FaEdit />
               </EditLink>
             </Link>
-            <DeleteButton>
+            <DeleteButton onClick={(e) => {
+              handleSelectProduct(e);
+            }}
+            >
               <FaTrashAlt />
             </DeleteButton>
           </div>
@@ -96,7 +91,7 @@ const CouponList = (props) => {
 };
 
 CouponList.propTypes = {
-  coupons: PropTypes.shape().isRequired,
+  coupons: PropTypes.shape().isRequired
 };
 
 export default CouponList;

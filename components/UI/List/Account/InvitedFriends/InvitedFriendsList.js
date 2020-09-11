@@ -14,7 +14,7 @@ import {
   UserInfoWrapper,
   CommentedOn,
   Wrapper,
-  NotVerified
+  NotVerified,
 } from '../../../../../styles/Components/UI/List/Account/InvitedFriendsList/InvitedFriendsList';
 import DateFormatter from '../../../../../utils/dateFormatter';
 
@@ -38,9 +38,7 @@ const InvitedFriendsList = (props) => {
                   <li className='user-info'>
                     <LinkToProfile>
                       <AuthorName>
-                        {user.names.firstName}
-                        {' '}
-                        {user.names.lastName}
+                        {user.names.firstName} {user.names.lastName}
                       </AuthorName>
                     </LinkToProfile>
 

@@ -13,6 +13,26 @@
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/account/billing</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/invite</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/reviews</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/shipping</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/add/banner</loc>
   </url>
 
@@ -41,31 +61,7 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/account/billing</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/index</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/invite</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/reviews</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/shipping</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/bundles/index</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/coupons/index</loc>
   </url>
 
   <url>
@@ -77,11 +73,23 @@
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/coupons/index</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/dashboard/index</loc>
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/order/[id]</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/orders/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/orders/map</loc>
   </url>
 
   <url>
@@ -93,6 +101,42 @@
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/register/index</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/register/[token]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/banner/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/bundle/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/category/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/coupon/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/order/[id]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/product/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/register/main/[token]</loc>
   </url>
 </urlset>

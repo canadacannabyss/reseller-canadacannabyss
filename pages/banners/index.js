@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import {
   FaSearch, FaPlus, FaObjectUngroup
 } from 'react-icons/fa';
@@ -20,144 +22,100 @@ import {
   TitleDiv,
   Content
 } from '../../styles/Pages/Banners/Banners';
+import { getBanners } from '../../store/actions/banners/banners';
+import DeleteConfirmation from '../../components/UI/Confirmations/DeleteBannerConfirmation';
 
-const banners = [
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    promotionName: 'First Promotion',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  }
-
-];
-
-const Banners = () => (
-  <>
-    <Head>
-      <title>Banners | Reseller - Canada Cannabyss</title>
-    </Head>
-    <Background>
-      <Wrapper>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaObjectUngroup />
-                  <h1>Banners</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/add/banner' as='/add/banner'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <BannerList banners={banners} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Wrapper>
-    </Background>
-  </>
-);
-
-Banners.getInitialProps = async () => {
-  const repos = await fetch('https://api.github.com/users/Davi-Silva/repos');
-
-  const data = await repos.json();
-  return {
-    repos: data
-  };
+const mapStateToProps = (state) => {
+  const { banners } = state;
+  return { banners };
 };
 
-export default Banners;
+const Banners = (props) => {
+  const { banners } = props;
+
+  const [bannerList, setBannerList] = useState([]);
+  const [toggleDeleteConfirmation, setToggleDeleteConfirmation] = useState(
+    false
+  );
+
+  const [selectedBannersId, setSelectedBannersId] = useState('');
+  const [selectedBannersName, setSelectedBannersName] = useState('');
+
+  const handleGetElement = (el) => {
+    const element = el.parentNode.parentNode;
+    console.log(element.children[0].children[0].innerHTML);
+    setSelectedBannersId(element.id);
+    setSelectedBannersName(element.children[0].children[0].innerHTML);
+    // console.log('element.querySelector(a):', element.querySelector('a'));
+    setToggleDeleteConfirmation(true);
+  };
+
+  const handleCloseDeleteConfirmation = () => {
+    setToggleDeleteConfirmation(false);
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Banners | Administrator - Canada Cannabyss</title>
+      </Head>
+      {toggleDeleteConfirmation && (
+        <DeleteConfirmation
+          bannerId={selectedBannersId}
+          bannerName={selectedBannersName}
+          handleCloseDeleteConfirmation={handleCloseDeleteConfirmation}
+        />
+      )}
+      <Background>
+        <Wrapper>
+          <Container>
+            <ContentContainer>
+              <Content>
+                <TitleSearchBarAddButtonDiv>
+                  <TitleDiv>
+                    <FaObjectUngroup />
+                    <h1>Banners</h1>
+                  </TitleDiv>
+                  <SearchBarAddButtonDiv>
+                    <SearchBar>
+                      <input />
+                      <button type='button'>
+                        <FaSearch />
+                      </button>
+                    </SearchBar>
+                    <Link href='/add/banner' as='/add/banner'>
+                      <AddProductLink>
+                        <FaPlus />
+                      </AddProductLink>
+                    </Link>
+                  </SearchBarAddButtonDiv>
+                </TitleSearchBarAddButtonDiv>
+                {!_.isEmpty(banners.data) &&
+                  banners.fetched &&
+                  !banners.error &&
+                  !banners.loading && (
+                    <BannerList
+                      banners={banners.data}
+                      handleGetElement={handleGetElement}
+                    />
+                )}
+              </Content>
+            </ContentContainer>
+          </Container>
+        </Wrapper>
+      </Background>
+    </>
+  );
+};
+
+Banners.propTypes = {
+  banners: PropTypes.shape().isRequired
+};
+
+Banners.getInitialProps = async ({ ctx }) => {
+  const { store } = ctx;
+
+  store.dispatch(getBanners());
+};
+
+export default connect(mapStateToProps)(Banners);

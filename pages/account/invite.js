@@ -36,7 +36,7 @@ const Invite = (props) => {
 
   const fetchAllUserInvitedFriends = async () => {
     const response = await fetch(
-      `${process.env.USER_API_ENDPOINT}/referral/get/invited-friends/${user.data._id}`,
+      `${process.env.USER_API_ENDPOINT}/referral/reseller/get/invited-friends/${user.data._id}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -80,17 +80,17 @@ const Invite = (props) => {
               <div>
                 <Title>Invite Friends</Title>
                 {!_.isEmpty(user.data) && (
-                <ReferralLink>
-                  <p>Share this referral link to a friend:</p>
-                  <span
-                    id='referral'
-                    onClick={() => {
-                      onCopyToClipboard();
-                    }}
-                  >
-                    {`${process.env.SECURED_MAIN_DOMAIN}/register?referral=${user.data.referral._id}`}
-                  </span>
-                </ReferralLink>
+                  <ReferralLink>
+                    <p>Share this referral link to a friend:</p>
+                    <span
+                      id='referral'
+                      onClick={() => {
+                        onCopyToClipboard();
+                      }}
+                    >
+                      {`${process.env.RESELLER_DOMAIN}/register?referral=${user.data.referral._id}`}
+                    </span>
+                  </ReferralLink>
                 )}
               </div>
               <Credits>
@@ -104,19 +104,19 @@ const Invite = (props) => {
             </HeaderDiv>
             <InvitedFriendsTitle>Invited Friends:</InvitedFriendsTitle>
             {loading && (
-            <ContainerLoading>
-              <WrapperLoading />
-              <WrapperLoading />
-              <WrapperLoading />
-              <WrapperLoading />
-            </ContainerLoading>
+              <ContainerLoading>
+                <WrapperLoading />
+                <WrapperLoading />
+                <WrapperLoading />
+                <WrapperLoading />
+              </ContainerLoading>
             )}
             {invitedFriends.length === 0 && !loading && fetched && (
-            <NoInvitedFriends>No invited friends</NoInvitedFriends>
+              <NoInvitedFriends>No invited friends</NoInvitedFriends>
             )}
 
             {!_.isEmpty(invitedFriends) && !loading && fetched && (
-            <InvitedFriendsList invitedFriends={invitedFriends} />
+              <InvitedFriendsList invitedFriends={invitedFriends} />
             )}
           </Content>
         </ContentContainer>

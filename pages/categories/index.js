@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import {
   FaListUl, FaSearch, FaPlus
 } from 'react-icons/fa';
@@ -20,145 +23,102 @@ import {
   TitleDiv,
   Content
 } from '../../styles/Pages/Categories/Categories';
+import { getCategories } from '../../store/actions/categories/categories';
+import DeleteConfirmation from '../../components/UI/Confirmations/DeleteCategoryConfirmation';
 
-const categories = [
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  },
-  {
-    categoryName: 'First Category',
-    prices: {
-      price: 32.65,
-      compareTo: 40.00
-    },
-    createdOn: 'December 30, 2019',
-    updatedOn: 'December 31, 2019',
-    featured: false,
-    slug: 'first-product'
-  }
+const mapStateToProps = (state) => {
+  const { categories } = state;
 
-];
-
-const Categories = () => (
-  <>
-    <Head>
-      <title>Categories | Reseller - Canada Cannabyss</title>
-    </Head>
-
-    <Background>
-      <Wrapper>
-        <Container>
-          <ContentContainer>
-            <Content>
-              <TitleSearchBarAddButtonDiv>
-                <TitleDiv>
-                  <FaListUl />
-                  <h1>Categories</h1>
-                </TitleDiv>
-                <SearchBarAddButtonDiv>
-                  <SearchBar>
-                    <input />
-                    <button type='button'>
-                      <FaSearch />
-                    </button>
-                  </SearchBar>
-                  <Link href='/add/category' as='/add/category'>
-                    <AddProductLink>
-                      <FaPlus />
-                    </AddProductLink>
-                  </Link>
-                </SearchBarAddButtonDiv>
-              </TitleSearchBarAddButtonDiv>
-              <CategoryList categories={categories} />
-            </Content>
-          </ContentContainer>
-        </Container>
-      </Wrapper>
-    </Background>
-  </>
-);
-
-Categories.getInitialProps = async () => {
-  const repos = await fetch('https://api.github.com/users/Davi-Silva/repos');
-
-  const data = await repos.json();
   return {
-    repos: data
+    categories
   };
 };
 
-export default Categories;
+const Categories = (props) => {
+  const { categories } = props;
+
+  const [toggleDeleteConfirmation, setToggleDeleteConfirmation] = useState(
+    false
+  );
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  const [selectedCategoryName, setSelectedCategoryName] = useState('');
+
+  const handleGetElement = (el) => {
+    const element = el.parentNode.parentNode;
+    console.log(element.children[0].children[0].innerHTML);
+    setSelectedCategoryId(element.id);
+    setSelectedCategoryName(element.children[0].children[0].innerHTML);
+    // console.log('element.querySelector(a):', element.querySelector('a'));
+    setToggleDeleteConfirmation(true);
+  };
+
+  const handleCloseDeleteConfirmation = () => {
+    setToggleDeleteConfirmation(false);
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Categories | Administrator - Canada Cannabyss</title>
+      </Head>
+      {toggleDeleteConfirmation && (
+        <DeleteConfirmation
+          categoryId={selectedCategoryId}
+          categoryName={selectedCategoryName}
+          handleCloseDeleteConfirmation={handleCloseDeleteConfirmation}
+        />
+      )}
+      <Background>
+        <Wrapper>
+          <Container>
+            <ContentContainer>
+              <Content>
+                <TitleSearchBarAddButtonDiv>
+                  <TitleDiv>
+                    <FaListUl />
+                    <h1>Categories</h1>
+                  </TitleDiv>
+                  <SearchBarAddButtonDiv>
+                    <SearchBar>
+                      <input />
+                      <button type='button'>
+                        <FaSearch />
+                      </button>
+                    </SearchBar>
+                    <Link href='/add/category' as='/add/category'>
+                      <AddProductLink>
+                        <FaPlus />
+                      </AddProductLink>
+                    </Link>
+                  </SearchBarAddButtonDiv>
+                </TitleSearchBarAddButtonDiv>
+                {!_.isEmpty(categories.data) &&
+                categories.fetched &&
+                !categories.loading &&
+                !categories.error && (
+                  <CategoryList
+                    categories={categories.data}
+                    handleGetElement={handleGetElement}
+                  />
+                )}
+              </Content>
+            </ContentContainer>
+          </Container>
+        </Wrapper>
+      </Background>
+    </>
+  );
+};
+
+Categories.propTypes = {
+  categories: PropTypes.shape().isRequired
+};
+
+Categories.getInitialProps = async ({ ctx }) => {
+  const { store } = ctx;
+
+  store.dispatch(getCategories());
+};
+
+export default connect(mapStateToProps)(Categories);

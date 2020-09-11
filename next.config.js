@@ -24,7 +24,8 @@ module.exports = withImage(
         MAIN_DOMAIN: process.env.MAIN_DOMAIN,
         SECURED_MAIN_DOMAIN: process.env.SECURED_MAIN_DOMAIN,
         STORE_MAIN_DOMAIN: process.env.STORE_MAIN_DOMAIN,
+        RESELLER_DOMAIN: process.env.RESELLER_DOMAIN,
       },
-    }),
-  ),
+    })
+  )
 );

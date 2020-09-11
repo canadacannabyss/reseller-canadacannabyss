@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
 
     try {
       ctx.renderPage = () => originalRenderPage({
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />)
       });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        ),
+        )
       };
     } finally {
       sheet.seal();
@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html>
+      <html lang='en-ca'>
         <Head>
           {process.env.NODE_ENV !== 'production' && (
             <link
@@ -47,7 +47,6 @@ export default class MyDocument extends Document {
             href='https://fonts.googleapis.com/css?family=Montserrat&display=swap'
             rel='stylesheet'
           />
-          {/* {this.props.styleTags} */}
         </Head>
         <body>
           <Main />

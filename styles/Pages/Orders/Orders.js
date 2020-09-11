@@ -55,6 +55,9 @@ const TitleDiv = styled.div`
   h1 {
     font-size: 20px;
     color: #18840f;
+    span {
+      color: #000;
+    }
   }
   @media (max-width: 576px) {
     margin-bottom: 1rem;
@@ -133,5 +136,5 @@ export {
   AddProductLink,
   TitleDiv,
   ContentContainer,
-  Content,
+  Content
 };

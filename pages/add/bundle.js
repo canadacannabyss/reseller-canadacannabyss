@@ -2,7 +2,9 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { FaBoxes, FaPlus, FaSpinner } from 'react-icons/fa';
 import Router from 'next/router';
+import { connect } from 'react-redux';
 import _ from 'lodash';
+import { withResellerAuth } from '../../utils/withResellerAuth';
 
 import { slugifyString } from '../../utils/stringMethods';
 import { roundFloatNumber } from '../../utils/numberConverter';
@@ -24,10 +26,20 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning,
+  Warning
 } from '../../styles/Pages/Add/Product';
 
-const AddBundle = () => {
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    user
+  };
+};
+
+const AddBundle = (props) => {
+  const { user } = props;
+
   const [warning, setWarning] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSlugValid, setIsSlugValid] = useState(true);
@@ -43,7 +55,7 @@ const AddBundle = () => {
 
   const [price, setPrice] = useState(0);
   const [compareTo, setCompareTo] = useState(0);
-  const [taxableProduct, setTaxableProduct] = useState(false);
+  const [taxableBundle, setTaxableBundle] = useState(false);
 
   const [sku, setSku] = useState('');
   const [barcode, setBarcode] = useState('');
@@ -69,7 +81,7 @@ const AddBundle = () => {
   const [tagsArray, setTagsArray] = useState([]);
 
   const handleCheckTaxableProduct = () => {
-    setTaxableProduct(!taxableProduct);
+    setTaxableBundle(!taxableBundle);
   };
 
   const handleSku = (e) => {
@@ -132,7 +144,7 @@ const AddBundle = () => {
       bundleName.length > 0 &&
       price > 0 &&
       !isNaN(compareTo) &&
-      (taxableProduct || !taxableProduct) &&
+      (taxableBundle || !taxableBundle) &&
       description.length > 0 &&
       sku.length > 0 &&
       barcode.length > 0 &&
@@ -163,7 +175,7 @@ const AddBundle = () => {
     bundleName,
     price,
     compareTo,
-    taxableProduct,
+    taxableBundle,
     description,
     sku,
     barcode,
@@ -178,18 +190,18 @@ const AddBundle = () => {
     categoriesArray,
     tags,
     tagsArray,
-    extraInfo,
+    extraInfo
   ]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/bundles`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/products`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
     const data = await res.json();
     setProductList(data);
@@ -202,7 +214,7 @@ const AddBundle = () => {
   const setGlobalVariable = async () => {
     const bodyRequest = {
       type: 'bundles',
-      title: bundleName,
+      title: bundleName
     };
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/admin/bundles/set/global-variable`,
@@ -212,9 +224,9 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bodyRequest),
+        body: JSON.stringify(bodyRequest)
       }
     );
     return response;
@@ -229,8 +241,8 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
     const data = await response.json();
@@ -246,9 +258,9 @@ const AddBundle = () => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(product)
       }
     );
     const data = await response.json();
@@ -278,49 +290,49 @@ const AddBundle = () => {
     disabledSubmitButton();
     if (allFieldsFilled) {
       const productInfo = {
+        userId: user.data._id,
         products: productOnBundle,
         isSlugValid,
         variants: {
           variantsOptionNames: [],
-          values: [],
+          values: []
         },
         bundleName,
         prices: {
           price,
-          compareTo,
+          compareTo
         },
-        taxableProduct,
+        taxableBundle,
         description,
         extraInfo,
         inventory: {
           sku,
           barcode,
           quantity,
-          allowPurchaseOutOfStock,
+          allowPurchaseOutOfStock
         },
         shipping: {
           physicalProduct,
           weight: {
             unit: weightUnit,
-            amount: weightAmount,
-          },
+            amount: weightAmount
+          }
         },
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription,
+          description: seoDescription
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray,
-        },
+          tags: tagsArray
+        }
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await publishProduct(productInfo);
-        Router.push(`/bundle/${res.slug}`);
+        Router.push('/bundles');
       } else {
-        console.log('Slug is invalid');
         setIsSlugValid(false);
       }
     } else {
@@ -406,7 +418,7 @@ const AddBundle = () => {
   return (
     <>
       <Head>
-        <title>Add Product | Reseller - Canada Cannabyss</title>
+        <title>Add Bundle | Administrator - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -420,17 +432,17 @@ const AddBundle = () => {
               description={description}
               onChangeDescription={onChangeDescription}
             />
-            {/* <ProductsList
+            <ProductsList
               title='Products on bundles'
               products={productList}
               handleGetElement={handleGetElement}
-            /> */}
+            />
             <Pricing
               price={price}
               compareTo={compareTo}
               onChangePrice={onChangePrice}
               onChangeCompareTo={onChangeCompareTo}
-              taxableProduct={taxableProduct}
+              taxableBundle={taxableBundle}
               handleCheckTaxableProduct={handleCheckTaxableProduct}
             />
             <ExtraInfo handleGetExtraInfo={handleGetExtraInfo} />
@@ -483,4 +495,4 @@ const AddBundle = () => {
   );
 };
 
-export default AddBundle;
+export default connect(mapStateToProps)(AddBundle);

@@ -2,32 +2,30 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
+import DateFormatter from '../../../../utils/dateFormatter';
 import {
   List,
   ListLiContent,
   EditLink,
   DeleteButton,
-  SpansDiv,
+  SpansDiv
 } from '../../../../styles/Components/UI/List/Categories/CategoryList';
 
 const CategoryList = (props) => {
-  const { categories } = props;
+  const { categories, handleGetElement } = props;
+
+  const dateFormatter = new DateFormatter();
+
+  const handleSelectProduct = (e) => {
+    const getter = handleGetElement;
+    getter(e.currentTarget);
+  };
+
   return (
     <List>
       <SpansDiv>
         <div className='categoryName'>
           <span>Category Name</span>
-        </div>
-        <div className='price'>
-          <span>
-            Price
-          </span>
-        </div>
-        <div className='compareTo'>
-          <span>
-            Compare To
-          </span>
         </div>
         <div className='createdOn'>
           <span>
@@ -47,30 +45,24 @@ const CategoryList = (props) => {
         </div>
       </SpansDiv>
       {categories.map((category) => (
-        <ListLiContent>
+        <ListLiContent id={category._id}>
           <div className='categoryName'>
-            <a href={`${process.env.STORE_MAIN_DOMAIN}/category/${category.slug}`}>
+            <a href={`${process.env.SECURED_MAIN_DOMAIN}/category/${category.slug}`}>
               {category.categoryName}
             </a>
           </div>
-          <div className='price'>
-            <p>
-              {category.prices.price}
-            </p>
-          </div>
-          <div className='compareTo'>
-            <p>
-              {category.prices.compareTo}
-            </p>
-          </div>
           <div className='createdOn'>
             <p>
-              {category.createdOn}
+              {dateFormatter.formatDateFullDate(category.createdOn)}
             </p>
           </div>
           <div className='updatedOn'>
             <p>
-              {category.updatedOn}
+              {category.updatedOn ? (
+                <>
+                  {dateFormatter.formatDateFullDate(category.updatedOn)}
+                </>
+              ) : ('Not updated')}
             </p>
           </div>
           <div className='featured'>
@@ -78,14 +70,17 @@ const CategoryList = (props) => {
           </div>
           <div className='buttons'>
             <Link
-              href='/categories/edit/[slug]'
-              as={`/categories/edit/${category.slug}`}
+              href='/edit/category/[slug]'
+              as={`/edit/category/${category.slug}`}
             >
               <EditLink>
                 <FaEdit />
               </EditLink>
             </Link>
-            <DeleteButton>
+            <DeleteButton onClick={(e) => {
+              handleSelectProduct(e);
+            }}
+            >
               <FaTrashAlt />
             </DeleteButton>
           </div>
@@ -96,7 +91,7 @@ const CategoryList = (props) => {
 };
 
 CategoryList.propTypes = {
-  categories: PropTypes.shape().isRequired,
+  categories: PropTypes.shape().isRequired
 };
 
 export default CategoryList;

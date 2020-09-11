@@ -2,17 +2,25 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
+import DateFormatter from '../../../../utils/dateFormatter';
 import {
   List,
   ListLiContent,
   EditLink,
   DeleteButton,
-  SpansDiv,
+  SpansDiv
 } from '../../../../styles/Components/UI/List/Products/ProductList';
 
 const ProductList = (props) => {
-  const { products } = props;
+  const { products, handleGetElement } = props;
+
+  const dateFormatter = new DateFormatter();
+
+  const handleSelectProduct = (e) => {
+    const getter = handleGetElement;
+    getter(e.currentTarget);
+  };
+
   return (
     <List>
       <SpansDiv>
@@ -47,9 +55,13 @@ const ProductList = (props) => {
         </div>
       </SpansDiv>
       {products.map((product) => (
-        <ListLiContent>
+        <ListLiContent id={product._id}>
           <div className='productName'>
-            <a href={`${process.env.STORE_MAIN_DOMAIN}/product/${product.slug}`}>
+            <a
+              href={`${process.env.SECURED_MAIN_DOMAIN}/product/${product.slug}`}
+              target='_blank'
+              rel='noreferrer'
+            >
               {product.productName}
             </a>
           </div>
@@ -65,12 +77,16 @@ const ProductList = (props) => {
           </div>
           <div className='createdOn'>
             <p>
-              {product.createdOn}
+              {dateFormatter.formatDateFullDate(product.createdOn)}
             </p>
           </div>
           <div className='updatedOn'>
             <p>
-              {product.updatedOn}
+              {product.updatedOn ? (
+                <>
+                  {dateFormatter.formatDateFullDate(product.updatedOn)}
+                </>
+              ) : ('Not updated')}
             </p>
           </div>
           <div className='featured'>
@@ -78,14 +94,17 @@ const ProductList = (props) => {
           </div>
           <div className='buttons'>
             <Link
-              href='/products/edit/[slug]'
-              as={`/products/edit/${product.slug}`}
+              href='/edit/product/[slug]'
+              as={`/edit/product/${product.slug}`}
             >
               <EditLink>
                 <FaEdit />
               </EditLink>
             </Link>
-            <DeleteButton>
+            <DeleteButton onClick={(e) => {
+              handleSelectProduct(e);
+            }}
+            >
               <FaTrashAlt />
             </DeleteButton>
           </div>
@@ -96,7 +115,7 @@ const ProductList = (props) => {
 };
 
 ProductList.propTypes = {
-  products: PropTypes.shape().isRequired,
+  products: PropTypes.shape().isRequired
 };
 
 export default ProductList;

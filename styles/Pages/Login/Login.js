@@ -123,6 +123,28 @@ const Submit = styled.button`
   }
 `;
 
+const HalfGrid = styled.div`
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+const Warning = styled.div`
+  border: 1px solid #d42626;
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: #d42626;
+  font-size: 12px;
+  margin: 7px auto;
+  display: table;
+  cursor: default;
+  background: #d426260f;
+  text-transform: uppercase;
+`;
+
 export {
   Container,
   BrandDiv,
@@ -130,5 +152,7 @@ export {
   Label,
   Input,
   Submit,
-  BlurredBackground
+  BlurredBackground,
+  Warning,
+  HalfGrid
 };

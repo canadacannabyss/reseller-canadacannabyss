@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaListUl, FaPlus, FaSpinner } from 'react-icons/fa';
+import { connect } from 'react-redux';
 import Router from 'next/router';
 import _ from 'lodash';
 
@@ -21,7 +22,17 @@ import {
   Warning
 } from '../../styles/Pages/Add/Product';
 
-const AddCategory = () => {
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    user
+  };
+};
+
+const AddCategory = (props) => {
+  const { user } = props;
+
   const childRef = useRef();
 
   const [warning, setWarning] = useState(false);
@@ -42,11 +53,6 @@ const AddCategory = () => {
   const [seoTitle, setSeoTitle] = useState('');
   const [seoSlug, setSeoSlug] = useState('');
   const [seoDescription, setSeoDescription] = useState('');
-
-  const [categories, setCategories] = useState('');
-  const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
-  const [tagsArray, setTagsArray] = useState([]);
 
   const handleSubmit = async () => {
     if (allFieldsFilled) {
@@ -72,7 +78,7 @@ const AddCategory = () => {
     setSeoDescription(e.target.value);
   };
 
-  const changeSlugFromProductName = () => {
+  const changeSlugFromCategoryName = () => {
     setSlug(slugifyString(categoryName));
   };
 
@@ -82,14 +88,11 @@ const AddCategory = () => {
       slug.length > 0 &&
       categoryName.length > 0 &&
       description.length > 0 &&
+      typeof featured === 'boolean' &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
       seoDescription.length > 0 &&
-      categories.length > 0 &&
-      tags.length > 0 &&
-
-      !_.isEmpty(tagsArray) &&
-      !_.isEmpty(categoriesArray)
+      !_.isEmpty(imagesArray)
     ) {
       setAllFieldsFilled(true);
     } else {
@@ -103,14 +106,11 @@ const AddCategory = () => {
     isSlugValid,
     slug,
     categoryName,
+    featured,
     description,
     seoTitle,
     seoSlug,
-    seoDescription,
-    categories,
-    categoriesArray,
-    tags,
-    tagsArray
+    seoDescription
   ]);
 
   const setGlobalVariable = async () => {
@@ -119,7 +119,7 @@ const AddCategory = () => {
       title: categoryName
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/banners/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/admin/category/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -136,7 +136,7 @@ const AddCategory = () => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/banners/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/admin/category/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -151,9 +151,9 @@ const AddCategory = () => {
     return data;
   };
 
-  const publishProduct = async (product) => {
+  const publishCategory = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/banners/publish`,
+      `${process.env.MAIN_API_ENDPOINT}/admin/category/publish`,
       {
         method: 'POST',
         mode: 'cors',
@@ -174,7 +174,7 @@ const AddCategory = () => {
   }, [slug]);
 
   useEffect(() => {
-    changeSlugFromProductName(categoryName);
+    changeSlugFromCategoryName(categoryName);
   }, [categoryName]);
 
   useEffect(() => {
@@ -196,23 +196,21 @@ const AddCategory = () => {
       });
       const productInfo = {
         isSlugValid,
+        userId: user.data._id,
         media: imagesArrayObj,
         categoryName,
         description,
+        featured,
         seo: {
           title: seoTitle,
           slug: seoSlug,
           description: seoDescription
-        },
-        organization: {
-          categories: categoriesArray,
-          tags: tagsArray
         }
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
-        const res = await publishProduct(productInfo);
-        Router.push(`/product/${res.slug}`);
+        const res = await publishCategory(productInfo);
+        Router.push('/categories');
       } else {
         console.log('Slug is invalid');
         setIsSlugValid(false);
@@ -221,30 +219,6 @@ const AddCategory = () => {
       setWarning(true);
     }
   };
-
-  const categoriesToArray = () => {
-    const tempCategories = categories.split(',');
-    tempCategories.map((category, i) => {
-      tempCategories[i] = tempCategories[i].trim();
-    });
-    setCategoriesArray(tempCategories);
-  };
-
-  useEffect(() => {
-    categoriesToArray();
-  }, [categories]);
-
-  const tagsToArray = () => {
-    const tempTags = tags.split(',');
-    tempTags.map((tag, i) => {
-      tempTags[i] = tempTags[i].trim();
-    });
-    setTagsArray(tempTags);
-  };
-
-  useEffect(() => {
-    tagsToArray();
-  }, [tags]);
 
   useEffect(() => {
     if (imagesArray.length > 0) {
@@ -256,15 +230,7 @@ const AddCategory = () => {
     }
   }, [imagesArray]);
 
-  const onChangeCategories = (e) => {
-    setCategories(e.target.value);
-  };
-
-  const onChangeTags = (e) => {
-    setTags(e.target.value.toLowerCase());
-  };
-
-  const onChangeProductName = (e) => {
+  const onChangeCategoryName = (e) => {
     setCategoryName(e.target.value);
   };
 
@@ -279,7 +245,7 @@ const AddCategory = () => {
   return (
     <>
       <Head>
-        <title>Add Category | Reseller - Canada Cannabyss</title>
+        <title>Add Category | Administrator - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -289,7 +255,7 @@ const AddCategory = () => {
               PlusIcon={<FaPlus className='plus' />}
               title='Add Category'
               itemName='Category Name'
-              onChangeItemName={onChangeProductName}
+              onChangeItemName={onChangeCategoryName}
               description={description}
               onChangeDescription={onChangeDescription}
               handleCheckFeatured={handleCheckFeatured}
@@ -300,6 +266,7 @@ const AddCategory = () => {
               childRef={childRef}
               handleSetImagesArray={handleSetImagesArray}
               imagesArray={imagesArray}
+              apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/category/publish/media`}
             />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
@@ -328,4 +295,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default connect(mapStateToProps)(AddCategory);
