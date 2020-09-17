@@ -33,14 +33,6 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/banners/index</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/bundles/index</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/add/banner</loc>
   </url>
 
@@ -62,6 +54,14 @@
 
   <url>
     <loc>https://canadacannabyss.com/add/promotion</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/banners/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/bundles/index</loc>
   </url>
 
   <url>
