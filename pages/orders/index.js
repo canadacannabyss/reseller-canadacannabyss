@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import {
   FaSortAmountDownAlt, FaSearch

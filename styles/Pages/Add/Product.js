@@ -270,6 +270,14 @@ const Input = styled.input`
   }
 `;
 
+const P = styled.p`
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+`;
+
 const Select = styled.select`
   height: 40px;
   width: 100%;
@@ -506,6 +514,7 @@ export {
   Label,
   InputGroupTitle,
   Input,
+  P,
   Select,
   TextArea,
   OrganizationTextArea,

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { FaBox, FaPen, FaSpinner } from 'react-icons/fa';
+import { FaSortAmountDownAlt, FaPen, FaSpinner } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import {
   categoriesArrayToString,
@@ -24,6 +24,15 @@ import {
   LoadingSpinner,
   Loading,
   Warning,
+  Container,
+  Content,
+  ContentContainer,
+  TitleSearchBarAddButtonDiv,
+  TitleDiv,
+  PlusIconSign,
+  Label,
+  Input,
+  P,
 } from '../../../styles/Pages/Add/Product';
 import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import { getOrder } from '../../../store/actions/order/order';
@@ -60,7 +69,23 @@ const EditOrder = (props) => {
       <BackgroundAdd>
         <Wrapper>
           <MainGrid className='main'>
-            <h1>Order ID:{orderId}</h1>
+            <Container>
+              <ContentContainer>
+                <Content>
+                  <TitleSearchBarAddButtonDiv>
+                    <TitleDiv>
+                      <PlusIconSign>
+                        <FaSortAmountDownAlt className='mainIcon' />
+                        <FaPen className='plus' />
+                      </PlusIconSign>
+                      <h1>Edit Order</h1>
+                    </TitleDiv>
+                  </TitleSearchBarAddButtonDiv>
+                  <Label>Order ID</Label>
+                  <P>{order.data._id}</P>
+                </Content>
+              </ContentContainer>
+            </Container>
           </MainGrid>
         </Wrapper>
       </BackgroundAdd>

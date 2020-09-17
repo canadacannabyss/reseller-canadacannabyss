@@ -49,9 +49,7 @@ const Order = (props) => {
               <Content>
                 <TitleSearchBarAddButtonDiv>
                   <TitleDiv>
-                    <h1>
-                      Order: <span>{`${orderId}`}</span>
-                    </h1>
+                    <h1>sdf</h1>
                   </TitleDiv>
                 </TitleSearchBarAddButtonDiv>
               </Content>
