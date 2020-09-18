@@ -278,6 +278,13 @@ const P = styled.p`
   margin-top: 5px;
 `;
 
+const GroupSpan = styled.span`
+  font-size: 17px;
+  color: #777;
+  margin-bottom: 0.5rem;
+  display: block;
+`;
+
 const Select = styled.select`
   height: 40px;
   width: 100%;
@@ -515,6 +522,7 @@ export {
   InputGroupTitle,
   Input,
   P,
+  GroupSpan,
   Select,
   TextArea,
   OrganizationTextArea,

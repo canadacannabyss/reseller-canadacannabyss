@@ -30,7 +30,10 @@ const Sidebar = () => {
 
   return (
     <>
-      {(router.asPath !== '/login' && !router.asPath.includes('/confirmation/') && !router.asPath.includes('/register/')) && (
+      {(router.asPath !== '/' &&
+        router.asPath !== '/login' &&
+       !router.asPath.includes('/confirmation/') &&
+        !router.asPath.includes('/register/')) && (
         <>
           <Background
             toggleSidebar={toggleSidebar}

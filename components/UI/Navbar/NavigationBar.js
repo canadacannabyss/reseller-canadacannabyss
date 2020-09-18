@@ -68,8 +68,13 @@ const NavigationBar = (props) => {
               </Brand>
             </Link>
           )}
-          {(router.asPath !== '/login' && !router.asPath.includes('/confirmation/') && !router.asPath.includes('/register/')) &&
-          !_.isEmpty(user.data) && !user.loading && !user.error && (
+          {(router.asPath !== '/' &&
+          router.asPath !== '/login' &&
+          !router.asPath.includes('/confirmation/') &&
+          !router.asPath.includes('/register/')) &&
+          !_.isEmpty(user.data) &&
+          !user.loading &&
+          !user.error && (
           <UserDiv>
             <User
               onClick={() => {
