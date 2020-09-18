@@ -11,13 +11,13 @@ import {
   FaListUl,
   FaPlus,
   FaBars,
-  FaObjectUngroup
+  FaObjectUngroup,
 } from 'react-icons/fa';
 import {
   SidebarContainer,
   SidebarLink,
   ToggleSidebarButton,
-  Background
+  Background,
 } from '../../../styles/Components/UI/Sidebar/Sidebar';
 
 const Sidebar = () => {
@@ -30,117 +30,116 @@ const Sidebar = () => {
 
   return (
     <>
-      {(router.asPath !== '/' &&
-        router.asPath !== '/login' &&
-       !router.asPath.includes('/confirmation/') &&
-        !router.asPath.includes('/register/')) && (
-        <>
-          <Background
-            toggleSidebar={toggleSidebar}
-            onClick={() => {
-              onClickToggleSidebar();
-            }}
-          />
-          <ToggleSidebarButton
-            toggleSidebar={toggleSidebar}
-            onClick={() => {
-              onClickToggleSidebar();
-            }}
-          >
-            {toggleSidebar ? <FaPlus /> : <FaBars />}
-          </ToggleSidebarButton>
-          <SidebarContainer toggleSidebar={toggleSidebar}>
-            <Link href='/dashboard' as='/dashboard'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaHome />
-                <p>Dashboard</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/products' as='/products'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaBox />
-                <p>Products</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/bundles' as='/bundles'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaBoxes />
-                <p>Bundles</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/promotions' as='/promotions'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaTags />
-                <p>Promotions</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/banners' as='/banners'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaObjectUngroup />
-                <p>Banners</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/coupons' as='/coupons'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaPercent />
-                <p>Coupons</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/categories' as='/categories'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaListUl />
-                <p>Categories</p>
-              </SidebarLink>
-            </Link>
-            <Link href='/orders' as='/orders'>
-              <SidebarLink
-                toggleSidebar={toggleSidebar}
-                onClick={() => {
-                  onClickToggleSidebar();
-                }}
-              >
-                <FaSortAmountDownAlt />
-                <p>Orders</p>
-              </SidebarLink>
-            </Link>
-          </SidebarContainer>
-        </>
-      )}
+      {router.asPath !== '/login' &&
+        !router.asPath.includes('/confirmation/') &&
+        !router.asPath.includes('/register/') && (
+          <>
+            <Background
+              toggleSidebar={toggleSidebar}
+              onClick={() => {
+                onClickToggleSidebar();
+              }}
+            />
+            <ToggleSidebarButton
+              toggleSidebar={toggleSidebar}
+              onClick={() => {
+                onClickToggleSidebar();
+              }}
+            >
+              {toggleSidebar ? <FaPlus /> : <FaBars />}
+            </ToggleSidebarButton>
+            <SidebarContainer toggleSidebar={toggleSidebar}>
+              <Link href='/dashboard' as='/dashboard'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaHome />
+                  <p>Dashboard</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/products' as='/products'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaBox />
+                  <p>Products</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/bundles' as='/bundles'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaBoxes />
+                  <p>Bundles</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/promotions' as='/promotions'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaTags />
+                  <p>Promotions</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/banners' as='/banners'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaObjectUngroup />
+                  <p>Banners</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/coupons' as='/coupons'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaPercent />
+                  <p>Coupons</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/categories' as='/categories'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaListUl />
+                  <p>Categories</p>
+                </SidebarLink>
+              </Link>
+              <Link href='/orders' as='/orders'>
+                <SidebarLink
+                  toggleSidebar={toggleSidebar}
+                  onClick={() => {
+                    onClickToggleSidebar();
+                  }}
+                >
+                  <FaSortAmountDownAlt />
+                  <p>Orders</p>
+                </SidebarLink>
+              </Link>
+            </SidebarContainer>
+          </>
+        )}
     </>
   );
 };

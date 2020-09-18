@@ -14,14 +14,14 @@ import {
   Brand,
   UserDiv,
   User,
-  LoginLink
+  LoginLink,
 } from '../../../styles/Components/UI/Navbar/Navbar';
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user
+    user,
   };
 };
 
@@ -44,9 +44,7 @@ const NavigationBar = (props) => {
               <Brand>
                 <img src={Logo} alt='Canada Cannabyss Reseller' />
                 <p>
-                  Canada
-                  {' '}
-                  <br />
+                  Canada <br />
                   <span>Cannabyss</span>
                 </p>
                 <div className='sep' />
@@ -58,9 +56,7 @@ const NavigationBar = (props) => {
               <Brand>
                 <img src={Logo} alt='Canada Cannabyss Reseller' />
                 <p>
-                  Canada
-                  {' '}
-                  <br />
+                  Canada <br />
                   <span>Cannabyss</span>
                 </p>
                 <div className='sep' />
@@ -68,22 +64,21 @@ const NavigationBar = (props) => {
               </Brand>
             </Link>
           )}
-          {(router.asPath !== '/' &&
-          router.asPath !== '/login' &&
-          !router.asPath.includes('/confirmation/') &&
-          !router.asPath.includes('/register/')) &&
-          !_.isEmpty(user.data) &&
-          !user.loading &&
-          !user.error && (
-          <UserDiv>
-            <User
-              onClick={() => {
-                onClickUserButton();
-              }}
-              img={user.data.profileImage.url}
-            />
-          </UserDiv>
-          )}
+          {router.asPath !== '/login' &&
+            !router.asPath.includes('/confirmation/') &&
+            !router.asPath.includes('/register/') &&
+            !_.isEmpty(user.data) &&
+            !user.loading &&
+            !user.error && (
+              <UserDiv>
+                <User
+                  onClick={() => {
+                    onClickUserButton();
+                  }}
+                  img={user.data.profileImage.url}
+                />
+              </UserDiv>
+            )}
           {_.isEmpty(user.data) && (
             <Link href='/login' as='/login'>
               <LoginLink>Login</LoginLink>
@@ -92,9 +87,9 @@ const NavigationBar = (props) => {
         </NavbarWrapper>
       </Navbar>
       {toggleUserMenu && (
-      // <OutsideAlerter>
-      <UserMenu onClickUserButton={onClickUserButton} />
-      // </OutsideAlerter>
+        // <OutsideAlerter>
+        <UserMenu onClickUserButton={onClickUserButton} />
+        // </OutsideAlerter>
       )}
     </>
   );
