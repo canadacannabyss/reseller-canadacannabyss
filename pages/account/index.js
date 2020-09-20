@@ -20,6 +20,7 @@ import {
   MenusGrid,
   Menu
 } from '../../styles/Pages/Account/Account';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user } = state;
@@ -35,7 +36,7 @@ const Account = (props) => {
   const dateFormatter = new DateFormatter();
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Account | Reseller - Canada Cannabyss</title>
       </Head>
@@ -144,7 +145,7 @@ const Account = (props) => {
           </MenusGrid>
         </Container>
       </Background>
-    </>
+    </WithAuth>
   );
 };
 

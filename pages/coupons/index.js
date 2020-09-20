@@ -57,7 +57,7 @@ const Coupons = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Coupons | Administrator - Canada Cannabyss</title>
       </Head>
@@ -106,7 +106,7 @@ const Coupons = (props) => {
           </Container>
         </Wrapper>
       </Background>
-    </>
+    </WithAuth>
   );
 };
 

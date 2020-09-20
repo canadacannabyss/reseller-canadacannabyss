@@ -22,6 +22,7 @@ import {
   Loading,
   Warning
 } from '../../styles/Pages/Add/Product';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user } = state;
@@ -311,7 +312,7 @@ const AddBanner = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Add Banner | Administrator - Canada Cannabyss</title>
       </Head>
@@ -364,7 +365,7 @@ const AddBanner = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

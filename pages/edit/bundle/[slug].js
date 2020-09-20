@@ -39,6 +39,7 @@ import {
   Warning,
 } from '../../../styles/Pages/Add/Product';
 import { getBundle } from '../../../store/actions/bundle/bundle';
+import WithAuth from '../../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { bundle, user } = state;
@@ -421,7 +422,7 @@ const EditBundle = (props) => {
   }, [slug]);
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Edit Bundle | Administrator - Canada Cannabyss</title>
       </Head>
@@ -508,7 +509,7 @@ const EditBundle = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

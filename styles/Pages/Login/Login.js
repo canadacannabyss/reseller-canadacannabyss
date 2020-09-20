@@ -145,6 +145,60 @@ const Warning = styled.div`
   text-transform: uppercase;
 `;
 
+const SwitchFormButton = styled.button`
+  font-size: 14px;
+  color: #18840f;
+  text-align: center;
+  background: #fff;
+  border: none;
+  margin: 5px auto 0 auto;
+  display: table;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const FormLinkTo = styled.a`
+  font-size: 14px;
+  color: #18840f;
+  text-align: center;
+  background: #fff;
+  border: none;
+  margin: 5px auto 0 auto;
+  display: table;
+  text-decoration: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const EmailSentToMessage = styled.div`
+  width: 350px;
+  display: table;
+  padding: 7px 13px;
+  text-align: center;
+  position: fixed;
+  top: ${(props) => props.top};
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  margin: 10px auto;
+  border: 1px solid #18840f66;
+  border-image: initial;
+  border-radius: 4px;
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+  background: #d1e6cf;
+  color: #18840f;
+  p {
+    text-align: center;
+    span {
+      font-weight: 900;
+    }
+  }
+`;
+
 export {
   Container,
   BrandDiv,
@@ -154,5 +208,8 @@ export {
   Submit,
   BlurredBackground,
   Warning,
-  HalfGrid
+  HalfGrid,
+  FormLinkTo,
+  SwitchFormButton,
+  EmailSentToMessage
 };

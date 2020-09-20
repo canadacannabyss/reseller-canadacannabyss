@@ -28,6 +28,7 @@ import {
   Loading,
   Warning
 } from '../../styles/Pages/Add/Product';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user } = state;
@@ -416,7 +417,7 @@ const AddBundle = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Add Bundle | Administrator - Canada Cannabyss</title>
       </Head>
@@ -491,7 +492,7 @@ const AddBundle = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

@@ -21,6 +21,7 @@ import {
   Content
 } from '../../styles/Pages/Orders/Orders';
 import { getOrders } from '../../store/actions/orders/orders';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { orders } = state;
@@ -31,7 +32,7 @@ const Orders = (props) => {
   const { orders } = props;
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Orders | Administrator - Canada Cannabyss</title>
       </Head>
@@ -67,7 +68,7 @@ const Orders = (props) => {
           </Container>
         </Wrapper>
       </Background>
-    </>
+    </WithAuth>
   );
 };
 

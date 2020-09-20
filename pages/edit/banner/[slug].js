@@ -32,6 +32,7 @@ import {
   Warning,
 } from '../../../styles/Pages/Add/Product';
 import { getBanner } from '../../../store/actions/banner/banner';
+import WithAuth from '../../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { banner, user } = state;
@@ -348,7 +349,7 @@ const EditBanner = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Add Banner | Administrator - Canada Cannabyss</title>
       </Head>
@@ -402,7 +403,7 @@ const EditBanner = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

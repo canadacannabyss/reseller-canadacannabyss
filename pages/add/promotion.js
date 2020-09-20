@@ -21,14 +21,15 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning,
+  Warning
 } from '../../styles/Pages/Add/Product';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user,
+    user
   };
 };
 
@@ -127,13 +128,13 @@ const AddPromotion = (props) => {
     categoriesArray,
     tags,
     tagsArray,
-    imagesArray,
+    imagesArray
   ]);
 
   const setGlobalVariable = async () => {
     const bodyRequest = {
       type: 'promotions',
-      title: promotionName,
+      title: promotionName
     };
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/admin/promotions/set/global-variable`,
@@ -143,9 +144,9 @@ const AddPromotion = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bodyRequest),
+        body: JSON.stringify(bodyRequest)
       }
     );
     return response;
@@ -160,8 +161,8 @@ const AddPromotion = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
     const data = await response.json();
@@ -177,9 +178,9 @@ const AddPromotion = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(product)
       }
     );
     const data = await response.json();
@@ -193,8 +194,8 @@ const AddPromotion = (props) => {
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
     const data = await res.json();
     setProductList(data);
@@ -207,8 +208,8 @@ const AddPromotion = (props) => {
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
     const data = await res.json();
     setBundleList(data);
@@ -255,12 +256,12 @@ const AddPromotion = (props) => {
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription,
+          description: seoDescription
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray,
-        },
+          tags: tagsArray
+        }
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
@@ -337,9 +338,7 @@ const AddPromotion = (props) => {
     const element = el;
     if (element.classList[2] === 'product') {
       if (!productsOnPromotion.includes(element.id)) {
-        setProductsOnPromotion((pOnPromotion) =>
-          pOnPromotion.concat(element.id)
-        );
+        setProductsOnPromotion((pOnPromotion) => pOnPromotion.concat(element.id));
         element.style.backgroundColor = '#18840f';
         element.style.border = '1px solid #18840f';
         element.querySelector('.name').style.color = '#fff';
@@ -353,9 +352,7 @@ const AddPromotion = (props) => {
       }
     } else if (element.classList[2] === 'bundle') {
       if (!bundlesOnPromotion.includes(element.id)) {
-        setBundlesOnPromotion((bOnPromotion) =>
-          bOnPromotion.concat(element.id)
-        );
+        setBundlesOnPromotion((bOnPromotion) => bOnPromotion.concat(element.id));
         element.style.backgroundColor = '#18840f';
         element.style.border = '1px solid #18840f';
         element.querySelector('.name').style.color = '#fff';
@@ -371,7 +368,7 @@ const AddPromotion = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Add Promotion | Administrator - Canada Cannabyss</title>
       </Head>
@@ -431,7 +428,7 @@ const AddPromotion = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

@@ -11,13 +11,13 @@ import {
   FaListUl,
   FaPlus,
   FaBars,
-  FaObjectUngroup,
+  FaObjectUngroup
 } from 'react-icons/fa';
 import {
   SidebarContainer,
   SidebarLink,
   ToggleSidebarButton,
-  Background,
+  Background
 } from '../../../styles/Components/UI/Sidebar/Sidebar';
 
 const Sidebar = () => {
@@ -31,6 +31,8 @@ const Sidebar = () => {
   return (
     <>
       {router.asPath !== '/login' &&
+        router.asPath !== '/' &&
+        !router.asPath.includes('/reset-password/') &&
         !router.asPath.includes('/confirmation/') &&
         !router.asPath.includes('/register/') && (
           <>
@@ -139,7 +141,7 @@ const Sidebar = () => {
               </Link>
             </SidebarContainer>
           </>
-        )}
+      )}
     </>
   );
 };

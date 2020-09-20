@@ -27,6 +27,7 @@ import {
   Warning
 } from '../../styles/Pages/Account/Shipping';
 import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user, shippingList } = state;
@@ -306,21 +307,22 @@ const Shipping = (props) => {
   };
 
   return (
-    <BackgroundAdd>
-      <Head>
-        <title>Shipping | Account - Canada Cannabyss</title>
-      </Head>
-      <ContainerShipping>
-        <ContentContainer>
-          <Content>
-            {toggleEdit ? (
-              <Title>Edit Shipping Address</Title>
-            ) : (
-              <>
-                {toggleAdd ? (
-                  <Title>Shipping Addresses</Title>
-                ) : (
-                  <TitleAddDiv>
+    <WithAuth>
+      <BackgroundAdd>
+        <Head>
+          <title>Shipping | Account - Canada Cannabyss</title>
+        </Head>
+        <ContainerShipping>
+          <ContentContainer>
+            <Content>
+              {toggleEdit ? (
+                <Title>Edit Shipping Address</Title>
+              ) : (
+                <>
+                  {toggleAdd ? (
+                    <Title>Shipping Addresses</Title>
+                  ) : (
+                    <TitleAddDiv>
                     <Title>Shipping Addresses</Title>
                     <AddBtn
                       onClick={() => {
@@ -330,10 +332,10 @@ const Shipping = (props) => {
                       Add Shipping Address
                     </AddBtn>
                   </TitleAddDiv>
-                )}
-              </>
-            )}
-            {!_.isEmpty(shippingList.data) &&
+                  )}
+                </>
+              )}
+              {!_.isEmpty(shippingList.data) &&
           !shippingList.loading &&
           !shippingList.errors &&
           shippingList.fetched && (
@@ -421,8 +423,8 @@ const Shipping = (props) => {
                 </ContainerEdit>
               )}
             </>
-            )}
-            {!_.isEmpty(shippingList.data) &&
+              )}
+              {!_.isEmpty(shippingList.data) &&
           !shippingList.loading &&
           !shippingList.errors &&
           shippingList.fetched &&
@@ -467,87 +469,88 @@ const Shipping = (props) => {
                 </Container>
               ))}
             </Grid>
-            )}
-            {toggleAdd && (
-            <ContainerEdit>
-              <FirstNameDeleteBtnDiv>
-                <label>First Name</label>
-                <DeleteBtn
+              )}
+              {toggleAdd && (
+              <ContainerEdit>
+                <FirstNameDeleteBtnDiv>
+                  <label>First Name</label>
+                  <DeleteBtn
+                    onClick={() => {
+                      onToggleAddShipping();
+                    }}
+                  >
+                    <FaPlus />
+                  </DeleteBtn>
+                </FirstNameDeleteBtnDiv>
+                <InputEdit onChange={onChangeFirstName} value={shippingFirstName} />
+                <label>Last Name</label>
+                <InputEdit onChange={onChangeLastName} value={shippingLastName} />
+                <label>Country</label>
+                <SelectEdit
+                  onChange={handleShippingCountrySelect}
+                  value={shippingCountry}
+                  id='shipping_country'
+                >
+                  <option value='-'>CHOOSE COUNTRY</option>
+                  <option value='CA'>CANADA</option>
+                  {/* <option value="US">UNITED STATES</option> */}
+                </SelectEdit>
+                <label>Province / State</label>
+                <SelectEdit
+                  onChange={handleShippingProvinceStateSelect}
+                  value={shippingProvinceState}
+                  id='shipping_province_state'
+                >
+                  <option value='-'>PROVINCE/STATE</option>
+                  {shippingProvincesStatesList.map((province) => (
+                    <option key={province.abbr} value={province.abbr}>
+                      {province.name}
+                    </option>
+                  ))}
+                </SelectEdit>
+                <label>City</label>
+                <SelectEdit
+                  onChange={handleShippingCitySelect}
+                  value={shippingCity}
+                  id='shipping_city'
+                >
+                  <option value='-'>CITY</option>
+                  {shippingCitiesList.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </SelectEdit>
+                <label>Address Line 1</label>
+                <InputEdit
+                  onChange={onChangeAddressLine1}
+                  value={shippingAddressLine1}
+                />
+                <label>Address Line 2</label>
+                <InputEdit
+                  onChange={onChangeAddressLine2}
+                  value={shippingAddressLine2}
+                />
+                <label>Postal Code</label>
+                <InputEdit
+                  onChange={onChangePostalCode}
+                  value={shippingPostalCode}
+                />
+                <SubmitButton
                   onClick={() => {
-                    onToggleAddShipping();
+                    onSubmitAdd();
                   }}
                 >
-                  <FaPlus />
-                </DeleteBtn>
-              </FirstNameDeleteBtnDiv>
-              <InputEdit onChange={onChangeFirstName} value={shippingFirstName} />
-              <label>Last Name</label>
-              <InputEdit onChange={onChangeLastName} value={shippingLastName} />
-              <label>Country</label>
-              <SelectEdit
-                onChange={handleShippingCountrySelect}
-                value={shippingCountry}
-                id='shipping_country'
-              >
-                <option value='-'>CHOOSE COUNTRY</option>
-                <option value='CA'>CANADA</option>
-                {/* <option value="US">UNITED STATES</option> */}
-              </SelectEdit>
-              <label>Province / State</label>
-              <SelectEdit
-                onChange={handleShippingProvinceStateSelect}
-                value={shippingProvinceState}
-                id='shipping_province_state'
-              >
-                <option value='-'>PROVINCE/STATE</option>
-                {shippingProvincesStatesList.map((province) => (
-                  <option key={province.abbr} value={province.abbr}>
-                    {province.name}
-                  </option>
-                ))}
-              </SelectEdit>
-              <label>City</label>
-              <SelectEdit
-                onChange={handleShippingCitySelect}
-                value={shippingCity}
-                id='shipping_city'
-              >
-                <option value='-'>CITY</option>
-                {shippingCitiesList.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
-              </SelectEdit>
-              <label>Address Line 1</label>
-              <InputEdit
-                onChange={onChangeAddressLine1}
-                value={shippingAddressLine1}
-              />
-              <label>Address Line 2</label>
-              <InputEdit
-                onChange={onChangeAddressLine2}
-                value={shippingAddressLine2}
-              />
-              <label>Postal Code</label>
-              <InputEdit
-                onChange={onChangePostalCode}
-                value={shippingPostalCode}
-              />
-              <SubmitButton
-                onClick={() => {
-                  onSubmitAdd();
-                }}
-              >
-                Add
-              </SubmitButton>
-              {warning && <Warning>{warningText}</Warning>}
-            </ContainerEdit>
-            )}
-          </Content>
-        </ContentContainer>
-      </ContainerShipping>
-    </BackgroundAdd>
+                  Add
+                </SubmitButton>
+                {warning && <Warning>{warningText}</Warning>}
+              </ContainerEdit>
+              )}
+            </Content>
+          </ContentContainer>
+        </ContainerShipping>
+      </BackgroundAdd>
+    </WithAuth>
   );
 };
 

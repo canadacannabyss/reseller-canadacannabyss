@@ -69,17 +69,18 @@ const Invite = (props) => {
   };
 
   return (
-    <BackgroundAdd>
-      <Head>
-        <title>Invite Friends | Reseller - Canada Cannabyss</title>
-      </Head>
-      <Container>
-        <ContentContainer>
-          <Content>
-            <HeaderDiv>
-              <div>
-                <Title>Invite Friends</Title>
-                {!_.isEmpty(user.data) && (
+    <WithAuth>
+      <BackgroundAdd>
+        <Head>
+          <title>Invite Friends | Reseller - Canada Cannabyss</title>
+        </Head>
+        <Container>
+          <ContentContainer>
+            <Content>
+              <HeaderDiv>
+                <div>
+                  <Title>Invite Friends</Title>
+                  {!_.isEmpty(user.data) && (
                   <ReferralLink>
                     <p>Share this referral link to a friend:</p>
                     <span
@@ -91,37 +92,38 @@ const Invite = (props) => {
                       {`${process.env.RESELLER_DOMAIN}/register?referral=${user.data.referral._id}`}
                     </span>
                   </ReferralLink>
-                )}
-              </div>
-              <Credits>
-                {/* <div className='creditP'>
+                  )}
+                </div>
+                <Credits>
+                  {/* <div className='creditP'>
                   <p>Credits:</p>
                 </div>
                 <div className='creditSpan'>
                   <span>{user.data.credits}</span>
                 </div> */}
-              </Credits>
-            </HeaderDiv>
-            <InvitedFriendsTitle>Invited Friends:</InvitedFriendsTitle>
-            {loading && (
+                </Credits>
+              </HeaderDiv>
+              <InvitedFriendsTitle>Invited Friends:</InvitedFriendsTitle>
+              {loading && (
               <ContainerLoading>
                 <WrapperLoading />
                 <WrapperLoading />
                 <WrapperLoading />
                 <WrapperLoading />
               </ContainerLoading>
-            )}
-            {invitedFriends.length === 0 && !loading && fetched && (
+              )}
+              {invitedFriends.length === 0 && !loading && fetched && (
               <NoInvitedFriends>No invited friends</NoInvitedFriends>
-            )}
+              )}
 
-            {!_.isEmpty(invitedFriends) && !loading && fetched && (
+              {!_.isEmpty(invitedFriends) && !loading && fetched && (
               <InvitedFriendsList invitedFriends={invitedFriends} />
-            )}
-          </Content>
-        </ContentContainer>
-      </Container>
-    </BackgroundAdd>
+              )}
+            </Content>
+          </ContentContainer>
+        </Container>
+      </BackgroundAdd>
+    </WithAuth>
   );
 };
 

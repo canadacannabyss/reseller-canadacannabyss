@@ -20,7 +20,7 @@ import {
 } from '../../styles/Pages/Products/Products';
 import DeleteConfirmation from '../../components/UI/Confirmations/DeleteProductConfirmation';
 import { getProducts } from '../../store/actions/products/products';
-import { withResellerAuth } from '../../utils/withResellerAuth';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { products } = state;
@@ -53,7 +53,7 @@ const Products = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Products | Reseller - Canada Cannabyss</title>
       </Head>
@@ -97,7 +97,7 @@ const Products = (props) => {
           </Container>
         </Wrapper>
       </Background>
-    </>
+    </WithAuth>
   );
 };
 

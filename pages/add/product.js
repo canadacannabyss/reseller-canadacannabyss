@@ -26,14 +26,15 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning,
+  Warning
 } from '../../styles/Pages/Add/Product';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user,
+    user
   };
 };
 
@@ -202,13 +203,13 @@ const AddProduct = (props) => {
     categoriesArray,
     tags,
     tagsArray,
-    extraInfo,
+    extraInfo
   ]);
 
   const setGlobalVariable = async () => {
     const bodyRequest = {
       type: 'products',
-      title: productName,
+      title: productName
     };
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products/set/global-variable`,
@@ -218,9 +219,9 @@ const AddProduct = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bodyRequest),
+        body: JSON.stringify(bodyRequest)
       }
     );
     return response;
@@ -235,8 +236,8 @@ const AddProduct = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
     const data = await response.json();
@@ -252,9 +253,9 @@ const AddProduct = (props) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(product)
       }
     );
     const data = await response.json();
@@ -292,12 +293,12 @@ const AddProduct = (props) => {
         media: imagesArrayObj,
         variants: {
           variantsOptionNames,
-          values: variants,
+          values: variants
         },
         productName,
         prices: {
           price,
-          compareTo,
+          compareTo
         },
         taxableProduct,
         description,
@@ -306,24 +307,24 @@ const AddProduct = (props) => {
           sku,
           barcode,
           quantity,
-          allowPurchaseOutOfStock,
+          allowPurchaseOutOfStock
         },
         shipping: {
           physicalProduct,
           weight: {
             unit: weightUnit,
-            amount: weightAmount,
-          },
+            amount: weightAmount
+          }
         },
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription,
+          description: seoDescription
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray,
-        },
+          tags: tagsArray
+        }
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
@@ -401,7 +402,7 @@ const AddProduct = (props) => {
   };
 
   return (
-    <>
+    <WithAuth>
       <Head>
         <title>Add Product | Administrator - Canada Cannabyss</title>
       </Head>
@@ -482,7 +483,7 @@ const AddProduct = (props) => {
           </LoadingSpinner>
         </Loading>
       )}
-    </>
+    </WithAuth>
   );
 };
 

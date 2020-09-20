@@ -27,6 +27,7 @@ import {
   Warning
 } from '../../styles/Pages/Account/Billing';
 import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import WithAuth from '../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
   const { user, billingList } = state;
@@ -306,21 +307,22 @@ const Billing = (props) => {
   };
 
   return (
-    <BackgroundAdd>
-      <Head>
-        <title>Billing | Account - Canada Cannabyss</title>
-      </Head>
-      <ContainerBilling>
-        <ContentContainer>
-          <Content>
-            {toggleEdit ? (
-              <Title>Edit Billing Address</Title>
-            ) : (
-              <>
-                {toggleAdd ? (
-                  <Title>Billing Addresses</Title>
-                ) : (
-                  <TitleAddDiv>
+    <WithAuth>
+      <BackgroundAdd>
+        <Head>
+          <title>Billing | Account - Canada Cannabyss</title>
+        </Head>
+        <ContainerBilling>
+          <ContentContainer>
+            <Content>
+              {toggleEdit ? (
+                <Title>Edit Billing Address</Title>
+              ) : (
+                <>
+                  {toggleAdd ? (
+                    <Title>Billing Addresses</Title>
+                  ) : (
+                    <TitleAddDiv>
                     <Title>Billing Addresses</Title>
                     <AddBtn
                       onClick={() => {
@@ -330,10 +332,10 @@ const Billing = (props) => {
                       Add Billing Address
                     </AddBtn>
                   </TitleAddDiv>
-                )}
-              </>
-            )}
-            {!_.isEmpty(billingList.data) &&
+                  )}
+                </>
+              )}
+              {!_.isEmpty(billingList.data) &&
           !billingList.loading &&
           !billingList.errors &&
           billingList.fetched && (
@@ -421,8 +423,8 @@ const Billing = (props) => {
                 </ContainerEdit>
               )}
             </>
-            )}
-            {!_.isEmpty(billingList.data) &&
+              )}
+              {!_.isEmpty(billingList.data) &&
           !billingList.loading &&
           !billingList.errors &&
           billingList.fetched &&
@@ -467,86 +469,87 @@ const Billing = (props) => {
                 </Container>
               ))}
             </Grid>
-            )}
-            {toggleAdd && (
-            <ContainerEdit>
-              <FirstNameDeleteBtnDiv>
-                <label>First Name</label>
-                <DeleteBtn
+              )}
+              {toggleAdd && (
+              <ContainerEdit>
+                <FirstNameDeleteBtnDiv>
+                  <label>First Name</label>
+                  <DeleteBtn
+                    onClick={() => {
+                      onToggleAddBilling();
+                    }}
+                  >
+                    <FaPlus />
+                  </DeleteBtn>
+                </FirstNameDeleteBtnDiv>
+                <InputEdit onChange={onChangeFirstName} value={billingFirstName} />
+                <label>Last Name</label>
+                <InputEdit onChange={onChangeLastName} value={billingLastName} />
+                <label>Country</label>
+                <SelectEdit
+                  onChange={handleBillingCountrySelect}
+                  value={billingCountry}
+                  id='billing_country'
+                >
+                  <option value='-'>CHOOSE COUNTRY</option>
+                  <option value='CA'>CANADA</option>
+                </SelectEdit>
+                <label>Province / State</label>
+                <SelectEdit
+                  onChange={handleBillingProvinceStateSelect}
+                  value={billingProvinceState}
+                  id='billing_province_state'
+                >
+                  <option value='-'>PROVINCE/STATE</option>
+                  {billingProvincesStatesList.map((province) => (
+                    <option key={province.abbr} value={province.abbr}>
+                      {province.name}
+                    </option>
+                  ))}
+                </SelectEdit>
+                <label>City</label>
+                <SelectEdit
+                  onChange={handleBillingCitySelect}
+                  value={billingCity}
+                  id='billing_city'
+                >
+                  <option value='-'>CITY</option>
+                  {billingCitiesList.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </SelectEdit>
+                <label>Address Line 1</label>
+                <InputEdit
+                  onChange={onChangeAddressLine1}
+                  value={billingAddressLine1}
+                />
+                <label>Address Line 2</label>
+                <InputEdit
+                  onChange={onChangeAddressLine2}
+                  value={billingAddressLine2}
+                />
+                <label>Postal Code</label>
+                <InputEdit
+                  onChange={onChangePostalCode}
+                  value={billingPostalCode}
+                />
+                <SubmitButton
                   onClick={() => {
-                    onToggleAddBilling();
+                    onSubmitAdd();
                   }}
                 >
-                  <FaPlus />
-                </DeleteBtn>
-              </FirstNameDeleteBtnDiv>
-              <InputEdit onChange={onChangeFirstName} value={billingFirstName} />
-              <label>Last Name</label>
-              <InputEdit onChange={onChangeLastName} value={billingLastName} />
-              <label>Country</label>
-              <SelectEdit
-                onChange={handleBillingCountrySelect}
-                value={billingCountry}
-                id='billing_country'
-              >
-                <option value='-'>CHOOSE COUNTRY</option>
-                <option value='CA'>CANADA</option>
-              </SelectEdit>
-              <label>Province / State</label>
-              <SelectEdit
-                onChange={handleBillingProvinceStateSelect}
-                value={billingProvinceState}
-                id='billing_province_state'
-              >
-                <option value='-'>PROVINCE/STATE</option>
-                {billingProvincesStatesList.map((province) => (
-                  <option key={province.abbr} value={province.abbr}>
-                    {province.name}
-                  </option>
-                ))}
-              </SelectEdit>
-              <label>City</label>
-              <SelectEdit
-                onChange={handleBillingCitySelect}
-                value={billingCity}
-                id='billing_city'
-              >
-                <option value='-'>CITY</option>
-                {billingCitiesList.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
-              </SelectEdit>
-              <label>Address Line 1</label>
-              <InputEdit
-                onChange={onChangeAddressLine1}
-                value={billingAddressLine1}
-              />
-              <label>Address Line 2</label>
-              <InputEdit
-                onChange={onChangeAddressLine2}
-                value={billingAddressLine2}
-              />
-              <label>Postal Code</label>
-              <InputEdit
-                onChange={onChangePostalCode}
-                value={billingPostalCode}
-              />
-              <SubmitButton
-                onClick={() => {
-                  onSubmitAdd();
-                }}
-              >
-                Add
-              </SubmitButton>
-              {warning && <Warning>{warningText}</Warning>}
-            </ContainerEdit>
-            )}
-          </Content>
-        </ContentContainer>
-      </ContainerBilling>
-    </BackgroundAdd>
+                  Add
+                </SubmitButton>
+                {warning && <Warning>{warningText}</Warning>}
+              </ContainerEdit>
+              )}
+            </Content>
+          </ContentContainer>
+        </ContainerBilling>
+      </BackgroundAdd>
+    </WithAuth>
   );
 };
 
