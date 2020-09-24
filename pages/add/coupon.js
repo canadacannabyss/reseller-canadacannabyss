@@ -86,7 +86,7 @@ const AddCoupon = (props) => {
   // }, []);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products/`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -140,7 +140,7 @@ const AddCoupon = (props) => {
       setBundleList([]);
       const fetchAllProductsBundlesCategoriesOnChange = async () => {
         const resProducts = await fetch(
-          `${process.env.MAIN_API_ENDPOINT}/products/`,
+          `${process.env.MAIN_API_ENDPOINT}/products`,
           {
             method: 'GET',
             mode: 'cors',
@@ -153,7 +153,7 @@ const AddCoupon = (props) => {
         );
 
         const resBundles = await fetch(
-          `${process.env.MAIN_API_ENDPOINT}/bundles/`,
+          `${process.env.MAIN_API_ENDPOINT}/bundles`,
           {
             method: 'GET',
             mode: 'cors',
@@ -178,7 +178,7 @@ const AddCoupon = (props) => {
       setProductList([]);
       setBundleList([]);
       const fetchAllProductsOnChange = async () => {
-        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products/`, {
+        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',
@@ -198,7 +198,7 @@ const AddCoupon = (props) => {
       setProductList([]);
       setBundleList([]);
       const fetchAllBundlesOnChange = async () => {
-        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/bundles/`, {
+        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/bundles`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',
@@ -385,7 +385,7 @@ const AddCoupon = (props) => {
 
   const fetchNewCoupon = async (couponObj) => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/coupons/create`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/create`,
       {
         method: 'POST',
         mode: 'cors',
@@ -408,7 +408,7 @@ const AddCoupon = (props) => {
       console.log('fetchedValidCouponNameRes:', fetchedValidCouponNameRes);
       if (fetchedValidCouponNameRes) {
         const couponObj = {
-          userId: user.data._id,
+          resellerId: user.data._id,
           couponName: couponCode,
           description,
           featured,

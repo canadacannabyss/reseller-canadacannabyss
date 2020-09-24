@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import {
   FaSearch, FaPlus, FaObjectUngroup

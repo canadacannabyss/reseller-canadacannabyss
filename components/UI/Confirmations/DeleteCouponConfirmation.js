@@ -27,9 +27,9 @@ const DeleteConfirmationModal = (props) => {
 
   const handleDeleteCoupon = async () => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/coupons/delete/coupon/${couponId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/delete/coupon/${couponId}`,
       {
-        method: 'DELETE',
+        method: 'PUT',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',

@@ -27,9 +27,9 @@ const DeleteConfirmationModal = (props) => {
 
   const handleDeleteBundle = async () => {
     const deleteRes = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/delete/bundle/${bundleId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/delete/bundle/${bundleId}`,
       {
-        method: 'DELETE',
+        method: 'PUT',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',

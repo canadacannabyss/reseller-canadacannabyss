@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 async function getCategory(slug) {
   const res = await fetch(
-    `${process.env.MAIN_API_ENDPOINT}/admin/categories/panel/get/${slug}`,
+    `${process.env.MAIN_API_ENDPOINT}/reseller/categories/panel/get/${slug}`,
     {
       method: 'GET',
       mode: 'cors',

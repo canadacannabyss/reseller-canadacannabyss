@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 async function getBundle(slug) {
   const res = await fetch(
-    `${process.env.MAIN_API_ENDPOINT}/admin/bundles/${slug}`,
+    `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/${slug}`,
     {
       method: 'GET',
       mode: 'cors',

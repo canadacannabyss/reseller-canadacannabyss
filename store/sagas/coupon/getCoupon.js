@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 async function getCoupon(slug) {
   const res = await fetch(
-    `${process.env.MAIN_API_ENDPOINT}/admin/coupons/get/coupon/${slug}`,
+    `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/get/coupon/${slug}`,
     {
       method: 'GET',
       mode: 'cors',

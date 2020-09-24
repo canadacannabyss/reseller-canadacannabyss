@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 async function getBanners() {
   const res = await fetch(
-    `${process.env.MAIN_API_ENDPOINT}/admin/panel/get/all/banners`,
+    `${process.env.MAIN_API_ENDPOINT}/reseller/panel/get/all/banners`,
     {
       method: 'GET',
       mode: 'cors',

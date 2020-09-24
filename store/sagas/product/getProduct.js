@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 async function getProduct(slug) {
   const res = await fetch(
-    `${process.env.MAIN_API_ENDPOINT}/admin/products/${slug}`,
+    `${process.env.MAIN_API_ENDPOINT}/reseller/products/${slug}`,
     {
       method: 'GET',
       mode: 'cors',
