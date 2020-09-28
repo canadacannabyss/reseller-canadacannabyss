@@ -121,7 +121,7 @@ const AddBanner = (props) => {
       title: bannerName
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/banners/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -138,7 +138,7 @@ const AddBanner = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/banners/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -155,7 +155,7 @@ const AddBanner = (props) => {
 
   const publishProduct = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/banners/publish`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/publish`,
       {
         method: 'POST',
         mode: 'cors',
@@ -173,7 +173,7 @@ const AddBanner = (props) => {
 
   const fetchAllPromotions = async () => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/get/all`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/get/all`,
       {
         method: 'GET',
         mode: 'cors',
@@ -215,7 +215,7 @@ const AddBanner = (props) => {
     if (allFieldsFilled) {
       const productInfo = {
         isSlugValid,
-        userId: user.data._id,
+        resellerId: user.data._id,
         bannerName,
         description,
         featured,

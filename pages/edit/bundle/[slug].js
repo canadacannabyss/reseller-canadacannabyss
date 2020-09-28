@@ -192,15 +192,18 @@ const EditBundle = (props) => {
   ]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/products`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const data = await res.json();
     setProductList(data);
   };
@@ -221,7 +224,7 @@ const EditBundle = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -336,7 +339,7 @@ const EditBundle = (props) => {
 
   const editBundle = async (bundle) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/update/${id}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/update/${id}`,
       {
         method: 'PUT',
         mode: 'cors',

@@ -195,7 +195,7 @@ const AddBundle = (props) => {
   ]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/products`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/products`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -218,7 +218,7 @@ const AddBundle = (props) => {
       title: bundleName
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -235,7 +235,7 @@ const AddBundle = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -252,7 +252,7 @@ const AddBundle = (props) => {
 
   const publishProduct = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/bundles/publish`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/publish`,
       {
         method: 'POST',
         mode: 'cors',

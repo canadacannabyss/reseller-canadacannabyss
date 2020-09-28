@@ -241,6 +241,7 @@ const Register = (props) => {
                       id='firstName'
                       value={firstName}
                       onChange={handleFirstName}
+                      autoComplete='current-password'
                     />
                   </div>
                   <div>
@@ -250,6 +251,7 @@ const Register = (props) => {
                       id='lastName'
                       value={lastName}
                       onChange={handleLastName}
+                      autoComplete='current-password'
                     />
                   </div>
                 </HalfGrid>
@@ -259,7 +261,7 @@ const Register = (props) => {
                   name='user'
                   id='username'
                   value={username}
-                  autoComplete='off'
+                  autoComplete='current-password'
                   onChange={handleUsername}
                 />
                 <Label htmlFor='email'>Email</Label>
@@ -270,6 +272,7 @@ const Register = (props) => {
                   onChange={handleEmail}
                   disabled
                   className='disabled'
+                  autoComplete='current-password'
                 />
                 <Label htmlFor='password'>Password</Label>
                 <Input
@@ -277,6 +280,7 @@ const Register = (props) => {
                   id='password'
                   value={password}
                   onChange={handlePassword}
+                  autoComplete='current-password'
                 />
                 <Label htmlFor='password2'>Confirm Password</Label>
                 <Input
@@ -284,6 +288,7 @@ const Register = (props) => {
                   id='password2'
                   value={password2}
                   onChange={handlePassword2}
+                  autoComplete='current-password'
                 />
                 <Submit type='submit'>Register</Submit>
               </Form>

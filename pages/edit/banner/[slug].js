@@ -115,7 +115,7 @@ const EditBanner = (props) => {
 
   const fetchAllPromotions = async () => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/get/all`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/get/all`,
       {
         method: 'GET',
         mode: 'cors',
@@ -161,7 +161,7 @@ const EditBanner = (props) => {
       title: bannerName,
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -178,7 +178,7 @@ const EditBanner = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -231,7 +231,7 @@ const EditBanner = (props) => {
 
   const editBanner = async (banner) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/banners/update/${id}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/update/${id}`,
       {
         method: 'PUT',
         mode: 'cors',

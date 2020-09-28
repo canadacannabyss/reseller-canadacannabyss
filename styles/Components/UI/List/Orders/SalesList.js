@@ -9,6 +9,9 @@ const List = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
 `;
 
 const ListLiContent = styled.div`

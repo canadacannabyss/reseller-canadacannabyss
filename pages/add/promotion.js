@@ -137,7 +137,7 @@ const AddPromotion = (props) => {
       title: promotionName
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -154,7 +154,7 @@ const AddPromotion = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -171,7 +171,7 @@ const AddPromotion = (props) => {
 
   const publishProduct = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/publish`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/publish`,
       {
         method: 'POST',
         mode: 'cors',
@@ -188,7 +188,7 @@ const AddPromotion = (props) => {
   };
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/products`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/products`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -202,7 +202,7 @@ const AddPromotion = (props) => {
   };
 
   const fetchAllBundles = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/bundles`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/bundles`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',

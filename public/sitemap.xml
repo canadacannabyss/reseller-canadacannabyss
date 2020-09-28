@@ -13,6 +13,26 @@
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/account/billing</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/invite</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/reviews</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/shipping</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/add/banner</loc>
   </url>
 
@@ -41,26 +61,6 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/account/billing</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/index</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/invite</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/reviews</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/shipping</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/bundles/index</loc>
   </url>
 
@@ -73,11 +73,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/coupons/index</loc>
+    <loc>https://canadacannabyss.com/dashboard/index</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/dashboard/index</loc>
+    <loc>https://canadacannabyss.com/coupons/index</loc>
   </url>
 
   <url>
@@ -97,15 +97,15 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/promotions/index</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/register/index</loc>
   </url>
 
   <url>
     <loc>https://canadacannabyss.com/register/[token]</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/promotions/index</loc>
   </url>
 
   <url>
@@ -133,11 +133,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/product/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/product/[slug]</loc>
   </url>
 
   <url>

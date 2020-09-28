@@ -145,8 +145,19 @@ const Login = (props) => {
               <h1>Login</h1>
             </BrandDiv>
             <Label htmlFor='email'>Email</Label>
-            <Input type='email' id='email' value={email} onChange={onChangeEmail} />
-            <Label htmlFor='password'>Password</Label>
+            <Input
+              type='email'
+              id='email'
+              value={email}
+              onChange={onChangeEmail}
+              autoComplete='current-password'
+            />
+            <Label
+              htmlFor='password'
+              autoComplete='current-password'
+            >
+              Password
+            </Label>
             <Input
               type='password'
               id='password'

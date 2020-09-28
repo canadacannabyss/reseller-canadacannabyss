@@ -103,7 +103,7 @@ const EditProduct = (props) => {
       title: productName,
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/products/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -120,7 +120,7 @@ const EditProduct = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/products/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -137,7 +137,7 @@ const EditProduct = (props) => {
 
   const deleteProductImage = async (imageId) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/products/delete/cover/${imageId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products/delete/cover/${imageId}`,
       {
         method: 'DELETE',
         mode: 'cors',
@@ -183,7 +183,7 @@ const EditProduct = (props) => {
 
   const editProduct = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/products/update/${id}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products/update/${id}`,
       {
         method: 'PUT',
         mode: 'cors',

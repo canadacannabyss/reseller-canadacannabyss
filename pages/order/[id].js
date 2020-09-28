@@ -32,6 +32,7 @@ import {
 } from '../../styles/Pages/Add/Product';
 import { getOrder } from '../../store/actions/order/order';
 import OrderedItemsList from '../../components/UI/List/Order/OrderedItemsList';
+import PaymentReceiptViewer from '../../components/UI/Viewer/PaymentReceipt/PaymentReceipt';
 import DateFormatter from '../../utils/dateFormatter';
 import WithAuth from '../../components/UI/withAuth/withAuth';
 
@@ -153,7 +154,6 @@ const Order = (props) => {
                     </div>
                   </HalfGrid>
                   <br />
-                  <br />
                   <GroupSpan>Shipping information</GroupSpan>
                   <HalfGrid>
                     <div>
@@ -208,7 +208,6 @@ const Order = (props) => {
                     </div>
                   </HalfGrid>
                   <br />
-                  <br />
                   <GroupSpan>Billing information</GroupSpan>
                   <Label>Billing Address</Label>
                   <P id='shippingAddress'>
@@ -221,7 +220,6 @@ const Order = (props) => {
                         </>
                       )}
                   </P>
-                  <br />
                   <br />
                   <GroupSpan>Payment information</GroupSpan>
                   <HalfGrid>
@@ -302,11 +300,16 @@ const Order = (props) => {
               order.fetched &&
               !order.loading &&
               !order.error && (
-                <OrderedItemsList
-                  title='Purchased Items'
-                  products={order.data.cart.items}
-                  handleGetElement={handleGetElement}
-                />
+                <>
+                  <OrderedItemsList
+                    title='Purchased Items'
+                    products={order.data.cart.items}
+                    handleGetElement={handleGetElement}
+                  />
+                  <PaymentReceiptViewer
+                    paymentReceipt={order.data.paymentReceipt}
+                  />
+                </>
               )}
           </MainGrid>
         </Wrapper>

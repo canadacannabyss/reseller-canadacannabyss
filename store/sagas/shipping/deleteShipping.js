@@ -11,9 +11,9 @@ async function deleteShipping(shippingId) {
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: bearerToken,
+        Authorization: bearerToken
       },
-      body: JSON.stringify({ shippingId }),
+      body: JSON.stringify({ shippingId })
     }
   );
   const data = await res.json();

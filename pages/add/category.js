@@ -120,7 +120,7 @@ const AddCategory = (props) => {
       title: categoryName
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -137,7 +137,7 @@ const AddCategory = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -154,7 +154,7 @@ const AddCategory = (props) => {
 
   const publishCategory = async (product) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/publish`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/publish`,
       {
         method: 'POST',
         mode: 'cors',

@@ -15,11 +15,11 @@ import {
   HalfGrid,
   VerificationMsg,
   Warning,
-  ErrorMsg
+  ErrorMsg,
 } from '../../styles/Pages/Register/Register';
 import {
   Loading,
-  LoadingSpinner
+  LoadingSpinner,
 } from '../../styles/Pages/Confirmation/Confirmation';
 import { BackgroundLogin } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
 import Logo from '../../assets/img/canada-cannabyss-logo.svg';
@@ -56,8 +56,8 @@ const Register = ({ referral }) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       }
     );
     const dataReferralReseller = await res.json();
@@ -101,8 +101,8 @@ const Register = ({ referral }) => {
           cache: 'no-cache',
           credentials: 'same-origin',
           headers: {
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         }
       );
       const dataVerify = await response.json();
@@ -129,9 +129,9 @@ const Register = ({ referral }) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userInfoObj)
+        body: JSON.stringify(userInfoObj),
       }
     );
     const data = await response.json();
@@ -150,8 +150,8 @@ const Register = ({ referral }) => {
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       }
     );
     const data = await response.json();
@@ -177,7 +177,7 @@ const Register = ({ referral }) => {
             email,
             password,
             password2,
-            referralId: referral
+            referralId: referral,
           };
           fetchRegisterUser(registerInfo);
         }
@@ -231,8 +231,7 @@ const Register = ({ referral }) => {
             <>
               <VerificationMsg>
                 <p>
-                  You were invited to join our resellers team by
-                  {' '}
+                  You were invited to join our resellers team by{' '}
                   <span>
                     {loadingVerification &&
                       !fetchedVerification &&
@@ -243,11 +242,11 @@ const Register = ({ referral }) => {
                       !errorVerification &&
                       !_.isEmpty(referralReseller) && (
                         <>
-                          {referralReseller.ok &&
-                            'Error' }
-                          {referralReseller.names && `${referralReseller.names.firstName} ${referralReseller.names.lastName}`}
+                          {referralReseller.ok && 'Error'}
+                          {referralReseller.names &&
+                            `${referralReseller.names.firstName} ${referralReseller.names.lastName}`}
                         </>
-                    )}
+                      )}
                   </span>
                 </p>
               </VerificationMsg>
@@ -271,6 +270,7 @@ const Register = ({ referral }) => {
                           id='firstName'
                           value={firstName}
                           onChange={handleFirstName}
+                          autoComplete='current-password'
                         />
                       </div>
                       <div>
@@ -280,6 +280,7 @@ const Register = ({ referral }) => {
                           id='lastName'
                           value={lastName}
                           onChange={handleLastName}
+                          autoComplete='current-password'
                         />
                       </div>
                     </HalfGrid>
@@ -289,8 +290,8 @@ const Register = ({ referral }) => {
                       name='user'
                       id='username'
                       value={username}
-                      autoComplete='off'
                       onChange={handleUsername}
+                      autoComplete='current-password'
                     />
                     <Label htmlFor='email'>Email</Label>
                     <Input
@@ -298,6 +299,7 @@ const Register = ({ referral }) => {
                       id='email'
                       value={email}
                       onChange={handleEmail}
+                      autoComplete='current-password'
                     />
                     <Label htmlFor='password'>Password</Label>
                     <Input
@@ -305,6 +307,7 @@ const Register = ({ referral }) => {
                       id='password'
                       value={password}
                       onChange={handlePassword}
+                      autoComplete='current-password'
                     />
                     <Label htmlFor='password2'>Confirm Password</Label>
                     <Input
@@ -312,6 +315,7 @@ const Register = ({ referral }) => {
                       id='password2'
                       value={password2}
                       onChange={handlePassword2}
+                      autoComplete='current-password'
                     />
                     <Submit type='submit'>Register</Submit>
                   </>
@@ -334,7 +338,7 @@ Register.getInitialProps = async (props) => {
 };
 
 Register.propTypes = {
-  referral: PropTypes.string.isRequired
+  referral: PropTypes.string.isRequired,
 };
 
 export default Register;

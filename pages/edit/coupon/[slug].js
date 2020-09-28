@@ -109,7 +109,7 @@ const EditCoupon = (props) => {
   }, [coupon]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products/`, {
+    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -128,7 +128,7 @@ const EditCoupon = (props) => {
 
   const fetchValidateCouponName = async () => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/coupons/validate/couponName/${couponCode}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/validate/couponName/${couponCode}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -151,7 +151,7 @@ const EditCoupon = (props) => {
       setBundleList([]);
       const fetchAllProductsBundlesCategoriesOnChange = async () => {
         const resProducts = await fetch(
-          `${process.env.MAIN_API_ENDPOINT}/products/`,
+          `${process.env.MAIN_API_ENDPOINT}/products`,
           {
             method: 'GET',
             mode: 'cors',
@@ -164,7 +164,7 @@ const EditCoupon = (props) => {
         );
 
         const resBundles = await fetch(
-          `${process.env.MAIN_API_ENDPOINT}/bundles/`,
+          `${process.env.MAIN_API_ENDPOINT}/bundles`,
           {
             method: 'GET',
             mode: 'cors',
@@ -189,7 +189,7 @@ const EditCoupon = (props) => {
       setProductList([]);
       setBundleList([]);
       const fetchAllProductsOnChange = async () => {
-        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products/`, {
+        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',
@@ -209,7 +209,7 @@ const EditCoupon = (props) => {
       setProductList([]);
       setBundleList([]);
       const fetchAllBundlesOnChange = async () => {
-        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/bundles/`, {
+        const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/bundles`, {
           method: 'GET',
           mode: 'cors',
           cache: 'no-cache',
@@ -393,7 +393,7 @@ const EditCoupon = (props) => {
 
   const fetchEditCoupon = async (couponObj) => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/coupons/edit`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/edit`,
       {
         method: 'PUT',
         mode: 'cors',

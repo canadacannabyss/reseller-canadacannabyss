@@ -132,30 +132,36 @@ const EditPromotion = (props) => {
   }, [promotion]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/products`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const data = await res.json();
     console.log('data:', data);
     setProductList(data);
   };
 
   const fetchAllBundles = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/admin/bundles`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const data = await res.json();
     setBundleList(data);
   };
@@ -166,7 +172,7 @@ const EditPromotion = (props) => {
       title: promotionName,
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -284,7 +290,7 @@ const EditPromotion = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -301,7 +307,7 @@ const EditPromotion = (props) => {
 
   const editPromotion = async (promotion) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/update/${id}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/update/${id}`,
       {
         method: 'PUT',
         mode: 'cors',
@@ -319,7 +325,7 @@ const EditPromotion = (props) => {
 
   const deletePromotionImage = async (imageId) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/promotions/delete/cover/${imageId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/delete/cover/${imageId}`,
       {
         method: 'DELETE',
         mode: 'cors',

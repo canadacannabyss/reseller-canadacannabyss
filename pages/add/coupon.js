@@ -117,7 +117,7 @@ const AddCoupon = (props) => {
 
   const fetchValidateCouponName = async () => {
     const res = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/coupons/validate/couponName/${couponCode}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/validate/couponName/${couponCode}`,
       {
         method: 'GET',
         mode: 'cors',

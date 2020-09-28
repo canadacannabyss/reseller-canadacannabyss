@@ -205,7 +205,7 @@ const EditCategory = (props) => {
       title: categoryName,
     };
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/set/global-variable`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/set/global-variable`,
       {
         method: 'POST',
         mode: 'cors',
@@ -222,7 +222,7 @@ const EditCategory = (props) => {
 
   const verifySlug = async () => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/validation/slug/${slug}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/validation/slug/${slug}`,
       {
         method: 'GET',
         mode: 'cors',
@@ -239,7 +239,7 @@ const EditCategory = (props) => {
 
   const editCategory = async (category) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/update/${categoryId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/update/${categoryId}`,
       {
         method: 'PUT',
         mode: 'cors',
@@ -257,7 +257,7 @@ const EditCategory = (props) => {
 
   const deleteCategoryMedia = async (imageId) => {
     const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/admin/category/delete/media/${imageId}`,
+      `${process.env.MAIN_API_ENDPOINT}/reseller/category/delete/media/${imageId}`,
       {
         method: 'DELETE',
         mode: 'cors',
