@@ -180,7 +180,7 @@ const Order = (props) => {
                           !order.error && (
                             <>
                               {order.data.shipping.status.shipped
-                                ? 'Shipping'
+                                ? 'Shipped'
                                 : 'Processing order'}
                             </>
                           )}
