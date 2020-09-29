@@ -128,7 +128,6 @@ const Order = (props) => {
                       <h1>Order</h1>
                     </TitleDiv>
                   </TitleSearchBarAddButtonDiv>
-
                   <HalfGrid>
                     <div>
                       <Label for='orderId'>Order ID</Label>
@@ -137,6 +136,21 @@ const Order = (props) => {
                         !order.loading &&
                         !order.error && <P>{order.data._id}</P>}
                     </div>
+                    <div>
+                      <Label>Order Status</Label>
+                      <P>
+                        {!_.isEmpty(order.data) &&
+                          order.fetched &&
+                          !order.loading &&
+                          !order.error && (
+                            <>
+                              {order.data.canceled ? 'Canceled' : 'Fulfilled'}
+                            </>
+                          )}
+                      </P>
+                    </div>
+                  </HalfGrid>
+                  <HalfGrid>
                     <div>
                       <Label>Purchased At</Label>
                       <P>
@@ -152,6 +166,7 @@ const Order = (props) => {
                           )}
                       </P>
                     </div>
+                    <div />
                   </HalfGrid>
                   <br />
                   <GroupSpan>Shipping information</GroupSpan>
@@ -183,7 +198,6 @@ const Order = (props) => {
                         )}
                     </div>
                   </HalfGrid>
-                  <br />
                   <HalfGrid>
                     <div>
                       <Label>Shipped at</Label>
@@ -274,7 +288,6 @@ const Order = (props) => {
                         )}
                     </div>
                   </HalfGrid>
-                  <br />
                   <HalfGrid>
                     <div>
                       <Label>Payment Status</Label>
