@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
 };
 
 const EditPromotion = (props) => {
-  const { promotion } = props;
+  const { promotion, user } = props;
 
   const childRef = useRef();
 
@@ -372,6 +372,7 @@ const EditPromotion = (props) => {
         });
         promotionInfo = {
           isSlugValid,
+          userId: user.data._id,
           media: imagesArrayObj,
           promotionName,
           description,
@@ -390,6 +391,7 @@ const EditPromotion = (props) => {
       } else {
         promotionInfo = {
           isSlugValid,
+          userId: user.data._id,
           promotionName,
           description,
           products: productsOnPromotion,

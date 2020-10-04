@@ -37,15 +37,16 @@ import { getCoupon } from '../../../store/actions/coupon/coupon';
 import WithAuth from '../../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
-  const { coupon } = state;
+  const { coupon, user } = state;
 
   return {
     coupon,
+    user,
   };
 };
 
 const EditCoupon = (props) => {
-  const { coupon } = props;
+  const { coupon, user } = props;
 
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -416,6 +417,7 @@ const EditCoupon = (props) => {
       console.log('fetchedValidCouponNameRes:', fetchedValidCouponNameRes);
       if (fetchedValidCouponNameRes) {
         const couponObj = {
+          resellerId: user.data._id,
           id: couponId,
           couponName: couponCode,
           description,

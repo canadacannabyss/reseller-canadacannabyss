@@ -363,6 +363,7 @@ const EditBundle = (props) => {
       console.log('productOnBundle:', productOnBundle);
       const bundleInfo = {
         products: productOnBundle,
+        userId: user.data._id,
         isSlugValid,
         variants,
         bundleName,

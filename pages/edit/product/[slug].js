@@ -40,15 +40,16 @@ import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/
 import WithAuth from '../../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
-  const { product } = state;
+  const { product, user } = state;
 
   return {
     product,
+    user,
   };
 };
 
 const EditProduct = (props) => {
-  const { product } = props;
+  const { product, user } = props;
 
   const childRef = useRef();
 
@@ -211,6 +212,7 @@ const EditProduct = (props) => {
         productInfo = {
           isSlugValid,
           media: imagesArrayObj,
+          resellerId: user.data._id,
           variants: {
             variantsOptionNames,
             values: variants,
@@ -249,6 +251,7 @@ const EditProduct = (props) => {
       } else {
         productInfo = {
           isSlugValid,
+          resellerId: user.data._id,
           variants: {
             variantsOptionNames,
             values: variants,

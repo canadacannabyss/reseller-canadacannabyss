@@ -271,11 +271,16 @@ const Input = styled.input`
 `;
 
 const P = styled.p`
-  height: 40px;
-  width: 100%;
-  font-size: 16px;
-  display: block;
-  margin-top: 5px;
+  font-size: 18px;
+  color: #5a5a5a;
+  word-break: break-all;
+  img {
+    height: 20px;
+    width: 20px;
+    margin-top: -8px;
+    transform: translateY(4px);
+    margin-right: 5px;
+  }
 `;
 
 const GroupSpan = styled.span`

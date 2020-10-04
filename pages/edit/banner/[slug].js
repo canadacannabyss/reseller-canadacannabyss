@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 };
 
 const EditBanner = (props) => {
-  const { banner } = props;
+  const { banner, user } = props;
 
   const [warning, setWarning] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -318,6 +318,7 @@ const EditBanner = (props) => {
       setLoading(true);
       const bannerInfo = {
         isSlugValid,
+        resellerId: user.data._id,
         bannerName,
         description,
         featured,

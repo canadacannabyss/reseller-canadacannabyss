@@ -36,15 +36,16 @@ import { getCategory } from '../../../store/actions/category/category';
 import WithAuth from '../../../components/UI/withAuth/withAuth';
 
 const mapStateToProps = (state) => {
-  const { category } = state;
+  const { category, user } = state;
 
   return {
     category,
+    user,
   };
 };
 
 const EditCategory = (props) => {
-  const { category } = props;
+  const { category, user } = props;
 
   const childRef = useRef();
 
@@ -327,6 +328,7 @@ const EditCategory = (props) => {
         });
         categoryInfo = {
           id: category._id,
+          resellerId: user.data._id,
           isSlugValid,
           slug,
           media: imagesArrayObj,
@@ -342,6 +344,7 @@ const EditCategory = (props) => {
       } else {
         categoryInfo = {
           id: category._id,
+          resellerId: user.data._id,
           isSlugValid,
           slug,
           categoryName,

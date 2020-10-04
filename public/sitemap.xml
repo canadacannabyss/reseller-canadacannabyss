@@ -65,15 +65,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/categories/index</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/confirmation/[token]</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/coupons/index</loc>
+    <loc>https://canadacannabyss.com/categories/index</loc>
   </url>
 
   <url>
@@ -81,11 +77,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/order/[id]</loc>
+    <loc>https://canadacannabyss.com/coupons/index</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/products/index</loc>
+    <loc>https://canadacannabyss.com/order/[id]</loc>
   </url>
 
   <url>
@@ -94,6 +90,10 @@
 
   <url>
     <loc>https://canadacannabyss.com/orders/map</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/products/index</loc>
   </url>
 
   <url>
