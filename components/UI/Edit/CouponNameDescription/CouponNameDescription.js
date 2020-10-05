@@ -14,7 +14,9 @@ import {
   Select,
   WeightLabel,
   WeightInput,
-  WeightUnitSelect
+  WeightUnitSelect,
+  Required,
+  RequiredDescription
 } from '../../../../styles/Pages/Add/Product';
 import FeaturedCheckbox from '../../Buttons/Checkbox/Featured';
 import FreeShippingCheckbox from '../../Buttons/Checkbox/FreeShippingCheckbox';
@@ -58,7 +60,13 @@ const BannerNameDescription = (props) => {
               <h1>{title}</h1>
             </TitleDiv>
           </TitleSearchBarAddButtonDiv>
+          <RequiredDescription>
+            <span>*</span>
+            {' '}
+            - Required
+          </RequiredDescription>
           <Label htmlFor='itemName'>{itemName}</Label>
+          <Required>*</Required>
           <Input
             id='itemName'
             type='text'
@@ -72,6 +80,7 @@ const BannerNameDescription = (props) => {
               <WeightLabel htmlFor='discountAmount'>
                 Discount
               </WeightLabel>
+              <Required>*</Required>
               <br />
               <WeightInput
                 id='discountAmount'
@@ -91,6 +100,7 @@ const BannerNameDescription = (props) => {
               <WeightLabel htmlFor='quantity'>
                 Quantity
               </WeightLabel>
+              <Required>*</Required>
               <br />
               <WeightInput
                 id='quantity'
@@ -106,6 +116,7 @@ const BannerNameDescription = (props) => {
           <HalfGrid>
             <div>
               <WeightLabel>Available At</WeightLabel>
+              <Required>*</Required>
               <br />
               <Select onChange={onChangeAvailableAt} value={availableAtInput}>
                 <option value='canada'>Canadawide</option>
@@ -113,6 +124,7 @@ const BannerNameDescription = (props) => {
             </div>
             <div>
               <WeightLabel>Applied On</WeightLabel>
+              <Required>*</Required>
               <br />
               <Select onChange={onChangeApplyOn} value={applyCouponOnInput}>
                 <option value='items'>All Items</option>
@@ -137,6 +149,7 @@ const BannerNameDescription = (props) => {
             </div>
           </HalfGrid>
           <Label htmlFor='productDescription'>Description</Label>
+          <Required>*</Required>
           <div>
             {description && (
             <Editor

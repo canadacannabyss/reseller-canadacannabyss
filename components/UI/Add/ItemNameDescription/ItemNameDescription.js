@@ -9,7 +9,9 @@ import {
   Content,
   PlusIconSign,
   Label,
-  Input
+  Input,
+  Required,
+  RequiredDescription
 } from '../../../../styles/Pages/Add/Product';
 
 const ItemNameDescription = (props) => {
@@ -30,7 +32,13 @@ const ItemNameDescription = (props) => {
               <h1>{title}</h1>
             </TitleDiv>
           </TitleSearchBarAddButtonDiv>
+          <RequiredDescription>
+            <span>*</span>
+            {' '}
+            - Required
+          </RequiredDescription>
           <Label htmlFor='itemName'>{itemName}</Label>
+          <Required>*</Required>
           <Input
             id='itemName'
             type='text'
@@ -39,6 +47,7 @@ const ItemNameDescription = (props) => {
           />
           <br />
           <Label htmlFor='productDescription'>Description</Label>
+          <Required>*</Required>
           <div>
             <Editor
               apiKey='z1imaefgqfqi5gkj9tp9blogndyf2gp0aj3fgubdtz73p658'

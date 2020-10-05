@@ -9,7 +9,9 @@ import {
   Content,
   PlusIconSign,
   Label,
-  Input
+  Input,
+  Required,
+  RequiredDescription
 } from '../../../../styles/Pages/Add/Product';
 import FeaturedCheckbox from '../../Buttons/Checkbox/Featured';
 
@@ -40,7 +42,13 @@ const BannerNameDescription = (props) => {
               <h1>{title}</h1>
             </TitleDiv>
           </TitleSearchBarAddButtonDiv>
+          <RequiredDescription>
+            <span>*</span>
+            {' '}
+            - Required
+          </RequiredDescription>
           <Label htmlFor='itemName'>{itemName}</Label>
+          <Required>*</Required>
           <Input
             id='itemName'
             type='text'
@@ -54,6 +62,7 @@ const BannerNameDescription = (props) => {
             featured={featured}
           />
           <Label htmlFor='productDescription'>Description</Label>
+          <Required>*</Required>
           <div>
             <Editor
               apiKey='z1imaefgqfqi5gkj9tp9blogndyf2gp0aj3fgubdtz73p658'
