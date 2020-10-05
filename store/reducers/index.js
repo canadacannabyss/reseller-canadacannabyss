@@ -32,6 +32,8 @@ import shippingList from './shipping/shippingList';
 import banner from './banner/banner';
 import banners from './banners/banners';
 
+import postalServices from './postalServices/postalServices';
+
 export default combineReducers({
   banner,
   banners,
@@ -44,6 +46,7 @@ export default combineReducers({
   coupon,
   coupons,
   order,
+  postalServices,
   orders,
   product,
   products,

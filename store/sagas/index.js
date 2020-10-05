@@ -53,6 +53,8 @@ import GetPromotions from './promotions/getPromotions';
 import GetBanner from './banner/getBanner';
 import GetBanners from './banners/getBanners';
 
+import getPostalServices from './postalServices/getPostalServices';
+
 export default function* root() {
   yield all([
     takeLatest('REQUEST_CREATE_BILLING', CreateBilling),
@@ -106,6 +108,8 @@ export default function* root() {
     takeLatest('REQUEST_GET_PROMOTIONS', GetPromotions),
 
     takeLatest('REQUEST_GET_BANNER', GetBanner),
-    takeLatest('REQUEST_GET_BANNERS', GetBanners)
+    takeLatest('REQUEST_GET_BANNERS', GetBanners),
+
+    takeLatest('REQUEST_GET_POSTAL_SERVICES', getPostalServices)
   ]);
 }
