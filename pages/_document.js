@@ -9,9 +9,11 @@ export default class MyDocument extends Document {
     const originalRenderPage = ctx.renderPage;
 
     try {
-      ctx.renderPage = () => originalRenderPage({
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />)
-      });
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        });
 
       const initialProps = await Document.getInitialProps(ctx);
       return {
@@ -21,7 +23,7 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        )
+        ),
       };
     } finally {
       sheet.seal();
@@ -46,6 +48,25 @@ export default class MyDocument extends Document {
           <link
             href='https://fonts.googleapis.com/css?family=Montserrat&display=swap'
             rel='stylesheet'
+          />
+          <script
+            async
+            src='https://www.googletagmanager.com/gtag/js?id=UA-179966128-1'
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-179966128-1');
+              `,
+            }}
+          />
+          <meta
+            name='copyright'
+            content={`© ${new Date().getFullYear()} Canada Cannabyss`}
           />
         </Head>
         <body>

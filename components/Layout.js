@@ -12,18 +12,13 @@ import Sidebar from './UI/Sidebar/Sidebar';
 import { fetchLoginResellerUser } from '../store/actions/user/user';
 
 const mapStateToProps = (state) => {
-  const {
-    user,
-    cart,
-    order,
-    loginRequestCount
-  } = state;
+  const { user, cart, order, loginRequestCount } = state;
 
   return {
     user,
     cart,
     order,
-    loginRequestCount
+    loginRequestCount,
   };
 };
 
@@ -45,31 +40,9 @@ const Layout = (props) => {
       className='Layout'
       style={{
         height: '100%',
-        width: '100%'
+        width: '100%',
       }}
     >
-      <Head>
-        <meta
-          name='copyright'
-          content={`© ${new Date().getFullYear()} Canada Cannabyss`}
-        />
-        <script
-          async
-          src='https://www.googletagmanager.com/gtag/js?id=UA-145329492-1'
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            
-              gtag('config', 'UA-145329492-1');
-              `
-          }}
-        />
-      </Head>
-
       <Navbar />
       <PageContainer>
         <Sidebar />
@@ -81,7 +54,7 @@ const Layout = (props) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default connect(mapStateToProps)(Layout);
