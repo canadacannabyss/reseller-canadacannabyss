@@ -10,7 +10,7 @@ import {
   HalfGrid,
   P,
   SentMessage,
-  SendTrackingNumberButton,
+  SendTrackingNumberButton
 } from '../../../../styles/Pages/Add/Product';
 
 const TrackingNumber = (props) => {
@@ -38,14 +38,14 @@ const TrackingNumber = (props) => {
                   sendTrackingNumberToCustomer();
                 }}
               >
-                Send Tracking Number to Customer
+                Send tracking number to customer
               </SendTrackingNumberButton>
             </div>
             <div>
               {trackingNumberSent && (
                 <>
                   <br />
-                  <SentMessage>Tracking Number Sent to Customer</SentMessage>
+                  <SentMessage>Tracking number sent to customer</SentMessage>
                 </>
               )}
             </div>
@@ -57,7 +57,7 @@ const TrackingNumber = (props) => {
 };
 
 TrackingNumber.propTypes = {
-  tracking: PropTypes.shape().isRequired,
+  tracking: PropTypes.shape().isRequired
 };
 
 export default TrackingNumber;
