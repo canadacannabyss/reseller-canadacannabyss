@@ -137,10 +137,10 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
+    <loc>https://canadacannabyss.com/register/main/[token]</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/register/main/[token]</loc>
+    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
   </url>
 </urlset>
