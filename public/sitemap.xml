@@ -133,11 +133,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/product/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/promotion/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/product/[slug]</loc>
   </url>
 
   <url>
