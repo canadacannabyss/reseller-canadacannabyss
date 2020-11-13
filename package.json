@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 2000",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start": "next start -p $PORT",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@tinymce/tinymce-react": "^3.6.0",
