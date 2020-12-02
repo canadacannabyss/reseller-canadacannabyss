@@ -1,19 +1,19 @@
-import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
-import { FaTags, FaPlus, FaSpinner } from 'react-icons/fa';
-import Router from 'next/router';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { withResellerAuth } from '../../utils/withResellerAuth';
+import Head from "next/head";
+import React, { useState, useRef, useEffect } from "react";
+import { FaTags, FaPlus, FaSpinner } from "react-icons/fa";
+import Router from "next/router";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { withResellerAuth } from "../../utils/withResellerAuth";
 
-import { slugifyString } from '../../utils/stringMethods';
+import { slugifyString } from "../../utils/stringMethods";
 
-import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import ItemNameDescription from '../../components/UI/Add/ItemNameDescription/ItemNameDescription';
-import Media from '../../components/UI/Add/Media/Media';
-import SEO from '../../components/UI/Add/SEO/SEO';
-import Organization from '../../components/UI/Add/Organization/Organization';
-import ProductsBundlesList from '../../components/UI/List/Add/Coupon/ProductsBundlesList';
+import { BackgroundAdd } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import ItemNameDescription from "../../components/UI/Add/ItemNameDescription/ItemNameDescription";
+import Media from "../../components/UI/Add/Media/Media";
+import SEO from "../../components/UI/Add/SEO/SEO";
+import Organization from "../../components/UI/Add/Organization/Organization";
+import ProductsBundlesList from "../../components/UI/List/Add/Coupon/ProductsBundlesList";
 import {
   Wrapper,
   StickyDiv,
@@ -21,15 +21,15 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning
-} from '../../styles/Pages/Add/Product';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Warning,
+} from "../../styles/Pages/Add/Product";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user
+    user,
   };
 };
 
@@ -43,26 +43,26 @@ const AddPromotion = (props) => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [promotionName, setPromotionName] = useState('');
-  const [description, setDescription] = useState('');
+  const [promotionName, setPromotionName] = useState("");
+  const [description, setDescription] = useState("");
 
   const [productsOnPromotion, setProductsOnPromotion] = useState([]);
   const [bundlesOnPromotion, setBundlesOnPromotion] = useState([]);
   const [productList, setProductList] = useState([]);
   const [bundleList, setBundleList] = useState([]);
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
   const [imagesArray, setImagesArray] = useState([]);
   const [imagesArrayLength, setImagesArrayLength] = useState(0);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   const handleSetImagesArray = (images) => {
@@ -128,41 +128,20 @@ const AddPromotion = (props) => {
     categoriesArray,
     tags,
     tagsArray,
-    imagesArray
+    imagesArray,
   ]);
-
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'promotions',
-      title: promotionName
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bodyRequest)
-      }
-    );
-    return response;
-  };
 
   const verifySlug = async () => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     const data = await response.json();
@@ -173,14 +152,14 @@ const AddPromotion = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/publish`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       }
     );
     const data = await response.json();
@@ -188,29 +167,35 @@ const AddPromotion = (props) => {
   };
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/products`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
+      {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await res.json();
     setProductList(data);
   };
 
   const fetchAllBundles = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/bundles`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles`,
+      {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await res.json();
     setBundleList(data);
   };
@@ -234,7 +219,6 @@ const AddPromotion = (props) => {
         await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [promotionName]);
 
@@ -256,19 +240,19 @@ const AddPromotion = (props) => {
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription
+          description: seoDescription,
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray
-        }
+          tags: tagsArray,
+        },
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await publishProduct(promotionInfo);
-        Router.push('/promotions');
+        Router.push("/promotions");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -287,7 +271,7 @@ const AddPromotion = (props) => {
   }, [imagesArray]);
 
   const categoriesToArray = () => {
-    const tempCategories = categories.split(',');
+    const tempCategories = categories.split(",");
     tempCategories.map((category, i) => {
       tempCategories[i] = tempCategories[i].trim();
     });
@@ -299,7 +283,7 @@ const AddPromotion = (props) => {
   }, [categories]);
 
   const tagsToArray = () => {
-    const tempTags = tags.split(',');
+    const tempTags = tags.split(",");
     tempTags.map((tag, i) => {
       tempTags[i] = tempTags[i].trim();
     });
@@ -336,33 +320,37 @@ const AddPromotion = (props) => {
 
   const handleGetElement = (el) => {
     const element = el;
-    if (element.classList[2] === 'product') {
+    if (element.classList[2] === "product") {
       if (!productsOnPromotion.includes(element.id)) {
-        setProductsOnPromotion((pOnPromotion) => pOnPromotion.concat(element.id));
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        setProductsOnPromotion((pOnPromotion) =>
+          pOnPromotion.concat(element.id)
+        );
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
         setProductsOnPromotion(
           removeElementFromArray(productsOnPromotion, element.id)
         );
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
-    } else if (element.classList[2] === 'bundle') {
+    } else if (element.classList[2] === "bundle") {
       if (!bundlesOnPromotion.includes(element.id)) {
-        setBundlesOnPromotion((bOnPromotion) => bOnPromotion.concat(element.id));
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        setBundlesOnPromotion((bOnPromotion) =>
+          bOnPromotion.concat(element.id)
+        );
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
         setBundlesOnPromotion(
           removeElementFromArray(bundlesOnPromotion, element.id)
         );
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
     }
   };
@@ -374,12 +362,12 @@ const AddPromotion = (props) => {
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <ItemNameDescription
-              MainIcon={<FaTags className='mainIcon' />}
-              PlusIcon={<FaPlus className='plus' />}
-              title='Add Promotion'
-              itemName='Promotion Name'
+              MainIcon={<FaTags className="mainIcon" />}
+              PlusIcon={<FaPlus className="plus" />}
+              title="Add Promotion"
+              itemName="Promotion Name"
               onChangeItemName={onChangeProductName}
               description={description}
               onChangeDescription={onChangeDescription}
@@ -390,13 +378,15 @@ const AddPromotion = (props) => {
               handleSetImagesArray={handleSetImagesArray}
               imagesArray={imagesArray}
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/promotions/publish/media`}
+              type="promotions"
+              destinationFolder={promotionName}
             />
             <ProductsBundlesList
-              title='Items on promotion'
+              title="Items on promotion"
               products={productList}
               bundles={bundleList}
               handleGetElement={handleGetElement}
-              applyCouponOn='items'
+              applyCouponOn="items"
             />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
@@ -417,7 +407,7 @@ const AddPromotion = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={handleSubmit}>
+        <SubmitButton type="button" onClick={handleSubmit}>
           Add Promotion
         </SubmitButton>
       </BackgroundAdd>

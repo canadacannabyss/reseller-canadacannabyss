@@ -1,16 +1,16 @@
-import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
-import { FaListUl, FaPlus, FaSpinner } from 'react-icons/fa';
-import { connect } from 'react-redux';
-import Router from 'next/router';
-import _ from 'lodash';
+import Head from "next/head";
+import React, { useState, useRef, useEffect } from "react";
+import { FaListUl, FaPlus, FaSpinner } from "react-icons/fa";
+import { connect } from "react-redux";
+import Router from "next/router";
+import _ from "lodash";
 
-import { slugifyString } from '../../utils/stringMethods';
+import { slugifyString } from "../../utils/stringMethods";
 
-import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import BannerNameDescription from '../../components/UI/Add/BannerNameDescription/BannerNameDescription';
-import Media from '../../components/UI/Add/Media/Media';
-import SEO from '../../components/UI/Add/SEO/SEO';
+import { BackgroundAdd } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import BannerNameDescription from "../../components/UI/Add/BannerNameDescription/BannerNameDescription";
+import Media from "../../components/UI/Add/Media/Media";
+import SEO from "../../components/UI/Add/SEO/SEO";
 
 import {
   Wrapper,
@@ -19,15 +19,15 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning
-} from '../../styles/Pages/Add/Product';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Warning,
+} from "../../styles/Pages/Add/Product";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user
+    user,
   };
 };
 
@@ -41,19 +41,19 @@ const AddCategory = (props) => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [categoryName, setCategoryName] = useState('');
-  const [description, setDescription] = useState('');
+  const [categoryName, setCategoryName] = useState("");
+  const [description, setDescription] = useState("");
 
   const [featured, setFeatured] = useState(false);
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
   const [imagesArray, setImagesArray] = useState([]);
   const [imagesArrayLength, setImagesArrayLength] = useState(0);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
   const handleSubmit = async () => {
     if (allFieldsFilled) {
@@ -89,7 +89,7 @@ const AddCategory = (props) => {
       slug.length > 0 &&
       categoryName.length > 0 &&
       description.length > 0 &&
-      typeof featured === 'boolean' &&
+      typeof featured === "boolean" &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
       seoDescription.length > 0 &&
@@ -111,41 +111,20 @@ const AddCategory = (props) => {
     description,
     seoTitle,
     seoSlug,
-    seoDescription
+    seoDescription,
   ]);
-
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'banners',
-      title: categoryName
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/category/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bodyRequest)
-      }
-    );
-    return response;
-  };
 
   const verifySlug = async () => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/category/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     const data = await response.json();
@@ -156,14 +135,14 @@ const AddCategory = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/category/publish`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       }
     );
     const data = await response.json();
@@ -184,7 +163,6 @@ const AddCategory = (props) => {
         await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [categoryName]);
 
@@ -205,15 +183,15 @@ const AddCategory = (props) => {
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription
-        }
+          description: seoDescription,
+        },
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await publishCategory(productInfo);
-        Router.push('/categories');
+        Router.push("/categories");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -250,12 +228,12 @@ const AddCategory = (props) => {
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <BannerNameDescription
-              MainIcon={<FaListUl className='mainIcon' />}
-              PlusIcon={<FaPlus className='plus' />}
-              title='Add Category'
-              itemName='Category Name'
+              MainIcon={<FaListUl className="mainIcon" />}
+              PlusIcon={<FaPlus className="plus" />}
+              title="Add Category"
+              itemName="Category Name"
               onChangeItemName={onChangeCategoryName}
               description={description}
               onChangeDescription={onChangeDescription}
@@ -268,6 +246,8 @@ const AddCategory = (props) => {
               handleSetImagesArray={handleSetImagesArray}
               imagesArray={imagesArray}
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/category/publish/media`}
+              type="categories"
+              destinationFolder={categoryName}
             />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
@@ -281,7 +261,7 @@ const AddCategory = (props) => {
           <StickyDiv />
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={handleSubmit}>
+        <SubmitButton type="button" onClick={handleSubmit}>
           Add Category
         </SubmitButton>
       </BackgroundAdd>

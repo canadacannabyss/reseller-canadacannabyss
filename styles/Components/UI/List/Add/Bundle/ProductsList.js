@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const List = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ const List = styled.div`
 `;
 
 const ListLiContent = styled.div`
-  ${(props) => console.log('variants length:', props.variants)}
+  ${(props) => console.log("variants length:", props.variants)}
   background: #efefef;
   border-radius: 4px;
   padding: 7px 10px;
@@ -45,7 +45,7 @@ const ListLiContent = styled.div`
   }
   .productName {
     display: flex;
-    align-content: center;  
+    align-content: center;
     /* @media (max-width: 1190px) {
       width: 300px;
     }
@@ -62,7 +62,7 @@ const ListLiContent = styled.div`
     display: flex;
     flex-direction: row;
     justify-self: center;
-  } 
+  }
   .buttons {
     display: flex;
     flex-direction: row;
@@ -79,8 +79,8 @@ const ListLiContent = styled.div`
     .compareTo {
       width: 100px;
     }
-    .createdOn,
-    .updatedOn {
+    .createdAt,
+    .updatedAt {
       width: 220px;
     }
     .featured {
@@ -159,7 +159,7 @@ const SpansDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-self: center;
-  } 
+  }
   .buttons {
     display: flex;
     flex-direction: row;
@@ -176,8 +176,8 @@ const SpansDiv = styled.div`
     .compareTo {
       width: 100px;
     }
-    .createdOn,
-    .updatedOn {
+    .createdAt,
+    .updatedAt {
       width: 220px;
     }
     .featured {
@@ -209,5 +209,5 @@ export {
   VariantsDivFlex,
   ProductSelectDiv,
   DeleteButton,
-  SpansDiv
+  SpansDiv,
 };

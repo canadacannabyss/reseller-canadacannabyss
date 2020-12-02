@@ -1,28 +1,28 @@
-import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
-import { FaTags, FaPen, FaSpinner } from 'react-icons/fa';
-import Router from 'next/router';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { withResellerAuth } from '../../../utils/withResellerAuth';
+import Head from "next/head";
+import React, { useState, useRef, useEffect } from "react";
+import { FaTags, FaPen, FaSpinner } from "react-icons/fa";
+import Router from "next/router";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { withResellerAuth } from "../../../utils/withResellerAuth";
 import {
   categoriesArrayToString,
   tagsArrayToString,
-} from '../../../utils/arrayMethods';
+} from "../../../utils/arrayMethods";
 import {
   slugifyString,
   categoriesToArray,
   tagsToArray,
   editCategoriesToArray,
   editTagsToArray,
-} from '../../../utils/stringMethods';
-import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import ItemNameDescription from '../../../components/UI/Edit/ItemNameDescription/ItemNameDescription';
-import Media from '../../../components/UI/Edit/Media/Media';
-import SEO from '../../../components/UI/Edit/SEO/SEO';
-import Organization from '../../../components/UI/Edit/Organization/Organization';
-import ProductsBundlesList from '../../../components/UI/List/Add/Coupon/ProductsBundlesList';
+} from "../../../utils/stringMethods";
+import { BackgroundAdd } from "../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import ItemNameDescription from "../../../components/UI/Edit/ItemNameDescription/ItemNameDescription";
+import Media from "../../../components/UI/Edit/Media/Media";
+import SEO from "../../../components/UI/Edit/SEO/SEO";
+import Organization from "../../../components/UI/Edit/Organization/Organization";
+import ProductsBundlesList from "../../../components/UI/List/Add/Coupon/ProductsBundlesList";
 import {
   Wrapper,
   StickyDiv,
@@ -31,9 +31,9 @@ import {
   LoadingSpinner,
   Loading,
   Warning,
-} from '../../../styles/Pages/Add/Product';
-import { getPromotion } from '../../../store/actions/promotion/promotion';
-import WithAuth from '../../../components/UI/withAuth/withAuth';
+} from "../../../styles/Pages/Add/Product";
+import { getPromotion } from "../../../store/actions/promotion/promotion";
+import WithAuth from "../../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { user, promotion } = state;
@@ -54,30 +54,30 @@ const EditPromotion = (props) => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState("");
 
-  const [promotionName, setPromotionName] = useState('');
-  const [description, setDescription] = useState('');
+  const [promotionName, setPromotionName] = useState("");
+  const [description, setDescription] = useState("");
 
   const [productsOnPromotion, setProductsOnPromotion] = useState([]);
   const [bundlesOnPromotion, setBundlesOnPromotion] = useState([]);
   const [productList, setProductList] = useState([]);
   const [bundleList, setBundleList] = useState([]);
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
   const [imagesArray, setImagesArray] = useState([]);
   const [imagesArrayLength, setImagesArrayLength] = useState(0);
   const [toDeleteImagesArray, setToDeleteImagesArray] = useState([]);
   const [isNewImagesUploaded, setIsNewImagesUploaded] = useState(false);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   const handleSetImagesArray = (images) => {
@@ -135,17 +135,17 @@ const EditPromotion = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
     const data = await res.json();
-    console.log('data:', data);
+    console.log("data:", data);
     setProductList(data);
   };
 
@@ -153,38 +153,17 @@ const EditPromotion = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/bundles`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
     const data = await res.json();
     setBundleList(data);
-  };
-
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'promotions',
-      title: promotionName,
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bodyRequest),
-      }
-    );
-    return response;
   };
 
   const changeSlugFromPromotionName = () => {
@@ -206,7 +185,6 @@ const EditPromotion = (props) => {
         const isSlugValidRes = await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [promotionName]);
 
@@ -241,37 +219,37 @@ const EditPromotion = (props) => {
 
   const handleGetElement = (el) => {
     const element = el;
-    if (element.classList[2] === 'product') {
+    if (element.classList[2] === "product") {
       if (!productsOnPromotion.includes(element.id)) {
         setProductsOnPromotion((pOnPromotion) =>
           pOnPromotion.concat(element.id)
         );
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
         setProductsOnPromotion(
           removeElementFromArray(productsOnPromotion, element.id)
         );
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
-    } else if (element.classList[2] === 'bundle') {
+    } else if (element.classList[2] === "bundle") {
       if (!bundlesOnPromotion.includes(element.id)) {
         setBundlesOnPromotion((bOnPromotion) =>
           bOnPromotion.concat(element.id)
         );
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
         setBundlesOnPromotion(
           removeElementFromArray(bundlesOnPromotion, element.id)
         );
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
     }
   };
@@ -292,12 +270,12 @@ const EditPromotion = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -309,12 +287,12 @@ const EditPromotion = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/update/${id}`,
       {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(promotion),
       }
@@ -327,12 +305,12 @@ const EditPromotion = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/delete/cover/${imageId}`,
       {
-        method: 'DELETE',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "DELETE",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -416,9 +394,9 @@ const EditPromotion = (props) => {
             await deletePromotionImage(image.data._id);
           });
         }
-        await Router.push('/promotions');
+        await Router.push("/promotions");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -485,12 +463,12 @@ const EditPromotion = (props) => {
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <ItemNameDescription
-              MainIcon={<FaTags className='mainIcon' />}
-              PlusIcon={<FaPen className='plus' />}
-              title='Edit Promotion'
-              itemName='Promotion Name'
+              MainIcon={<FaTags className="mainIcon" />}
+              PlusIcon={<FaPen className="plus" />}
+              title="Edit Promotion"
+              itemName="Promotion Name"
               itemNameInput={promotionName}
               onChangeItemName={onChangePromotionName}
               description={description}
@@ -502,13 +480,15 @@ const EditPromotion = (props) => {
               handleSetImagesArray={handleSetImagesArray}
               imagesArray={imagesArray}
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/promotions/publish/media`}
+              type="promotions"
+              destinationFolder={promotionName}
             />
             <ProductsBundlesList
-              title='Items on promotion'
+              title="Items on promotion"
               products={productList}
               bundles={bundleList}
               handleGetElement={handleGetElement}
-              applyCouponOn='items'
+              applyCouponOn="items"
             />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}
@@ -529,7 +509,7 @@ const EditPromotion = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={handleSubmit}>
+        <SubmitButton type="button" onClick={handleSubmit}>
           Edit Promotion
         </SubmitButton>
       </BackgroundAdd>

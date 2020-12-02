@@ -1,22 +1,22 @@
-import _ from 'lodash';
-import Head from 'next/head';
-import Router from 'next/router';
-import React, { useEffect, useState, useRef } from 'react';
-import { FaBox, FaPen, FaSpinner } from 'react-icons/fa';
-import { connect } from 'react-redux';
-import slugify from 'slugify';
-import PropTypes from 'prop-types';
+import _ from "lodash";
+import Head from "next/head";
+import Router from "next/router";
+import React, { useEffect, useState, useRef } from "react";
+import { FaBox, FaPen, FaSpinner } from "react-icons/fa";
+import { connect } from "react-redux";
+import slugify from "slugify";
+import PropTypes from "prop-types";
 import {
   categoriesArrayToString,
   tagsArrayToString,
-} from '../../../utils/arrayMethods';
+} from "../../../utils/arrayMethods";
 import {
   slugifyString,
   categoriesToArray,
   tagsToArray,
   editCategoriesToArray,
   editTagsToArray,
-} from '../../../utils/stringMethods';
+} from "../../../utils/stringMethods";
 import {
   Wrapper,
   StickyDiv,
@@ -25,19 +25,19 @@ import {
   LoadingSpinner,
   Loading,
   Warning,
-} from '../../../styles/Pages/Add/Product';
-import { getProduct } from '../../../store/actions/product/product';
-import Media from '../../../components/UI/Edit/Media/Media';
-import ItemNameDescription from '../../../components/UI/Edit/ItemNameDescription/ItemNameDescription';
-import Pricing from '../../../components/UI/Edit/Pricing/Pricing';
-import ExtraInfo from '../../../components/UI/Edit/ExtraInfo/ExtraInfo';
-import Inventory from '../../../components/UI/Edit/Inventory/Inventory';
-import Organization from '../../../components/UI/Edit/Organization/Organization';
-import SEO from '../../../components/UI/Edit/SEO/SEO';
-import Shipping from '../../../components/UI/Edit/Shipping/Shipping';
-import Variants from '../../../components/UI/Edit/Variants/Variants';
-import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import WithAuth from '../../../components/UI/withAuth/withAuth';
+} from "../../../styles/Pages/Add/Product";
+import { getProduct } from "../../../store/actions/product/product";
+import Media from "../../../components/UI/Edit/Media/Media";
+import ItemNameDescription from "../../../components/UI/Edit/ItemNameDescription/ItemNameDescription";
+import Pricing from "../../../components/UI/Edit/Pricing/Pricing";
+import ExtraInfo from "../../../components/UI/Edit/ExtraInfo/ExtraInfo";
+import Inventory from "../../../components/UI/Edit/Inventory/Inventory";
+import Organization from "../../../components/UI/Edit/Organization/Organization";
+import SEO from "../../../components/UI/Edit/SEO/SEO";
+import Shipping from "../../../components/UI/Edit/Shipping/Shipping";
+import Variants from "../../../components/UI/Edit/Variants/Variants";
+import { BackgroundAdd } from "../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import WithAuth from "../../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { product, user } = state;
@@ -61,15 +61,15 @@ const EditProduct = (props) => {
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
   const [warning, setWarning] = useState(false);
 
-  const [productName, setProductName] = useState('');
-  const [description, setDescription] = useState('');
+  const [productName, setProductName] = useState("");
+  const [description, setDescription] = useState("");
 
   const [imagesArray, setImagesArray] = useState([]);
   const [imagesArrayLength, setImagesArrayLength] = useState(0);
   const [toDeleteImagesArray, setToDeleteImagesArray] = useState([]);
   const [isNewImagesUploaded, setIsNewImagesUploaded] = useState(false);
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
   const [price, setPrice] = useState(0);
   const [compareTo, setCompareTo] = useState(0);
@@ -77,58 +77,37 @@ const EditProduct = (props) => {
 
   const [extraInfo, setExtraInfo] = useState([]);
 
-  const [sku, setSku] = useState('');
-  const [barcode, setBarcode] = useState('');
+  const [sku, setSku] = useState("");
+  const [barcode, setBarcode] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [allowPurchaseOutOfStock, setAllowPurchaseOutOfStock] = useState(false);
 
   const [physicalProduct, setPhysicalProduct] = useState(false);
   const [weightAmount, setWeightAmount] = useState(0.0);
-  const [weightUnit, setWeightUnit] = useState('kg');
+  const [weightUnit, setWeightUnit] = useState("kg");
 
   const [variants, setVariants] = useState([]);
   const [variantsOptionNames, setVariantsOptionNames] = useState([]);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
-
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'products',
-      title: productName,
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/products/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bodyRequest),
-      }
-    );
-    return response;
-  };
 
   const verifySlug = async () => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -140,12 +119,12 @@ const EditProduct = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products/delete/cover/${imageId}`,
       {
-        method: 'DELETE',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "DELETE",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -167,7 +146,7 @@ const EditProduct = (props) => {
       quantity > 0 &&
       weightAmount > 0 &&
       weightUnit.length > 0 &&
-      (weightUnit === 'kg' || weightUnit === 'lbs') &&
+      (weightUnit === "kg" || weightUnit === "lbs") &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
       seoDescription.length > 0 &&
@@ -186,12 +165,12 @@ const EditProduct = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products/update/${id}`,
       {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(product),
       }
@@ -297,9 +276,9 @@ const EditProduct = (props) => {
             await deleteProductImage(image.data._id);
           });
         }
-        await Router.push('/products');
+        await Router.push("/products");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -425,7 +404,6 @@ const EditProduct = (props) => {
         const isSlugValidRes = await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [productName]);
 
@@ -545,12 +523,12 @@ const EditProduct = (props) => {
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <ItemNameDescription
-              MainIcon={<FaBox className='mainIcon' />}
-              PlusIcon={<FaPen className='plus' />}
-              title='Edit Product'
-              itemName='Product Name'
+              MainIcon={<FaBox className="mainIcon" />}
+              PlusIcon={<FaPen className="plus" />}
+              title="Edit Product"
+              itemName="Product Name"
               itemNameInput={productName}
               onChangeItemName={onChangeProductName}
               description={description}
@@ -562,6 +540,8 @@ const EditProduct = (props) => {
               imagesArray={imagesArray}
               multipleFiles
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/products/publish/media`}
+              type="products"
+              destinationFolder={productName}
             />
             <Pricing
               price={price}
@@ -621,7 +601,7 @@ const EditProduct = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={handleSubmit}>
+        <SubmitButton type="button" onClick={handleSubmit}>
           Update Product
         </SubmitButton>
       </BackgroundAdd>
