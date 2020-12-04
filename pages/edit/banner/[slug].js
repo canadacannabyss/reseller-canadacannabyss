@@ -1,27 +1,27 @@
-import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
-import { FaTags, FaPen, FaSpinner, FaObjectUngroup } from 'react-icons/fa';
-import Router from 'next/router';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { withResellerAuth } from '../../../utils/withResellerAuth';
+import Head from "next/head";
+import React, { useState, useRef, useEffect } from "react";
+import { FaTags, FaPen, FaSpinner, FaObjectUngroup } from "react-icons/fa";
+import Router from "next/router";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { withResellerAuth } from "../../../utils/withResellerAuth";
 import {
   categoriesArrayToString,
   tagsArrayToString,
-} from '../../../utils/arrayMethods';
+} from "../../../utils/arrayMethods";
 import {
   slugifyString,
   categoriesToArray,
   tagsToArray,
   editCategoriesToArray,
   editTagsToArray,
-} from '../../../utils/stringMethods';
-import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import BannerNameDescription from '../../../components/UI/Add/BannerNameDescription/BannerNameDescription';
-import SEO from '../../../components/UI/Add/SEO/SEO';
-import Organization from '../../../components/UI/Add/Organization/Organization';
-import PromotionsList from '../../../components/UI/List/Add/PromotionsList/PromotionsList';
+} from "../../../utils/stringMethods";
+import { BackgroundAdd } from "../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import BannerNameDescription from "../../../components/UI/Add/BannerNameDescription/BannerNameDescription";
+import SEO from "../../../components/UI/Add/SEO/SEO";
+import Organization from "../../../components/UI/Add/Organization/Organization";
+import PromotionsList from "../../../components/UI/List/Add/PromotionsList/PromotionsList";
 import {
   Wrapper,
   StickyDiv,
@@ -30,9 +30,9 @@ import {
   LoadingSpinner,
   Loading,
   Warning,
-} from '../../../styles/Pages/Add/Product';
-import { getBanner } from '../../../store/actions/banner/banner';
-import WithAuth from '../../../components/UI/withAuth/withAuth';
+} from "../../../styles/Pages/Add/Product";
+import { getBanner } from "../../../store/actions/banner/banner";
+import WithAuth from "../../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { banner, user } = state;
@@ -51,21 +51,21 @@ const EditBanner = (props) => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState("");
 
   const [promotionsOnBanner, setPromotionsOnBanner] = useState([]);
   const [promotionsList, setPromotionsList] = useState([]);
-  const [slug, setSlug] = useState('');
-  const [bannerName, setBannerName] = useState('');
-  const [description, setDescription] = useState('');
+  const [slug, setSlug] = useState("");
+  const [bannerName, setBannerName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   const [featured, setFeatured] = useState(false);
@@ -117,12 +117,12 @@ const EditBanner = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/get/all`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -155,37 +155,16 @@ const EditBanner = (props) => {
     }
   };
 
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'banners',
-      title: bannerName,
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bodyRequest),
-      }
-    );
-    return response;
-  };
-
   const verifySlug = async () => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -199,7 +178,6 @@ const EditBanner = (props) => {
         const isSlugValidRes = await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [bannerName]);
 
@@ -233,12 +211,12 @@ const EditBanner = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/promotions/banners/update/${id}`,
       {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(banner),
       }
@@ -256,7 +234,6 @@ const EditBanner = (props) => {
   };
 
   useEffect(() => {
-    setGlobalVariable();
     changeSlugFromBannerName(bannerName);
   }, [bannerName]);
 
@@ -290,16 +267,16 @@ const EditBanner = (props) => {
       setPromotionsOnBanner((promotionsOnBanner) =>
         promotionsOnBanner.concat(element.id)
       );
-      element.style.backgroundColor = '#18840f';
-      element.style.border = '1px solid #18840f';
-      element.querySelector('.name').style.color = '#fff';
+      element.style.backgroundColor = "#18840f";
+      element.style.border = "1px solid #18840f";
+      element.querySelector(".name").style.color = "#fff";
     } else {
       setPromotionsOnBanner(
         removeElementFromArray(promotionsOnBanner, element.id)
       );
-      element.style.backgroundColor = '#efefef';
-      element.style.border = '1px solid #efefef';
-      element.querySelector('.name').style.color = '#18840f';
+      element.style.backgroundColor = "#efefef";
+      element.style.border = "1px solid #efefef";
+      element.querySelector(".name").style.color = "#18840f";
     }
   };
 
@@ -333,15 +310,15 @@ const EditBanner = (props) => {
           tags: tagsArray,
         },
       };
-      console.log('bannerInfo:', bannerInfo);
+      console.log("bannerInfo:", bannerInfo);
 
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await editBanner(bannerInfo);
         // setUploaded(res.uploaded);
-        Router.push('/banners');
+        Router.push("/banners");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -352,16 +329,16 @@ const EditBanner = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Add Banner | Administrator - Canada Cannabyss</title>
+        <title>Add Banner | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <BannerNameDescription
-              MainIcon={<FaObjectUngroup className='mainIcon' />}
-              PlusIcon={<FaPen className='plus' />}
-              title='Add Banner'
-              itemName='Banner Name'
+              MainIcon={<FaObjectUngroup className="mainIcon" />}
+              PlusIcon={<FaPen className="plus" />}
+              title="Add Banner"
+              itemName="Banner Name"
               itemNameInput={bannerName}
               onChangeItemName={onChangeBannerName}
               description={description}
@@ -370,7 +347,7 @@ const EditBanner = (props) => {
               featured={featured}
             />
             <PromotionsList
-              title='Promotions on banner'
+              title="Promotions on banner"
               promotions={promotionsList}
               handleGetElement={handleGetElement}
             />
@@ -393,7 +370,7 @@ const EditBanner = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={onSubmit}>
+        <SubmitButton type="button" onClick={onSubmit}>
           Update Banner
         </SubmitButton>
       </BackgroundAdd>

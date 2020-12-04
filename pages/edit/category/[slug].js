@@ -346,7 +346,7 @@ const EditCategory = (props) => {
         //     await deleteCategoryMedia(image.data._id);
         //   });
         // }
-        Router.push(`/`);
+        Router.push("/categories");
       } else {
         console.log("Slug is invalid");
         setIsSlugValid(false);
@@ -359,7 +359,7 @@ const EditCategory = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Edit Category | Administrator - Canada Cannabyss</title>
+        <title>Edit Category | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -384,6 +384,10 @@ const EditCategory = (props) => {
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/category/publish/media`}
               type="categories"
               destinationFolder={categoryName}
+              fileDimensions={{
+                width: "540px",
+                height: "960px",
+              }}
             />
             <SEO
               onChangeSeoTitle={onChangeSeoTitle}

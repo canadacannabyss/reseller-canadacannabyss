@@ -1,15 +1,11 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import {
-  FaPercent, FaSearch, FaPlus
-} from 'react-icons/fa';
-import {
-  Background
-} from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import Head from "next/head";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import { FaPercent, FaSearch, FaPlus } from "react-icons/fa";
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -19,18 +15,18 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content
-} from '../../styles/Pages/Coupons/Coupons';
-import CouponList from '../../components/UI/List/Coupons/CouponList';
-import { getCoupons } from '../../store/actions/coupons/coupons';
-import DeleteConfirmation from '../../components/UI/Confirmations/DeleteCouponConfirmation';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Content,
+} from "../../styles/Pages/Coupons/Coupons";
+import CouponList from "../../components/UI/List/Coupons/CouponList";
+import { getCoupons } from "../../store/actions/coupons/coupons";
+import DeleteConfirmation from "../../components/UI/Confirmations/DeleteCouponConfirmation";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { coupons } = state;
 
   return {
-    coupons
+    coupons,
   };
 };
 
@@ -41,8 +37,8 @@ const Coupons = (props) => {
     false
   );
 
-  const [selectedCouponId, setSelectedCouponId] = useState('');
-  const [selectedCouponName, setSelectedCouponName] = useState('');
+  const [selectedCouponId, setSelectedCouponId] = useState("");
+  const [selectedCouponName, setSelectedCouponName] = useState("");
 
   const handleGetElement = (el) => {
     const element = el.parentNode.parentNode;
@@ -60,7 +56,7 @@ const Coupons = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Coupons | Administrator - Canada Cannabyss</title>
+        <title>Coupons | Reseller - Canada Cannabyss</title>
       </Head>
       {toggleDeleteConfirmation && (
         <DeleteConfirmation
@@ -82,11 +78,11 @@ const Coupons = (props) => {
                   <SearchBarAddButtonDiv>
                     <SearchBar>
                       <input />
-                      <button type='button'>
+                      <button type="button">
                         <FaSearch />
                       </button>
                     </SearchBar>
-                    <Link href='/add/coupon' as='/add/coupon'>
+                    <Link href="/add/coupon" as="/add/coupon">
                       <AddProductLink>
                         <FaPlus />
                       </AddProductLink>
@@ -97,11 +93,11 @@ const Coupons = (props) => {
                   coupons.fetched &&
                   !coupons.error &&
                   !coupons.loading && (
-                  <CouponList
-                    coupons={coupons.data}
-                    handleGetElement={handleGetElement}
-                  />
-                )}
+                    <CouponList
+                      coupons={coupons.data}
+                      handleGetElement={handleGetElement}
+                    />
+                  )}
               </Content>
             </ContentContainer>
           </Container>
@@ -112,7 +108,7 @@ const Coupons = (props) => {
 };
 
 Coupons.propTypes = {
-  coupons: PropTypes.shape().isRequired
+  coupons: PropTypes.shape().isRequired,
 };
 
 Coupons.getInitialProps = async ({ ctx }) => {

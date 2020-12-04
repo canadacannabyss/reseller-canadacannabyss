@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Router from 'next/router';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { useDispatch, connect } from 'react-redux';
-import { BackgroundLogin } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Router from "next/router";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import { useDispatch, connect } from "react-redux";
+import { BackgroundLogin } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Container,
   BrandDiv,
@@ -15,15 +15,15 @@ import {
   BlurredBackground,
   SwitchFormButton,
   Warning,
-} from '../../styles/Pages/Login/Login';
-import Logo from '../../assets/img/canada-cannabyss-logo.svg';
-import BackgroundImg from '../../assets/img/bg-login.jpg';
+} from "../../styles/Pages/Login/Login";
+import Logo from "../../assets/img/canada-cannabyss-logo.svg";
+import BackgroundImg from "../../assets/img/bg-login.jpg";
 
 const ResetPassword = ({ token }) => {
   const [user, setUser] = useState({});
 
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const [warning, setWarning] = useState(false);
   const [error, setError] = useState(false);
@@ -32,7 +32,7 @@ const ResetPassword = ({ token }) => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [serverErrorMessage, setServerErrorMessage] = useState('');
+  const [serverErrorMessage, setServerErrorMessage] = useState("");
   const [successPasswordUpdated, setSuccessPasswordUpdated] = useState(false);
 
   useEffect(() => {
@@ -41,12 +41,12 @@ const ResetPassword = ({ token }) => {
       const response = await fetch(
         `${process.env.USER_API_ENDPOINT}/resellers/auth/reset-password/validating/token/${token}`,
         {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -74,18 +74,18 @@ const ResetPassword = ({ token }) => {
     const response = await fetch(
       `${process.env.USER_API_ENDPOINT}/resellers/auth/reset-password`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ token, password, password2 }),
       }
     );
     const data = await response.json();
-    console.log('updatedPassword:', data);
+    console.log("updatedPassword:", data);
     if (data.ok) {
       setSuccessPasswordUpdated(true);
     }
@@ -113,7 +113,7 @@ const ResetPassword = ({ token }) => {
   return (
     <>
       <Head>
-        <title>Reset Password | Administrator - Canada Cannabyss</title>
+        <title>Reset Password | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundLogin>
         <BlurredBackground bgImg={BackgroundImg}>
@@ -121,51 +121,51 @@ const ResetPassword = ({ token }) => {
         </BlurredBackground>
         <Container>
           {loading && <h4>Loading</h4>}
-          {warning && error && serverErrorMessage === 'This link is expired' && (
+          {warning && error && serverErrorMessage === "This link is expired" && (
             <>
               <p>This link is expired</p>
             </>
           )}
           {warning &&
             invalid &&
-            serverErrorMessage === 'This link is not valid' && (
+            serverErrorMessage === "This link is not valid" && (
               <>
                 <p>This link is not valid</p>
               </>
             )}
           {success && !successPasswordUpdated && !_.isEmpty(user) && (
-            <Form method='post' onSubmit={handleSendResetPasswordEmail}>
+            <Form method="post" onSubmit={handleSendResetPasswordEmail}>
               <BrandDiv>
-                <img src={Logo} alt='Canada Cannabyss' />
-                <div className='sep' />
+                <img src={Logo} alt="Canada Cannabyss" />
+                <div className="sep" />
                 <h1>Reset Password</h1>
               </BrandDiv>
-              <Label htmlFor='password'>New Password</Label>
+              <Label htmlFor="password">New Password</Label>
               <Input
-                type='password'
-                name='password'
-                id='password'
+                type="password"
+                name="password"
+                id="password"
                 value={password}
-                autoComplete='off'
+                autoComplete="off"
                 onChange={handlePassword}
               />
-              <Label htmlFor='password'>Confirm New Password</Label>
+              <Label htmlFor="password">Confirm New Password</Label>
               <Input
-                type='password'
-                name='password2'
-                id='password2'
+                type="password"
+                name="password2"
+                id="password2"
                 value={password2}
-                autoComplete='off'
+                autoComplete="off"
                 onChange={handlePassword2}
               />
               {warning &&
                 error &&
-                serverErrorMessage === 'Passwords does not match.' && (
+                serverErrorMessage === "Passwords does not match." && (
                   <Warning>
                     <p>Passwords does not match</p>
                   </Warning>
                 )}
-              <Submit className='resetPassword' type='submit'>
+              <Submit className="resetPassword" type="submit">
                 Reset Password
               </Submit>
             </Form>

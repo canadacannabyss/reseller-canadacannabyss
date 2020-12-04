@@ -1,15 +1,11 @@
-import Head from 'next/head';
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
-import { connect } from 'react-redux';
-import {
-  FaSortAmountDownAlt, FaSearch
-} from 'react-icons/fa';
-import OrderList from '../../components/UI/List/Orders/OrderList';
-import {
-  Background
-} from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import Head from "next/head";
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
+import { connect } from "react-redux";
+import { FaSortAmountDownAlt, FaSearch } from "react-icons/fa";
+import OrderList from "../../components/UI/List/Orders/OrderList";
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -18,10 +14,10 @@ import {
   TitleSearchBarAddButtonDiv,
   SearchBar,
   TitleDiv,
-  Content
-} from '../../styles/Pages/Orders/Orders';
-import { getOrders } from '../../store/actions/orders/orders';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Content,
+} from "../../styles/Pages/Orders/Orders";
+import { getOrders } from "../../store/actions/orders/orders";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { orders } = state;
@@ -34,7 +30,7 @@ const Orders = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Orders | Administrator - Canada Cannabyss</title>
+        <title>Orders | Reseller - Canada Cannabyss</title>
       </Head>
       <Background>
         <Wrapper>
@@ -49,7 +45,7 @@ const Orders = (props) => {
                   <SearchBarAddButtonDiv>
                     <SearchBar>
                       <input />
-                      <button type='button'>
+                      <button type="button">
                         <FaSearch />
                       </button>
                     </SearchBar>
@@ -58,11 +54,7 @@ const Orders = (props) => {
                 {!_.isEmpty(orders.data) &&
                   orders.fetched &&
                   !orders.error &&
-                  !orders.loading && (
-                    <OrderList
-                      orders={orders.data}
-                    />
-                )}
+                  !orders.loading && <OrderList orders={orders.data} />}
               </Content>
             </ContentContainer>
           </Container>
@@ -73,7 +65,7 @@ const Orders = (props) => {
 };
 
 Orders.propTypes = {
-  orders: PropTypes.shape().isRequired
+  orders: PropTypes.shape().isRequired,
 };
 
 Orders.getInitialProps = async ({ ctx }) => {

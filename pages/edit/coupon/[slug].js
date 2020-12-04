@@ -454,7 +454,7 @@ const EditCoupon = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Add Coupon | Administrator - Canada Cannabyss</title>
+        <title>Add Coupon | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>

@@ -1,17 +1,13 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import {
-  FaBoxes, FaSearch, FaPlus
-} from 'react-icons/fa';
-import BundleList from '../../components/UI/List/Bundles/BundleList';
+import Head from "next/head";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { FaBoxes, FaSearch, FaPlus } from "react-icons/fa";
+import BundleList from "../../components/UI/List/Bundles/BundleList";
 
-import {
-  Background
-} from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -21,25 +17,25 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content
-} from '../../styles/Pages/Bundles/Bundles';
-import DeleteConfirmation from '../../components/UI/Confirmations/DeleteBundleConfirmation';
-import { getBundles } from '../../store/actions/bundles/bundles';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Content,
+} from "../../styles/Pages/Bundles/Bundles";
+import DeleteConfirmation from "../../components/UI/Confirmations/DeleteBundleConfirmation";
+import { getBundles } from "../../store/actions/bundles/bundles";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { bundles } = state;
 
   return {
-    bundles
+    bundles,
   };
 };
 
 const Bundles = (props) => {
   const { bundles } = props;
 
-  const [selectedBundleId, setSelectedBundleId] = useState('');
-  const [selectedBundleName, setSelectedBundleName] = useState('');
+  const [selectedBundleId, setSelectedBundleId] = useState("");
+  const [selectedBundleName, setSelectedBundleName] = useState("");
   const [toggleDeleteConfirmation, setToggleDeleteConfirmation] = useState(
     false
   );
@@ -59,7 +55,7 @@ const Bundles = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Bundles | Administrator - Canada Cannabyss</title>
+        <title>Bundles | Reseller - Canada Cannabyss</title>
       </Head>
       {toggleDeleteConfirmation && (
         <DeleteConfirmation
@@ -81,11 +77,11 @@ const Bundles = (props) => {
                   <SearchBarAddButtonDiv>
                     <SearchBar>
                       <input />
-                      <button type='button'>
+                      <button type="button">
                         <FaSearch />
                       </button>
                     </SearchBar>
-                    <Link href='/add/bundle' as='/add/bundle'>
+                    <Link href="/add/bundle" as="/add/bundle">
                       <AddProductLink>
                         <FaPlus />
                       </AddProductLink>
@@ -96,11 +92,11 @@ const Bundles = (props) => {
                   bundles.fetched &&
                   !bundles.error &&
                   !bundles.loading && (
-                  <BundleList
-                    bundles={bundles.data}
-                    handleGetElement={handleGetElement}
-                  />
-                )}
+                    <BundleList
+                      bundles={bundles.data}
+                      handleGetElement={handleGetElement}
+                    />
+                  )}
               </Content>
             </ContentContainer>
           </Container>
@@ -111,7 +107,7 @@ const Bundles = (props) => {
 };
 
 Bundles.propTypes = {
-  bundles: PropTypes.shape().isRequired
+  bundles: PropTypes.shape().isRequired,
 };
 
 Bundles.getInitialProps = async ({ ctx }) => {

@@ -1,24 +1,24 @@
-import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
-import { FaBoxes, FaPlus, FaSpinner } from 'react-icons/fa';
-import Router from 'next/router';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { withResellerAuth } from '../../utils/withResellerAuth';
+import Head from "next/head";
+import React, { useState, useEffect } from "react";
+import { FaBoxes, FaPlus, FaSpinner } from "react-icons/fa";
+import Router from "next/router";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { withResellerAuth } from "../../utils/withResellerAuth";
 
-import { slugifyString } from '../../utils/stringMethods';
-import { roundFloatNumber } from '../../utils/numberConverter';
+import { slugifyString } from "../../utils/stringMethods";
+import { roundFloatNumber } from "../../utils/numberConverter";
 
-import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import ItemNameDescription from '../../components/UI/Add/ItemNameDescription/ItemNameDescription';
-import ProductsList from '../../components/UI/List/Add/ProductsList/ProductsList';
-import Pricing from '../../components/UI/Add/Pricing/Pricing';
-import ExtraInfo from '../../components/UI/Add/ExtraInfo/ExtraInfo';
-import Inventory from '../../components/UI/Add/Inventory/Inventory';
-import Shipping from '../../components/UI/Add/Shipping/Shipping';
-import Variants from '../../components/UI/Add/Variants/Variants';
-import SEO from '../../components/UI/Add/SEO/SEO';
-import Organization from '../../components/UI/Add/Organization/Organization';
+import { BackgroundAdd } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import ItemNameDescription from "../../components/UI/Add/ItemNameDescription/ItemNameDescription";
+import ProductsList from "../../components/UI/List/Add/ProductsList/ProductsList";
+import Pricing from "../../components/UI/Add/Pricing/Pricing";
+import ExtraInfo from "../../components/UI/Add/ExtraInfo/ExtraInfo";
+import Inventory from "../../components/UI/Add/Inventory/Inventory";
+import Shipping from "../../components/UI/Add/Shipping/Shipping";
+import Variants from "../../components/UI/Add/Variants/Variants";
+import SEO from "../../components/UI/Add/SEO/SEO";
+import Organization from "../../components/UI/Add/Organization/Organization";
 import {
   Wrapper,
   StickyDiv,
@@ -26,15 +26,15 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning
-} from '../../styles/Pages/Add/Product';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Warning,
+} from "../../styles/Pages/Add/Product";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user
+    user,
   };
 };
 
@@ -46,10 +46,10 @@ const AddBundle = (props) => {
   const [isSlugValid, setIsSlugValid] = useState(true);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
-  const [bundleName, setProductName] = useState('');
-  const [description, setDescription] = useState('');
+  const [bundleName, setProductName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
   const [productOnBundle, setProductOnBundle] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -58,27 +58,27 @@ const AddBundle = (props) => {
   const [compareTo, setCompareTo] = useState(0);
   const [taxableBundle, setTaxableBundle] = useState(false);
 
-  const [sku, setSku] = useState('');
-  const [barcode, setBarcode] = useState('');
+  const [sku, setSku] = useState("");
+  const [barcode, setBarcode] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [allowPurchaseOutOfStock, setAllowPurchaseOutOfStock] = useState(false);
 
   const [physicalProduct, setPhysicalProduct] = useState(false);
   const [weightAmount, setWeightAmount] = useState(0.0);
-  const [weightUnit, setWeightUnit] = useState('kg');
+  const [weightUnit, setWeightUnit] = useState("kg");
 
   const [extraInfo, setExtraInfo] = useState([]);
 
   const [variants, setVariants] = useState([]);
   const [variantsOptionNames, setVariantsOptionNames] = useState([]);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   const handleCheckTaxableProduct = () => {
@@ -152,7 +152,7 @@ const AddBundle = (props) => {
       quantity > 0 &&
       weightAmount > 0 &&
       weightUnit.length > 0 &&
-      (weightUnit === 'kg' || weightUnit === 'lbs') &&
+      (weightUnit === "kg" || weightUnit === "lbs") &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
       seoDescription.length > 0 &&
@@ -191,19 +191,22 @@ const AddBundle = (props) => {
     categoriesArray,
     tags,
     tagsArray,
-    extraInfo
+    extraInfo,
   ]);
 
   const fetchAllProducts = async () => {
-    const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/reseller/products`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
+      {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await res.json();
     setProductList(data);
   };
@@ -212,38 +215,17 @@ const AddBundle = (props) => {
     fetchAllProducts(1, 12);
   }, []);
 
-  const setGlobalVariable = async () => {
-    const bodyRequest = {
-      type: 'bundles',
-      title: bundleName
-    };
-    const response = await fetch(
-      `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/set/global-variable`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bodyRequest)
-      }
-    );
-    return response;
-  };
-
   const verifySlug = async () => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     const data = await response.json();
@@ -254,14 +236,14 @@ const AddBundle = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/publish`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       }
     );
     const data = await response.json();
@@ -282,7 +264,6 @@ const AddBundle = (props) => {
         await verifySlug(slug);
       };
       checkSlugValid();
-      setGlobalVariable();
     }
   }, [bundleName]);
 
@@ -296,12 +277,12 @@ const AddBundle = (props) => {
         isSlugValid,
         variants: {
           variantsOptionNames: [],
-          values: []
+          values: [],
         },
         bundleName,
         prices: {
           price,
-          compareTo
+          compareTo,
         },
         taxableBundle,
         description,
@@ -310,29 +291,29 @@ const AddBundle = (props) => {
           sku,
           barcode,
           quantity,
-          allowPurchaseOutOfStock
+          allowPurchaseOutOfStock,
         },
         shipping: {
           physicalProduct,
           weight: {
             unit: weightUnit,
-            amount: weightAmount
-          }
+            amount: weightAmount,
+          },
         },
         seo: {
           title: seoTitle,
           slug: seoSlug,
-          description: seoDescription
+          description: seoDescription,
         },
         organization: {
           categories: categoriesArray,
-          tags: tagsArray
-        }
+          tags: tagsArray,
+        },
       };
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await publishProduct(productInfo);
-        Router.push('/bundles');
+        Router.push("/bundles");
       } else {
         setIsSlugValid(false);
       }
@@ -342,7 +323,7 @@ const AddBundle = (props) => {
   };
 
   const categoriesToArray = () => {
-    const tempCategories = categories.split(',');
+    const tempCategories = categories.split(",");
     tempCategories.map((category, i) => {
       tempCategories[i] = tempCategories[i].trim();
     });
@@ -354,7 +335,7 @@ const AddBundle = (props) => {
   }, [categories]);
 
   const tagsToArray = () => {
-    const tempTags = tags.split(',');
+    const tempTags = tags.split(",");
     tempTags.map((tag, i) => {
       tempTags[i] = tempTags[i].trim();
     });
@@ -405,36 +386,36 @@ const AddBundle = (props) => {
     const element = el;
     if (!productOnBundle.includes(element.id)) {
       setProductOnBundle((pOnBundle) => pOnBundle.concat(element.id));
-      element.style.backgroundColor = '#18840f';
-      element.style.border = '1px solid #18840f';
-      element.querySelector('.name').style.color = '#fff';
+      element.style.backgroundColor = "#18840f";
+      element.style.border = "1px solid #18840f";
+      element.querySelector(".name").style.color = "#fff";
     } else {
       setProductOnBundle(removeElementFromArray(productOnBundle, element.id));
-      element.style.backgroundColor = '#efefef';
-      element.style.border = '1px solid #efefef';
-      element.querySelector('.name').style.color = '#18840f';
+      element.style.backgroundColor = "#efefef";
+      element.style.border = "1px solid #efefef";
+      element.querySelector(".name").style.color = "#18840f";
     }
   };
 
   return (
     <WithAuth>
       <Head>
-        <title>Add Bundle | Administrator - Canada Cannabyss</title>
+        <title>Add Bundle | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <ItemNameDescription
-              MainIcon={<FaBoxes className='mainIcon' />}
-              PlusIcon={<FaPlus className='plus' />}
-              title='Add Bundle'
-              itemName='Bundle Name'
+              MainIcon={<FaBoxes className="mainIcon" />}
+              PlusIcon={<FaPlus className="plus" />}
+              title="Add Bundle"
+              itemName="Bundle Name"
               onChangeItemName={onChangeBundleName}
               description={description}
               onChangeDescription={onChangeDescription}
             />
             <ProductsList
-              title='Products on bundles'
+              title="Products on bundles"
               products={productList}
               handleGetElement={handleGetElement}
             />
@@ -481,7 +462,7 @@ const AddBundle = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={onSubmit}>
+        <SubmitButton type="button" onClick={onSubmit}>
           Add Bundle
         </SubmitButton>
       </BackgroundAdd>

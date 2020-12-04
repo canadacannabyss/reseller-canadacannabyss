@@ -1,17 +1,13 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import _ from 'lodash';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import {
-  FaListUl, FaSearch, FaPlus
-} from 'react-icons/fa';
-import CategoryList from '../../components/UI/List/Categories/CategoryList';
+import Head from "next/head";
+import Link from "next/link";
+import _ from "lodash";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { FaListUl, FaSearch, FaPlus } from "react-icons/fa";
+import CategoryList from "../../components/UI/List/Categories/CategoryList";
 
-import {
-  Background
-} from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -21,17 +17,17 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content
-} from '../../styles/Pages/Categories/Categories';
-import { getCategories } from '../../store/actions/categories/categories';
-import DeleteConfirmation from '../../components/UI/Confirmations/DeleteCategoryConfirmation';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Content,
+} from "../../styles/Pages/Categories/Categories";
+import { getCategories } from "../../store/actions/categories/categories";
+import DeleteConfirmation from "../../components/UI/Confirmations/DeleteCategoryConfirmation";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { categories } = state;
 
   return {
-    categories
+    categories,
   };
 };
 
@@ -42,8 +38,8 @@ const Categories = (props) => {
     false
   );
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [selectedCategoryName, setSelectedCategoryName] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const handleGetElement = (el) => {
     const element = el.parentNode.parentNode;
@@ -61,7 +57,7 @@ const Categories = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Categories | Administrator - Canada Cannabyss</title>
+        <title>Categories | Reseller - Canada Cannabyss</title>
       </Head>
       {toggleDeleteConfirmation && (
         <DeleteConfirmation
@@ -83,11 +79,11 @@ const Categories = (props) => {
                   <SearchBarAddButtonDiv>
                     <SearchBar>
                       <input />
-                      <button type='button'>
+                      <button type="button">
                         <FaSearch />
                       </button>
                     </SearchBar>
-                    <Link href='/add/category' as='/add/category'>
+                    <Link href="/add/category" as="/add/category">
                       <AddProductLink>
                         <FaPlus />
                       </AddProductLink>
@@ -95,14 +91,14 @@ const Categories = (props) => {
                   </SearchBarAddButtonDiv>
                 </TitleSearchBarAddButtonDiv>
                 {!_.isEmpty(categories.data) &&
-                categories.fetched &&
-                !categories.loading &&
-                !categories.error && (
-                  <CategoryList
-                    categories={categories.data}
-                    handleGetElement={handleGetElement}
-                  />
-                )}
+                  categories.fetched &&
+                  !categories.loading &&
+                  !categories.error && (
+                    <CategoryList
+                      categories={categories.data}
+                      handleGetElement={handleGetElement}
+                    />
+                  )}
               </Content>
             </ContentContainer>
           </Container>
@@ -113,7 +109,7 @@ const Categories = (props) => {
 };
 
 Categories.propTypes = {
-  categories: PropTypes.shape().isRequired
+  categories: PropTypes.shape().isRequired,
 };
 
 Categories.getInitialProps = async ({ ctx }) => {

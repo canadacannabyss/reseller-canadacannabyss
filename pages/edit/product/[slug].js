@@ -519,7 +519,7 @@ const EditProduct = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Edit Product | Administrator - Canada Cannabyss</title>
+        <title>Edit Product | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -542,6 +542,10 @@ const EditProduct = (props) => {
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/products/publish/media`}
               type="products"
               destinationFolder={productName}
+              fileDimensions={{
+                width: "640px",
+                height: "640px",
+              }}
             />
             <Pricing
               price={price}

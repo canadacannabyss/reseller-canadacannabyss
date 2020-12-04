@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { FaSortAmountDownAlt } from 'react-icons/fa';
-import _ from 'lodash';
-import { Background } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { FaSortAmountDownAlt } from "react-icons/fa";
+import _ from "lodash";
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -14,7 +14,7 @@ import {
   SearchBar,
   TitleDiv,
   Content,
-} from '../../styles/Pages/Orders/Orders';
+} from "../../styles/Pages/Orders/Orders";
 import {
   StickyDiv,
   MainGrid,
@@ -31,13 +31,13 @@ import {
   PlusIconSign,
   SendTrackingNumberButton,
   SentMessage,
-} from '../../styles/Pages/Add/Product';
-import { getOrder } from '../../store/actions/order/order';
-import OrderedItemsList from '../../components/UI/List/Order/OrderedItemsList';
-import PaymentReceiptViewer from '../../components/UI/Viewer/PaymentReceipt/PaymentReceipt';
-import TrackingNumber from '../../components/UI/Viewer/TrackingNumber/TrackingNumber';
-import DateFormatter from '../../utils/dateFormatter';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+} from "../../styles/Pages/Add/Product";
+import { getOrder } from "../../store/actions/order/order";
+import OrderedItemsList from "../../components/UI/List/Order/OrderedItemsList";
+import PaymentReceiptViewer from "../../components/UI/Viewer/PaymentReceipt/PaymentReceipt";
+import TrackingNumber from "../../components/UI/Viewer/TrackingNumber/TrackingNumber";
+import DateFormatter from "../../utils/dateFormatter";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { order } = state;
@@ -62,12 +62,12 @@ const Order = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/customers/order/send/finished-order/start`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ orderId: order.data._id }),
       }
@@ -83,12 +83,12 @@ const Order = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/orders/send/tracking-number/start`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ orderId: order.data._id }),
       }
@@ -100,16 +100,16 @@ const Order = (props) => {
   };
 
   const fetchShippingGeolocation = async (orderID) => {
-    console.log('orderID:', orderID);
+    console.log("orderID:", orderID);
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/admin/orders/${orderID}/coordinates`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -141,25 +141,25 @@ const Order = (props) => {
     const element = el;
     if (!items.includes(element.id)) {
       setItems((pOnBundle) => pOnBundle.concat(element.id));
-      element.style.backgroundColor = '#18840f';
-      element.style.border = '1px solid #18840f';
-      element.querySelector('.name').style.color = '#fff';
-      element.querySelector('.items-detail').style.display = 'block';
-      element.querySelector('.empty').style.display = 'block';
+      element.style.backgroundColor = "#18840f";
+      element.style.border = "1px solid #18840f";
+      element.querySelector(".name").style.color = "#fff";
+      element.querySelector(".items-detail").style.display = "block";
+      element.querySelector(".empty").style.display = "block";
     } else {
       setItems(removeElementFromArray(items, element.id));
-      element.style.backgroundColor = '#efefef';
-      element.style.border = '1px solid #efefef';
-      element.querySelector('.name').style.color = '#18840f';
-      element.querySelector('.items-detail').style.display = 'none';
-      element.querySelector('.empty').style.display = 'none';
+      element.style.backgroundColor = "#efefef";
+      element.style.border = "1px solid #efefef";
+      element.querySelector(".name").style.color = "#18840f";
+      element.querySelector(".items-detail").style.display = "none";
+      element.querySelector(".empty").style.display = "none";
     }
   };
 
   return (
     <WithAuth>
       <Head>
-        <title>{`Order: ${orderId} | Administrator - Canada Cannabyss`}</title>
+        <title>{`Order: ${orderId} | Reseller - Canada Cannabyss`}</title>
       </Head>
       <Background>
         <Wrapper>
@@ -170,14 +170,14 @@ const Order = (props) => {
                   <TitleSearchBarAddButtonDiv>
                     <TitleDiv>
                       <PlusIconSign>
-                        <FaSortAmountDownAlt className='mainIcon' />
+                        <FaSortAmountDownAlt className="mainIcon" />
                       </PlusIconSign>
                       <h1>Order</h1>
                     </TitleDiv>
                   </TitleSearchBarAddButtonDiv>
                   <HalfGrid>
                     <div>
-                      <Label for='orderId'>Order ID</Label>
+                      <Label for="orderId">Order ID</Label>
                       {!_.isEmpty(order.data) &&
                         order.fetched &&
                         !order.loading &&
@@ -191,7 +191,7 @@ const Order = (props) => {
                           !order.loading &&
                           !order.error && (
                             <>
-                              {order.data.canceled ? 'Canceled' : 'Fulfilled'}
+                              {order.data.canceled ? "Canceled" : "Fulfilled"}
                             </>
                           )}
                       </P>
@@ -228,19 +228,19 @@ const Order = (props) => {
                           !order.error && (
                             <>
                               {order.data.shipping.status.shipped
-                                ? 'Shipped'
-                                : 'Processing order'}
+                                ? "Shipped"
+                                : "Processing order"}
                             </>
                           )}
                       </P>
                     </div>
                     <div>
-                      <Label htmlFor='shippingAddress'>Shipping Address</Label>
+                      <Label htmlFor="shippingAddress">Shipping Address</Label>
                       {!_.isEmpty(order.data) &&
                         order.fetched &&
                         !order.loading &&
                         !order.error && (
-                          <P id='shippingAddress'>
+                          <P id="shippingAddress">
                             {`${order.data.shippingAddress.addressLine1}, ${order.data.shippingAddress.city}, ${order.data.shippingAddress.provinceState}, ${order.data.shippingAddress.country}`}
                           </P>
                         )}
@@ -263,7 +263,7 @@ const Order = (props) => {
                                   )}
                                 </>
                               ) : (
-                                'Not Shipped yet'
+                                "Not Shipped yet"
                               )}
                             </>
                           )}
@@ -273,7 +273,7 @@ const Order = (props) => {
                   <br />
                   <GroupSpan>Billing information</GroupSpan>
                   <Label>Billing Address</Label>
-                  <P id='shippingAddress'>
+                  <P id="shippingAddress">
                     {!_.isEmpty(order.data) &&
                       order.fetched &&
                       !order.loading &&
@@ -318,7 +318,7 @@ const Order = (props) => {
                               order.data.paymentMethod.cryptocurrency.logo && (
                                 <>
                                   <Label>Cryptocurrency</Label>
-                                  <P className='cryptoLogoSymbolName'>
+                                  <P className="cryptoLogoSymbolName">
                                     <img
                                       src={
                                         order.data.paymentMethod.cryptocurrency
@@ -414,7 +414,7 @@ const Order = (props) => {
                         order.fetched &&
                         !order.loading &&
                         !order.error && (
-                          <P>{order.data.paid ? 'Paid' : 'Pending'}</P>
+                          <P>{order.data.paid ? "Paid" : "Pending"}</P>
                         )}
                     </div>
                     <div>
@@ -443,7 +443,7 @@ const Order = (props) => {
                               <HalfGrid>
                                 <div>
                                   <Label>
-                                    Total in{' '}
+                                    Total in{" "}
                                     {
                                       order.data.paymentMethod.cryptocurrency
                                         .symbol
@@ -487,7 +487,7 @@ const Order = (props) => {
               !order.error && (
                 <>
                   <OrderedItemsList
-                    title='Purchased Items'
+                    title="Purchased Items"
                     products={order.data.cart.items}
                     handleGetElement={handleGetElement}
                   />

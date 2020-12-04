@@ -1,34 +1,34 @@
-import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { FaBoxes, FaPen, FaSpinner } from 'react-icons/fa';
-import Router from 'next/router';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { withResellerAuth } from '../../../utils/withResellerAuth';
+import Head from "next/head";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { FaBoxes, FaPen, FaSpinner } from "react-icons/fa";
+import Router from "next/router";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { withResellerAuth } from "../../../utils/withResellerAuth";
 
-import { roundFloatNumber } from '../../../utils/numberConverter';
+import { roundFloatNumber } from "../../../utils/numberConverter";
 import {
   categoriesArrayToString,
   tagsArrayToString,
-} from '../../../utils/arrayMethods';
+} from "../../../utils/arrayMethods";
 import {
   slugifyString,
   categoriesToArray,
   tagsToArray,
   editCategoriesToArray,
   editTagsToArray,
-} from '../../../utils/stringMethods';
-import { BackgroundAdd } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import ItemNameDescription from '../../../components/UI/Edit/ItemNameDescription/ItemNameDescription';
-import ProductsList from '../../../components/UI/List/Add/ProductsList/ProductsList';
-import Pricing from '../../../components/UI/Edit/Pricing/Pricing';
-import ExtraInfo from '../../../components/UI/Edit/ExtraInfo/ExtraInfo';
-import Inventory from '../../../components/UI/Edit/Inventory/Inventory';
-import Shipping from '../../../components/UI/Edit/Shipping/Shipping';
-import Variants from '../../../components/UI/Edit/Variants/Variants';
-import SEO from '../../../components/UI/Edit/SEO/SEO';
-import Organization from '../../../components/UI/Edit/Organization/Organization';
+} from "../../../utils/stringMethods";
+import { BackgroundAdd } from "../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import ItemNameDescription from "../../../components/UI/Edit/ItemNameDescription/ItemNameDescription";
+import ProductsList from "../../../components/UI/List/Add/ProductsList/ProductsList";
+import Pricing from "../../../components/UI/Edit/Pricing/Pricing";
+import ExtraInfo from "../../../components/UI/Edit/ExtraInfo/ExtraInfo";
+import Inventory from "../../../components/UI/Edit/Inventory/Inventory";
+import Shipping from "../../../components/UI/Edit/Shipping/Shipping";
+import Variants from "../../../components/UI/Edit/Variants/Variants";
+import SEO from "../../../components/UI/Edit/SEO/SEO";
+import Organization from "../../../components/UI/Edit/Organization/Organization";
 import {
   Wrapper,
   StickyDiv,
@@ -37,9 +37,9 @@ import {
   LoadingSpinner,
   Loading,
   Warning,
-} from '../../../styles/Pages/Add/Product';
-import { getBundle } from '../../../store/actions/bundle/bundle';
-import WithAuth from '../../../components/UI/withAuth/withAuth';
+} from "../../../styles/Pages/Add/Product";
+import { getBundle } from "../../../store/actions/bundle/bundle";
+import WithAuth from "../../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { bundle, user } = state;
@@ -56,17 +56,17 @@ const EditBundle = (props) => {
   const [loading, setLoading] = useState(false);
   const [isSlugValid, setIsSlugValid] = useState(true);
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState("");
 
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
   const [warning, setWarning] = useState(false);
 
   const [productOnBundle, setProductOnBundle] = useState([]);
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
-  const [bundleName, setBundleName] = useState('');
-  const [description, setDescription] = useState('');
+  const [bundleName, setBundleName] = useState("");
+  const [description, setDescription] = useState("");
 
   const [price, setPrice] = useState(0);
   const [compareTo, setCompareTo] = useState(0);
@@ -74,26 +74,26 @@ const EditBundle = (props) => {
 
   const [extraInfo, setExtraInfo] = useState([]);
 
-  const [sku, setSku] = useState('');
-  const [barcode, setBarcode] = useState('');
+  const [sku, setSku] = useState("");
+  const [barcode, setBarcode] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [allowPurchaseOutOfStock, setAllowPurchaseOutOfStock] = useState(false);
 
   const [physicalProduct, setPhysicalProduct] = useState(false);
   const [weightAmount, setWeightAmount] = useState(0.0);
-  const [weightUnit, setWeightUnit] = useState('kg');
+  const [weightUnit, setWeightUnit] = useState("kg");
 
   const [variants, setVariants] = useState([]);
 
   const [productList, setProductList] = useState([]);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   useEffect(() => {
@@ -149,7 +149,7 @@ const EditBundle = (props) => {
       quantity > 0 &&
       weightAmount > 0 &&
       weightUnit.length > 0 &&
-      (weightUnit === 'kg' || weightUnit === 'lbs') &&
+      (weightUnit === "kg" || weightUnit === "lbs") &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
       seoDescription.length > 0 &&
@@ -195,12 +195,12 @@ const EditBundle = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/products`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -226,12 +226,12 @@ const EditBundle = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/validation/slug/${slug}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -251,14 +251,14 @@ const EditBundle = (props) => {
     const element = el;
     if (!productOnBundle.includes(element.id)) {
       setProductOnBundle((pOnBundle) => pOnBundle.concat(element.id));
-      element.style.backgroundColor = '#18840f';
-      element.style.border = '1px solid #18840f';
-      element.querySelector('.name').style.color = '#fff';
+      element.style.backgroundColor = "#18840f";
+      element.style.border = "1px solid #18840f";
+      element.querySelector(".name").style.color = "#fff";
     } else {
       setProductOnBundle(removeElementFromArray(productOnBundle, element.id));
-      element.style.backgroundColor = '#efefef';
-      element.style.border = '1px solid #efefef';
-      element.querySelector('.name').style.color = '#18840f';
+      element.style.backgroundColor = "#efefef";
+      element.style.border = "1px solid #efefef";
+      element.querySelector(".name").style.color = "#18840f";
     }
   };
 
@@ -341,12 +341,12 @@ const EditBundle = (props) => {
     const response = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/bundles/update/${id}`,
       {
-        method: 'PUT',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(bundle),
       }
@@ -360,7 +360,7 @@ const EditBundle = (props) => {
     disabledSubmitButton();
     if (allFieldsFilled) {
       setLoading(true);
-      console.log('productOnBundle:', productOnBundle);
+      console.log("productOnBundle:", productOnBundle);
       const bundleInfo = {
         products: productOnBundle,
         userId: user.data._id,
@@ -397,15 +397,15 @@ const EditBundle = (props) => {
           tags: tagsArray,
         },
       };
-      console.log('bundleInfo:', bundleInfo);
+      console.log("bundleInfo:", bundleInfo);
 
       const isSlugValidRes = await verifySlug(slug);
       if (isSlugValidRes.valid) {
         const res = await editBundle(bundleInfo);
         // setUploaded(res.uploaded);
-        Router.push('/bundles');
+        Router.push("/bundles");
       } else {
-        console.log('Slug is invalid');
+        console.log("Slug is invalid");
         setIsSlugValid(false);
       }
     } else {
@@ -428,23 +428,23 @@ const EditBundle = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Edit Bundle | Administrator - Canada Cannabyss</title>
+        <title>Edit Bundle | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <ItemNameDescription
-              MainIcon={<FaBoxes className='mainIcon' />}
-              PlusIcon={<FaPen className='plus' />}
-              title='Edit Bundle'
-              itemName='Bundle Name'
+              MainIcon={<FaBoxes className="mainIcon" />}
+              PlusIcon={<FaPen className="plus" />}
+              title="Edit Bundle"
+              itemName="Bundle Name"
               itemNameInput={bundleName}
               onChangeItemName={onChangeBundleName}
               description={description}
               onChangeDescription={onChangeDescription}
             />
             <ProductsList
-              title='Products on bundles'
+              title="Products on bundles"
               products={productList}
               handleGetElement={handleGetElement}
             />
@@ -502,7 +502,7 @@ const EditBundle = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={onSubmit}>
+        <SubmitButton type="button" onClick={onSubmit}>
           Update Bundle
         </SubmitButton>
       </BackgroundAdd>

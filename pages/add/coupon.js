@@ -1,28 +1,28 @@
-import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { FaPercent, FaPlus, FaSpinner } from 'react-icons/fa';
-import Router from 'next/router';
-import _ from 'lodash';
+import Head from "next/head";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { FaPercent, FaPlus, FaSpinner } from "react-icons/fa";
+import Router from "next/router";
+import _ from "lodash";
 
 import {
   categoriesArrayToString,
-  tagsArrayToString
-} from '../../utils/arrayMethods';
+  tagsArrayToString,
+} from "../../utils/arrayMethods";
 import {
   slugifyString,
   categoriesToArray,
   tagsToArray,
   editCategoriesToArray,
-  editTagsToArray
-} from '../../utils/stringMethods';
-import { roundFloatNumber } from '../../utils/numberConverter';
+  editTagsToArray,
+} from "../../utils/stringMethods";
+import { roundFloatNumber } from "../../utils/numberConverter";
 
-import { BackgroundAdd } from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import CouponNameDescription from '../../components/UI/Add/CouponNameDescription/CouponNameDescription';
-import SEO from '../../components/UI/Add/SEO/SEO';
-import Organization from '../../components/UI/Add/Organization/Organization';
-import ProductsBundlesList from '../../components/UI/List/Add/Coupon/ProductsBundlesList';
+import { BackgroundAdd } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import CouponNameDescription from "../../components/UI/Add/CouponNameDescription/CouponNameDescription";
+import SEO from "../../components/UI/Add/SEO/SEO";
+import Organization from "../../components/UI/Add/Organization/Organization";
+import ProductsBundlesList from "../../components/UI/List/Add/Coupon/ProductsBundlesList";
 import {
   Wrapper,
   StickyDiv,
@@ -30,38 +30,38 @@ import {
   SubmitButton,
   LoadingSpinner,
   Loading,
-  Warning
-} from '../../styles/Pages/Add/Product';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Warning,
+} from "../../styles/Pages/Add/Product";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    user
+    user,
   };
 };
 
 const AddCoupon = (props) => {
   const { user } = props;
 
-  const [couponCode, setCouponCode] = useState('');
+  const [couponCode, setCouponCode] = useState("");
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState("");
 
-  const [discountAmount, setdiscountAmount] = useState('');
-  const [discountType, setDiscountType] = useState('percent');
+  const [discountAmount, setdiscountAmount] = useState("");
+  const [discountType, setDiscountType] = useState("percent");
 
-  const [applyCouponOn, setApplyCouponOn] = useState('items');
+  const [applyCouponOn, setApplyCouponOn] = useState("items");
 
-  const [availableAt, setAvailableAt] = useState('canada');
+  const [availableAt, setAvailableAt] = useState("canada");
 
   const [productsOnCoupon, setProductsOnCoupon] = useState([]);
   const [bundlesOnCoupon, setBundlesOnCoupon] = useState([]);
   const [productList, setProductList] = useState([]);
   const [bundleList, setBundleList] = useState([]);
 
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [featured, setFeatured] = useState(false);
   const [freeShipping, setFreeShipping] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -69,13 +69,13 @@ const AddCoupon = (props) => {
   const [warning, setWarning] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [seoTitle, setSeoTitle] = useState('');
-  const [seoSlug, setSeoSlug] = useState('');
-  const [seoDescription, setSeoDescription] = useState('');
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoSlug, setSeoSlug] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
 
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState("");
   const [categoriesArray, setCategoriesArray] = useState([]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState("");
   const [tagsArray, setTagsArray] = useState([]);
 
   // const locationList = new Location();
@@ -87,13 +87,13 @@ const AddCoupon = (props) => {
 
   const fetchAllProducts = async () => {
     const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     });
     const data = await res.json();
     setProductList(data);
@@ -119,13 +119,13 @@ const AddCoupon = (props) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/validate/couponName/${couponCode}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     const data = await res.json();
@@ -133,7 +133,7 @@ const AddCoupon = (props) => {
   };
 
   useEffect(() => {
-    if (applyCouponOn === 'items') {
+    if (applyCouponOn === "items") {
       setProductList([]);
       setBundleList([]);
       setProductList([]);
@@ -142,26 +142,26 @@ const AddCoupon = (props) => {
         const resProducts = await fetch(
           `${process.env.MAIN_API_ENDPOINT}/products`,
           {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           }
         );
 
         const resBundles = await fetch(
           `${process.env.MAIN_API_ENDPOINT}/bundles`,
           {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           }
         );
 
@@ -172,40 +172,40 @@ const AddCoupon = (props) => {
       };
       fetchAllProductsBundlesCategoriesOnChange();
     }
-    if (applyCouponOn === 'products') {
+    if (applyCouponOn === "products") {
       setProductList([]);
       setBundleList([]);
       setProductList([]);
       setBundleList([]);
       const fetchAllProductsOnChange = async () => {
         const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/products`, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         });
         const data = await res.json();
         setProductList(data);
       };
       fetchAllProductsOnChange();
     }
-    if (applyCouponOn === 'bundles') {
+    if (applyCouponOn === "bundles") {
       setProductList([]);
       setBundleList([]);
       setProductList([]);
       setBundleList([]);
       const fetchAllBundlesOnChange = async () => {
         const res = await fetch(`${process.env.MAIN_API_ENDPOINT}/bundles`, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         });
         const data = await res.json();
         setBundleList(data);
@@ -224,35 +224,37 @@ const AddCoupon = (props) => {
 
   const handleGetElement = (el) => {
     const element = el;
-    if (element.classList[2] === 'product') {
+    if (element.classList[2] === "product") {
       if (!productsOnCoupon.includes(element.id)) {
         setProductsOnCoupon((pOnPromotion) => pOnPromotion.concat(element.id));
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
-        setProductsOnCoupon(removeElementFromArray(productsOnCoupon, element.id));
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        setProductsOnCoupon(
+          removeElementFromArray(productsOnCoupon, element.id)
+        );
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
-    } else if (element.classList[2] === 'bundle') {
+    } else if (element.classList[2] === "bundle") {
       if (!bundlesOnCoupon.includes(element.id)) {
         setBundlesOnCoupon((bOnPromotion) => bOnPromotion.concat(element.id));
-        element.style.backgroundColor = '#18840f';
-        element.style.border = '1px solid #18840f';
-        element.querySelector('.name').style.color = '#fff';
+        element.style.backgroundColor = "#18840f";
+        element.style.border = "1px solid #18840f";
+        element.querySelector(".name").style.color = "#fff";
       } else {
         setBundlesOnCoupon(removeElementFromArray(bundlesOnCoupon, element.id));
-        element.style.backgroundColor = '#efefef';
-        element.style.border = '1px solid #efefef';
-        element.querySelector('.name').style.color = '#18840f';
+        element.style.backgroundColor = "#efefef";
+        element.style.border = "1px solid #efefef";
+        element.querySelector(".name").style.color = "#18840f";
       }
     }
   };
 
   const categoriesToArray = () => {
-    const tempCategories = categories.split(',');
+    const tempCategories = categories.split(",");
     tempCategories.map((category, i) => {
       tempCategories[i] = tempCategories[i].trim();
     });
@@ -264,7 +266,7 @@ const AddCoupon = (props) => {
   }, [categories]);
 
   const tagsToArray = () => {
-    const tempTags = tags.split(',');
+    const tempTags = tags.split(",");
     tempTags.map((tag, i) => {
       tempTags[i] = tempTags[i].trim();
     });
@@ -337,11 +339,11 @@ const AddCoupon = (props) => {
       couponCode.length > 0 &&
       description.length > 0 &&
       discountAmount > 0 &&
-      (discountType === 'percent' || discountType === 'cash') &&
-      (applyCouponOn === 'items' ||
-        applyCouponOn === 'products' ||
-        applyCouponOn === 'bundles') &&
-      availableAt === 'canada' &&
+      (discountType === "percent" || discountType === "cash") &&
+      (applyCouponOn === "items" ||
+        applyCouponOn === "products" ||
+        applyCouponOn === "bundles") &&
+      availableAt === "canada" &&
       (!_.isEmpty(productsOnCoupon) || !_.isEmpty(bundlesOnCoupon)) &&
       seoTitle.length > 0 &&
       seoSlug.length > 0 &&
@@ -380,21 +382,21 @@ const AddCoupon = (props) => {
     seoDescription,
     categories,
     categoriesArray,
-    tags
+    tags,
   ]);
 
   const fetchNewCoupon = async (couponObj) => {
     const res = await fetch(
       `${process.env.MAIN_API_ENDPOINT}/reseller/coupons/create`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(couponObj)
+        body: JSON.stringify(couponObj),
       }
     );
     const data = await res.json();
@@ -405,7 +407,7 @@ const AddCoupon = (props) => {
     disabledSubmitButton();
     if (allFieldsFilled) {
       const fetchedValidCouponNameRes = await fetchValidateCouponName();
-      console.log('fetchedValidCouponNameRes:', fetchedValidCouponNameRes);
+      console.log("fetchedValidCouponNameRes:", fetchedValidCouponNameRes);
       if (fetchedValidCouponNameRes) {
         const couponObj = {
           resellerId: user.data._id,
@@ -419,21 +421,21 @@ const AddCoupon = (props) => {
           bundles: bundlesOnCoupon,
           discount: {
             type: discountType,
-            amount: discountAmount
+            amount: discountAmount,
           },
           seo: {
             title: seoTitle,
             slug: seoSlug,
-            description: seoDescription
+            description: seoDescription,
           },
           organization: {
             categories: categoriesArray,
-            tags: tagsArray
-          }
+            tags: tagsArray,
+          },
         };
         const fetchedCoupon = await fetchNewCoupon(couponObj);
         if (fetchedCoupon.ok === true) {
-          Router.push('/coupons');
+          Router.push("/coupons");
         }
       }
     } else {
@@ -444,16 +446,16 @@ const AddCoupon = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Add Coupon | Administrator - Canada Cannabyss</title>
+        <title>Add Coupon | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
-          <MainGrid className='main'>
+          <MainGrid className="main">
             <CouponNameDescription
-              MainIcon={<FaPercent className='mainIcon' />}
-              PlusIcon={<FaPlus className='plus' />}
-              title='Add Coupon'
-              itemName='Coupon Code'
+              MainIcon={<FaPercent className="mainIcon" />}
+              PlusIcon={<FaPlus className="plus" />}
+              title="Add Coupon"
+              itemName="Coupon Code"
               onChangeItemName={onChangeCounponCode}
               onChangeDiscountAmount={onChangeDiscountAmount}
               onChangeDiscountType={onChangeDiscountType}
@@ -468,7 +470,7 @@ const AddCoupon = (props) => {
               freeShipping={freeShipping}
             />
             <ProductsBundlesList
-              title='Items on coupon'
+              title="Items on coupon"
               products={productList.results}
               bundles={bundleList.results}
               handleGetElement={handleGetElement}
@@ -493,7 +495,7 @@ const AddCoupon = (props) => {
           </StickyDiv>
         </Wrapper>
         {warning && <Warning>Fill all fields before submit</Warning>}
-        <SubmitButton type='button' onClick={handleSubmit}>
+        <SubmitButton type="button" onClick={handleSubmit}>
           Add Coupon
         </SubmitButton>
       </BackgroundAdd>

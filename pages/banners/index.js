@@ -1,17 +1,13 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import React, { useState, useEffect } from 'react';
-import {
-  FaSearch, FaPlus, FaObjectUngroup
-} from 'react-icons/fa';
-import BannerList from '../../components/UI/List/Banners/BannersList';
+import Head from "next/head";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import _ from "lodash";
+import React, { useState, useEffect } from "react";
+import { FaSearch, FaPlus, FaObjectUngroup } from "react-icons/fa";
+import BannerList from "../../components/UI/List/Banners/BannersList";
 
-import {
-  Background
-} from '../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
+import { Background } from "../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
 import {
   Wrapper,
   Container,
@@ -21,11 +17,11 @@ import {
   SearchBar,
   AddProductLink,
   TitleDiv,
-  Content
-} from '../../styles/Pages/Banners/Banners';
-import { getBanners } from '../../store/actions/banners/banners';
-import DeleteConfirmation from '../../components/UI/Confirmations/DeleteBannerConfirmation';
-import WithAuth from '../../components/UI/withAuth/withAuth';
+  Content,
+} from "../../styles/Pages/Banners/Banners";
+import { getBanners } from "../../store/actions/banners/banners";
+import DeleteConfirmation from "../../components/UI/Confirmations/DeleteBannerConfirmation";
+import WithAuth from "../../components/UI/withAuth/withAuth";
 
 const mapStateToProps = (state) => {
   const { banners } = state;
@@ -40,8 +36,8 @@ const Banners = (props) => {
     false
   );
 
-  const [selectedBannersId, setSelectedBannersId] = useState('');
-  const [selectedBannersName, setSelectedBannersName] = useState('');
+  const [selectedBannersId, setSelectedBannersId] = useState("");
+  const [selectedBannersName, setSelectedBannersName] = useState("");
 
   const handleGetElement = (el) => {
     const element = el.parentNode.parentNode;
@@ -59,7 +55,7 @@ const Banners = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Banners | Administrator - Canada Cannabyss</title>
+        <title>Banners | Reseller - Canada Cannabyss</title>
       </Head>
       {toggleDeleteConfirmation && (
         <DeleteConfirmation
@@ -81,11 +77,11 @@ const Banners = (props) => {
                   <SearchBarAddButtonDiv>
                     <SearchBar>
                       <input />
-                      <button type='button'>
+                      <button type="button">
                         <FaSearch />
                       </button>
                     </SearchBar>
-                    <Link href='/add/banner' as='/add/banner'>
+                    <Link href="/add/banner" as="/add/banner">
                       <AddProductLink>
                         <FaPlus />
                       </AddProductLink>
@@ -100,7 +96,7 @@ const Banners = (props) => {
                       banners={banners.data}
                       handleGetElement={handleGetElement}
                     />
-                )}
+                  )}
               </Content>
             </ContentContainer>
           </Container>
@@ -111,7 +107,7 @@ const Banners = (props) => {
 };
 
 Banners.propTypes = {
-  banners: PropTypes.shape().isRequired
+  banners: PropTypes.shape().isRequired,
 };
 
 Banners.getInitialProps = async ({ ctx }) => {

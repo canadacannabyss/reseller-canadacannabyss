@@ -382,7 +382,7 @@ const AddProduct = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Add Product | Administrator - Canada Cannabyss</title>
+        <title>Add Product | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -404,6 +404,10 @@ const AddProduct = (props) => {
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/reseller/products/publish/media`}
               type="products"
               destinationFolder={productName}
+              fileDimensions={{
+                width: "640px",
+                height: "640px",
+              }}
             />
             <Pricing
               price={price}

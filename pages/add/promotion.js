@@ -358,7 +358,7 @@ const AddPromotion = (props) => {
   return (
     <WithAuth>
       <Head>
-        <title>Add Promotion | Administrator - Canada Cannabyss</title>
+        <title>Add Promotion | Reseller - Canada Cannabyss</title>
       </Head>
       <BackgroundAdd>
         <Wrapper>
@@ -380,6 +380,10 @@ const AddPromotion = (props) => {
               apiEndpoint={`${process.env.MAIN_API_ENDPOINT}/admin/promotions/publish/media`}
               type="promotions"
               destinationFolder={promotionName}
+              fileDimensions={{
+                width: "960px",
+                height: "540px",
+              }}
             />
             <ProductsBundlesList
               title="Items on promotion"
