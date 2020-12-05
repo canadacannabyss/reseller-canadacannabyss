@@ -269,6 +269,21 @@ const Order = (props) => {
                           )}
                       </P>
                     </div>
+                    {!_.isEmpty(order.data) &&
+                      order.fetched &&
+                      !order.loading &&
+                      !order.error && (
+                        <>
+                          {order.coupon ? (
+                            <div>
+                              <Label>Coupon applied</Label>
+                              <Status>{order.coupon.couponName}</Status>
+                            </div>
+                          ) : (
+                            <div />
+                          )}
+                        </>
+                      )}
                   </HalfGrid>
                   <br />
                   <GroupSpan>Billing information</GroupSpan>
