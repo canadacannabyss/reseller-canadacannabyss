@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Router from 'next/router';
-import Head from 'next/head';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import Router from "next/router";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import _ from "lodash";
 import {
   Container,
   BrandDiv,
@@ -15,10 +15,10 @@ import {
   VerificationMsg,
   Warning,
   ErrorMsg,
-} from '../../../styles/Pages/Register/Register';
-import { BackgroundLogin } from '../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage';
-import Logo from '../../../assets/img/canada-cannabyss-logo.svg';
-import BackgroundImg from '../../../assets/img/bg-register.jpg';
+} from "../../../styles/Pages/Register/Register";
+import { BackgroundLogin } from "../../../styles/Components/UI/DefaultSidebarPage/DefaultSidebarPage";
+import Logo from "../../../assets/img/canada-cannabyss-logo.svg";
+import BackgroundImg from "../../../assets/img/bg-register.jpg";
 
 const Register = (props) => {
   const { token } = props;
@@ -31,15 +31,15 @@ const Register = (props) => {
   const [loadingVerification, setLoadingVerification] = useState(false);
   const [fetchedVerification, setFetchedVerification] = useState(false);
   const [errorVerification, setErrorVerification] = useState(false);
-  const [errorVerificationMsg, setErrorVerificationMsg] = useState('');
+  const [errorVerificationMsg, setErrorVerificationMsg] = useState("");
   const [verificationData, setVerificationData] = useState({});
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [userRegistrationSubmit, setUserRegistrationSubmit] = useState(false);
   const [isUserValid, setIsUserValid] = useState(true);
   const [isPasswordsMatching, setIsPasswordsMatching] = useState(true);
@@ -63,7 +63,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (userRegistrationSubmit) {
-      Router.push('/login');
+      Router.push("/login");
     }
   }, [userRegistrationSubmit]);
 
@@ -80,16 +80,17 @@ const Register = (props) => {
       const response = await fetch(
         `${process.env.USER_API_ENDPOINT}/resellers/auth/verify/registration/main/${token}`,
         {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
       const data = await response.json();
+      console.log("data:", data);
       if (data.error) {
         setErrorVerification(true);
         setErrorVerificationMsg(data.error);
@@ -107,18 +108,18 @@ const Register = (props) => {
     const response = await fetch(
       `${process.env.USER_API_ENDPOINT}/resellers/auth/main/register`,
       {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userInfoObj),
       }
     );
     const data = await response.json();
-    console.log('data reseller user:', data);
+    console.log("data reseller user:", data);
     if (data.ok) {
       setUserRegistrationSubmit(true);
     }
@@ -128,12 +129,12 @@ const Register = (props) => {
     const response = await fetch(
       `${process.env.USER_API_ENDPOINT}/resellers/auth/verify/username/${username}`,
       {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -213,12 +214,12 @@ const Register = (props) => {
             <>
               <VerificationMsg>
                 <p>
-                  You were invited to join our resellers team by{' '}
+                  You were invited to join our resellers team by{" "}
                   <span>
                     {loadingVerification &&
                       !fetchedVerification &&
                       !errorVerification &&
-                      'Loading'}
+                      "Loading"}
                     {!loadingVerification &&
                       fetchedVerification &&
                       !errorVerification &&
@@ -227,65 +228,65 @@ const Register = (props) => {
                   </span>
                 </p>
               </VerificationMsg>
-              <Form method='post' onSubmit={handleRegistration}>
+              <Form method="post" onSubmit={handleRegistration}>
                 <BrandDiv>
-                  <img src={Logo} alt='Canada Cannabyss' />
-                  <div className='sep' />
+                  <img src={Logo} alt="Canada Cannabyss" />
+                  <div className="sep" />
                   <h1>Register</h1>
                 </BrandDiv>
                 <HalfGrid>
                   <div>
-                    <Label htmlFor='firstName'>First Name</Label>
+                    <Label htmlFor="firstName">First Name</Label>
                     <Input
-                      type='text'
-                      id='firstName'
+                      type="text"
+                      id="firstName"
                       value={firstName}
                       onChange={handleFirstName}
                     />
                   </div>
                   <div>
-                    <Label htmlFor='lastName'>Last Name</Label>
+                    <Label htmlFor="lastName">Last Name</Label>
                     <Input
-                      type='text'
-                      id='lastName'
+                      type="text"
+                      id="lastName"
                       value={lastName}
                       onChange={handleLastName}
                     />
                   </div>
                 </HalfGrid>
-                <Label htmlFor='username'>Username</Label>
+                <Label htmlFor="username">Username</Label>
                 <Input
-                  type='text'
-                  name='user'
-                  id='username'
+                  type="text"
+                  name="user"
+                  id="username"
                   value={username}
-                  autoComplete='off'
+                  autoComplete="off"
                   onChange={handleUsername}
                 />
-                <Label htmlFor='email'>Email</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  type='email'
-                  id='email'
+                  type="email"
+                  id="email"
                   value={email}
                   onChange={handleEmail}
                   disabled
-                  className='disabled'
+                  className="disabled"
                 />
-                <Label htmlFor='password'>Password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
-                  type='password'
-                  id='password'
+                  type="password"
+                  id="password"
                   value={password}
                   onChange={handlePassword}
                 />
-                <Label htmlFor='password2'>Confirm Password</Label>
+                <Label htmlFor="password2">Confirm Password</Label>
                 <Input
-                  type='password'
-                  id='password2'
+                  type="password"
+                  id="password2"
                   value={password2}
                   onChange={handlePassword2}
                 />
-                <Submit type='submit'>Register</Submit>
+                <Submit type="submit">Register</Submit>
               </Form>
             </>
           )}

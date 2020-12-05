@@ -13,6 +13,26 @@
   </url>
 
   <url>
+    <loc>https://canadacannabyss.com/account/billing</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/invite</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/reviews</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/account/shipping</loc>
+  </url>
+
+  <url>
     <loc>https://canadacannabyss.com/add/banner</loc>
   </url>
 
@@ -34,26 +54,6 @@
 
   <url>
     <loc>https://canadacannabyss.com/add/promotion</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/billing</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/index</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/invite</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/reviews</loc>
-  </url>
-
-  <url>
-    <loc>https://canadacannabyss.com/account/shipping</loc>
   </url>
 
   <url>
@@ -117,11 +117,11 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/bundle/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/category/[slug]</loc>
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/category/[slug]</loc>
+    <loc>https://canadacannabyss.com/edit/order/[id]</loc>
   </url>
 
   <url>
@@ -129,7 +129,7 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/edit/order/[id]</loc>
+    <loc>https://canadacannabyss.com/edit/bundle/[slug]</loc>
   </url>
 
   <url>
