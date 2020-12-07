@@ -65,15 +65,15 @@
   </url>
 
   <url>
-    <loc>https://canadacannabyss.com/categories/index</loc>
-  </url>
-
-  <url>
     <loc>https://canadacannabyss.com/confirmation/[token]</loc>
   </url>
 
   <url>
     <loc>https://canadacannabyss.com/coupons/index</loc>
+  </url>
+
+  <url>
+    <loc>https://canadacannabyss.com/categories/index</loc>
   </url>
 
   <url>
